@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Vec2.h"
 #include "Rect.h"
+#include "Surface.h"
 
 
 #include <mmsystem.h>
@@ -31,6 +32,8 @@ int main(int argc, char* argv[]) {
     int key;
 
     Rect testRect = MakeRect( 10, 10, 10, 10 );
+    Surface surf;
+    MakeSurface( "src/images/awsom.bmp", &surf );
 
     Vec2 lastPos = pos;
 
@@ -70,7 +73,7 @@ int main(int argc, char* argv[]) {
 
         // ComposeFrame
         {
-            DrawRect( pos.x+100, pos.y+ 100, pos.x + 150, pos.y + 150, RED );
+            DrawSpriteNonChroma( pos.x, pos.y, &surf );
         }
     }
 

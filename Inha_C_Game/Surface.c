@@ -7,13 +7,14 @@
 #include <stdbool.h>
 #include "Graphics.h"
 
-void CreateSurface ( const char* filename, Surface* pSurface )
+void MakeSurface ( const char* filename, Surface* pSurface )
 {
 	FILE* pFile;
 	
-	if (fopen_s( &pFile, filename, "rb" ) == 0)
+	if (fopen_s( &pFile, filename, "rb" ) != 0)
 	{
 		fclose( pFile );
+		return;
 	}
 	assert ( pFile != NULL  );
 
@@ -68,7 +69,7 @@ void CreateSurface ( const char* filename, Surface* pSurface )
 	{
 		for (int x = 0; x < pSurface->width; x++)
 		{
-			PutPixel( x, y, MakeRGB( fgetc(pFile), fgetc( pFile ), fgetc( pFile ) ) );
+			SurfacePutPixel( x, y, MakeRGB( fgetc(pFile), fgetc( pFile ), fgetc( pFile ) ), pSurface );
 			if (is32b)
 			{
 				fseek( pFile, 1, SEEK_CUR );
@@ -81,6 +82,31 @@ void CreateSurface ( const char* filename, Surface* pSurface )
 	}
 
 	fclose( pFile );
+}
+
+Color SurfacePutPixel( int x, int y, Color c, Surface* pSurface )
+{
+	return pSurface->pPixels[y * pSurface->width + x] = c;
+}
+
+Color SurfaceGetPixel( const Surface* const pSurface, int x, int y )
+{
+	return pSurface->pPixels[y * pSurface->width + x];
+}
+
+int SurfaceGetWidth( const Surface* const pSurface )
+{
+	return pSurface->width;
+}
+
+int SurfaceGetHeight( const Surface* const pSurface )
+{
+	return pSurface->height;
+}
+
+Rect SurfaceGetRect( const Surface* const pSurface )
+{
+	return MakeRectBySize( MakeVec2( 0, 0 ), pSurface->width, pSurface->height );
 }
 
 void DeleteSurface( Surface* pSurface )
