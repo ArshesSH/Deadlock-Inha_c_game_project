@@ -33,6 +33,9 @@
     <ClCompile Include="Vec2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Rect.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec2.h">
@@ -51,6 +54,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Colors.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

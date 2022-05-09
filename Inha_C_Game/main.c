@@ -43,22 +43,22 @@ int main(int argc, char* argv[]) {
                 if (key == UP)
                 {
                     lastPos = pos;
-                    AddEqualVec2( &pos, up );
+                    Vec2AddEqual( &pos, up );
                 }
                 if (key == DOWN)
                 {
                     lastPos = pos;
-                    AddEqualVec2( &pos, down );
+                    Vec2AddEqual( &pos, down );
                 }
                 if (key == LEFT)
                 {
                     lastPos = pos;
-                    AddEqualVec2( &pos, left );
+                    Vec2AddEqual( &pos, left );
                 }
                 if (key == RIGHT)
                 {
                     lastPos = pos;
-                    AddEqualVec2( &pos, right );
+                    Vec2AddEqual( &pos, right );
                 }
             }
         }
