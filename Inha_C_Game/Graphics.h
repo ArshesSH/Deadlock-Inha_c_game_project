@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <string.h>
+#include "cful.h"
 #include "Vec2.h"
 
 void SetColor(WORD color)
@@ -28,9 +29,9 @@ void SetConsoleFontSize(int size)
     SetCurrentConsoleFontEx(hOut, NULL, &fontex);
 }
 
-void MoveCursor(Vec2 pos)
+void MoveCursor(int x, int y)
 {
-    COORD coord = { pos.x , pos.y };
+    COORD coord = { x , y };
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
@@ -58,15 +59,16 @@ void SetConsoleWindowSize(int consoleWidth, int consoleHeight)
     system(consolSizeStr);
 }
 
-void PutPixelInt(int x, int y)
+void PutPixel(int x, int y)
 {
-    MoveCursor(MakeVec2(x, y));
+    MoveCursor(x * 2, y);
     //SetColor(0xFF00);
     printf("бс");
 }
 
+
 void DeletePixelInt(int x, int y)
 {
-    MoveCursor(MakeVec2(x, y));
+    MoveCursor(x * 2, y);
     printf("  ");
 }
