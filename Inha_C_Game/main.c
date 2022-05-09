@@ -4,6 +4,9 @@
 #include "Vec2.h"
 #include "Game.h"
 
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 #define UP 72
 #define LEFT 75
 #define RIGHT 77
@@ -39,20 +42,21 @@ int main(int argc, char* argv[]) {
 
     Vec2 lastPos = pos;
 
+    PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
 
-    PutPixelInt(pos.x - 5, pos.y);
-    PutPixelInt(pos.x - 4, pos.y);
-    PutPixelInt(pos.x - 3, pos.y);
-    PutPixelInt(pos.x+ 3, pos.y);
-    PutPixelInt(pos.x +4, pos.y);
-    PutPixelInt(pos.x +5, pos.y);
-    PutPixelInt(pos.x, pos.y -5);
-    PutPixelInt(pos.x, pos.y - 4);
-    PutPixelInt(pos.x, pos.y - 3);
-    PutPixelInt(pos.x, pos.y +5);
-    PutPixelInt(pos.x, pos.y +4);
-    PutPixelInt(pos.x, pos.y + 3);
-
+    PutPixel(pos.x, pos.y);
+    PutPixel(pos.x - 5, pos.y);
+    PutPixel(pos.x - 4, pos.y);
+    PutPixel(pos.x - 3, pos.y);
+    PutPixel(pos.x + 3, pos.y);
+    PutPixel(pos.x + 4, pos.y);
+    PutPixel(pos.x + 5, pos.y);
+    PutPixel(pos.x, pos.y -5);
+    PutPixel(pos.x, pos.y - 4);
+    PutPixel(pos.x, pos.y - 3);
+    PutPixel(pos.x, pos.y +5);
+    PutPixel(pos.x, pos.y +4);
+    PutPixel(pos.x, pos.y + 3);
 
     /*
     while (1)
@@ -90,6 +94,8 @@ int main(int argc, char* argv[]) {
     */
     
 
+
+    _getch();
 
     return 0;
 }
