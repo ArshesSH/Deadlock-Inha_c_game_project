@@ -12,4 +12,6 @@ void SetConsoleWindowSize( int consoleWidth, int consoleHeight );
 
 void PutPixel( int x, int y, Color c );
 
+void DrawRect( int x0, int y0, int x1, int y1, Color c );
+
 void DeletePixelInt( int x, int y );

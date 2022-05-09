@@ -1,8 +1,5 @@
 #include "Rect.h"
 
-#include "Vec2.h"
-#include <stdbool.h>
-
 Rect MakeRect( int left, int right, int top, int bottom )
 {
 	const Rect rt = { left, right, top, bottom };

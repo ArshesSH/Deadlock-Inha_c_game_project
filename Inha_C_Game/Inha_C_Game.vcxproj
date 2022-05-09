@@ -143,6 +143,7 @@
     <ClCompile Include="Game.c" />
     <ClCompile Include="Graphics.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="MathSH.c" />
     <ClCompile Include="Rect.c" />
     <ClCompile Include="Surface.c" />
     <ClCompile Include="Vec2.c" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="MathSH.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />

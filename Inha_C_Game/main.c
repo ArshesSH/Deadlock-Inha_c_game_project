@@ -3,6 +3,9 @@
 #include <Windows.h>
 #include "Graphics.h"
 #include "Vec2.h"
+#include "Rect.h"
+
+
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
@@ -26,6 +29,8 @@ int main(int argc, char* argv[]) {
     Vec2 right = { (speed), 0 };
 
     int key;
+
+    Rect testRect = MakeRect( 10, 10, 10, 10 );
 
     Vec2 lastPos = pos;
 
@@ -65,20 +70,7 @@ int main(int argc, char* argv[]) {
 
         // ComposeFrame
         {
-            PutPixel( pos.x, pos.y, CYAN );
-
-            PutPixel( pos.x - 5, pos.y, RED );
-            PutPixel( pos.x - 4, pos.y, RED );
-            PutPixel( pos.x - 3, pos.y, RED );
-            PutPixel( pos.x + 3, pos.y, RED );
-            PutPixel( pos.x + 4, pos.y, RED );
-            PutPixel( pos.x + 5, pos.y, RED );
-            PutPixel( pos.x, pos.y - 5, RED );
-            PutPixel( pos.x, pos.y - 4, RED );
-            PutPixel( pos.x, pos.y - 3, RED );
-            PutPixel( pos.x, pos.y + 5, RED );
-            PutPixel( pos.x, pos.y + 4, RED );
-            PutPixel( pos.x, pos.y + 3, RED );
+            DrawRect( pos.x+100, pos.y+ 100, pos.x + 150, pos.y + 150, RED );
         }
     }
 

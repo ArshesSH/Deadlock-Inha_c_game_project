@@ -4,6 +4,7 @@
 #include <string.h>
 #include "cful.h"
 #include "Vec2.h"
+#include "MathSH.h"
 
 void HideCursor()
 {
@@ -56,6 +57,26 @@ void PutPixel( int x, int y, Color c )
     MoveCursor( x * 2, y );
     SET_FG_COLOR( GetR( c ), GetG( c ), GetB( c ) );
     printf( "бс" );
+}
+
+void DrawRect( int x0, int y0, int x1, int y1, Color c )
+{
+    if (x0 > x1)
+    {
+        swapI( &x0, &x1 );
+    }
+    if (y0 > y1)
+    {
+        swapI( &y0, &y1 );
+    }
+
+    for (int y = y0; y < y1; ++y)
+    {
+        for (int x = x0; x < x1; ++x)
+        {
+            PutPixel( x, y, c );
+        }
+    }
 }
 
 void DeletePixelInt( int x, int y )
