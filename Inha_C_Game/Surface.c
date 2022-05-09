@@ -80,7 +80,7 @@ void CreateSurface ( const char* filename, Surface* pSurface )
 		}
 	}
 
-	pFile = fclose( pFile );
+	fclose( pFile );
 }
 
 void DeleteSurface( Surface* pSurface )
