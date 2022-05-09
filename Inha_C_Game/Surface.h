@@ -1,4 +1,4 @@
-/*
+
 #pragma once
 
 #include "Colors.h"
@@ -12,5 +12,3 @@ typedef struct surface
 	int height;
 	Color* pPixels;
 }Surface;
-*/
-

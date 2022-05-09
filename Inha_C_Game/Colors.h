@@ -11,8 +11,6 @@
 #define CYAN		MakeRGB( 0u, 255u, 255u )
 #define MAGENTA		MakeRGB( 255u, 0u, 255u )
 
-
-
 typedef struct Color
 {
 	unsigned int dword;

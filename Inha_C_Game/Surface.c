@@ -1,4 +1,3 @@
-/*
 
 #include "Surface.h"
 
@@ -89,4 +88,3 @@ void DeleteSurface( Surface* pSurface )
 	free( pSurface->pPixels );
 	pSurface->pPixels = NULL;
 }
-*/
