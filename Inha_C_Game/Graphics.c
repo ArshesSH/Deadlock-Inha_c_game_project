@@ -184,8 +184,20 @@ void DrawRect( int x0, int y0, int x1, int y1, Color c )
     }
 }
 
-void DeletePixelInt( int x, int y )
+void DeletePixel( int x, int y )
 {
     MoveCursor( x * 2, y );
     printf( "  " );
+}
+
+
+void DeleteRect( Rect rect, int pos_x, int pos_y )
+{
+    for (int y = rect.top; y < rect.bottom; ++y)
+    {
+        for (int x = rect.left; x < rect.right; ++x)
+        {
+            DeletePixel( x + pos_x, y + pos_y );
+        }
+    }
 }

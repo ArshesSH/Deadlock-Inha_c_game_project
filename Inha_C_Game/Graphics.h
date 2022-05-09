@@ -33,4 +33,6 @@ void DrawSpriteClipChroma( int x, int y, Rect srcRect, Rect clip, const Surface*
 
 void DrawRect( int x0, int y0, int x1, int y1, Color c );
 
-void DeletePixelInt( int x, int y );
+void DeletePixel( int x, int y );
+
+void DeleteRect( Rect rect, int pos_x, int pos_y );

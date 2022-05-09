@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     HideCursor();
 
     Vec2 pos = { 100, 100 };
-    int speed = 10;
+    int speed = 1;
     Vec2 up = { 0, -speed };
     Vec2 down = { 0, speed };
     Vec2 left = { -(speed), 0 };
@@ -50,21 +50,25 @@ int main(int argc, char* argv[]) {
 
                 if (key == UP)
                 {
+                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
                     lastPos = pos;
                     Vec2AddEqual( &pos, up );
                 }
                 if (key == DOWN)
                 {
+                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
                     lastPos = pos;
                     Vec2AddEqual( &pos, down );
                 }
                 if (key == LEFT)
                 {
+                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
                     lastPos = pos;
                     Vec2AddEqual( &pos, left );
                 }
                 if (key == RIGHT)
                 {
+                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
                     lastPos = pos;
                     Vec2AddEqual( &pos, right );
                 }
@@ -73,12 +77,11 @@ int main(int argc, char* argv[]) {
 
         // ComposeFrame
         {
-            DrawSpriteNonChroma( pos.x, pos.y, &surf );
+            DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
         }
     }
 
-
-    
+    DeleteSurface( &surf );
 
 
     _getch();
