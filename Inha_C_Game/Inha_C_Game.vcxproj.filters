@@ -21,6 +21,18 @@
     <ClCompile Include="Game.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Surface.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Colors.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec2.h">
@@ -33,6 +45,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cful.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

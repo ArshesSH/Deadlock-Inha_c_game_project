@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <conio.h>
+#include <Windows.h>
 #include "Graphics.h"
 #include "Vec2.h"
-#include "Game.h"
-
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
@@ -23,75 +22,67 @@ int main(int argc, char* argv[]) {
     int speed = 10;
     Vec2 up = { 0, -speed };
     Vec2 down = { 0, speed };
-    Vec2 left = { -(speed * 2), 0 };
-    Vec2 right = { (speed * 2), 0 };
+    Vec2 left = { -(speed), 0 };
+    Vec2 right = { (speed), 0 };
 
     int key;
 
-
-    /*
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    // you can loop k higher to see more color choices
-    for (int k = 1; k < 255; k++)
-    {
-        // pick the colorattribute k you want
-        SetConsoleTextAttribute(hConsole, k);
-        printf( "%d I want to be nice today!\n", k);
-    }
-    */
-
     Vec2 lastPos = pos;
 
-    PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
+    //PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
 
-    PutPixel(pos.x, pos.y);
-    PutPixel(pos.x - 5, pos.y);
-    PutPixel(pos.x - 4, pos.y);
-    PutPixel(pos.x - 3, pos.y);
-    PutPixel(pos.x + 3, pos.y);
-    PutPixel(pos.x + 4, pos.y);
-    PutPixel(pos.x + 5, pos.y);
-    PutPixel(pos.x, pos.y -5);
-    PutPixel(pos.x, pos.y - 4);
-    PutPixel(pos.x, pos.y - 3);
-    PutPixel(pos.x, pos.y +5);
-    PutPixel(pos.x, pos.y +4);
-    PutPixel(pos.x, pos.y + 3);
 
-    /*
     while (1)
     {
-        if (_kbhit())
+        //Update
         {
-            
-            key = _getch();
+            if (_kbhit())
+            {
+                key = _getch();
 
-            if (key == UP)
-            {
-                lastPos = pos;
-                AddEqualVec2(&pos, up);
+                if (key == UP)
+                {
+                    lastPos = pos;
+                    AddEqualVec2( &pos, up );
+                }
+                if (key == DOWN)
+                {
+                    lastPos = pos;
+                    AddEqualVec2( &pos, down );
+                }
+                if (key == LEFT)
+                {
+                    lastPos = pos;
+                    AddEqualVec2( &pos, left );
+                }
+                if (key == RIGHT)
+                {
+                    lastPos = pos;
+                    AddEqualVec2( &pos, right );
+                }
             }
-            if (key == DOWN)
-            {
-                lastPos = pos;
-                AddEqualVec2(&pos, down);
-            }
-            if (key == LEFT)
-            {
-                lastPos = pos;
-                AddEqualVec2(&pos, left);
-            }
-            if (key == RIGHT)
-            {
-                lastPos = pos;
-                AddEqualVec2(&pos, right);
-            }
-            PutPixelInt(pos.x, pos.y);
-            DeletePixelInt(lastPos.x, lastPos.y);
         }
-        
+
+        // ComposeFrame
+        {
+            PutPixel( pos.x, pos.y, CYAN );
+
+            PutPixel( pos.x - 5, pos.y, RED );
+            PutPixel( pos.x - 4, pos.y, RED );
+            PutPixel( pos.x - 3, pos.y, RED );
+            PutPixel( pos.x + 3, pos.y, RED );
+            PutPixel( pos.x + 4, pos.y, RED );
+            PutPixel( pos.x + 5, pos.y, RED );
+            PutPixel( pos.x, pos.y - 5, RED );
+            PutPixel( pos.x, pos.y - 4, RED );
+            PutPixel( pos.x, pos.y - 3, RED );
+            PutPixel( pos.x, pos.y + 5, RED );
+            PutPixel( pos.x, pos.y + 4, RED );
+            PutPixel( pos.x, pos.y + 3, RED );
+        }
     }
-    */
+
+
     
 
 

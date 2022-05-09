@@ -139,13 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Colors.c" />
     <ClCompile Include="Game.c" />
+    <ClCompile Include="Graphics.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Surface.c" />
+    <ClCompile Include="Vec2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cful.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
