@@ -30,13 +30,13 @@ Vec2 Vec2Sub( Vec2 lhs, Vec2 rhs )
 	return lhs;
 }
 
-void Vec2MulEqual( Vec2* const lhs, Vec2 rhs )
+void Vec2MulEqual( Vec2* const lhs, int rhs )
 {
-	lhs->x *= rhs.x;
-	lhs->y *= rhs.y;
+	lhs->x *= rhs;
+	lhs->y *= rhs;
 }
 
-Vec2 Vec2Mul( Vec2 lhs, Vec2 rhs )
+Vec2 Vec2Mul( Vec2 lhs, int rhs )
 {
 	Vec2MulEqual( &lhs, rhs );
 	return lhs;

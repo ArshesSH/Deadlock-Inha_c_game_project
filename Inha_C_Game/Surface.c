@@ -37,7 +37,7 @@ void MakeSurface ( const char* filename, Surface* pSurface )
 	assert( bmInfoHeader.biBitCount == 24 || bmInfoHeader.biBitCount == 32 );
 	const bool is32b = bmInfoHeader.biBitCount == 32;
 
-	assert( bmInfoHeader.biCompression == BI_RGB );
+	//assert( bmInfoHeader.biCompression == BI_RGB );
 
 	pSurface->width = bmInfoHeader.biWidth;
 
