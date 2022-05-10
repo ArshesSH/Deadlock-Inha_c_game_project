@@ -58,7 +58,8 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 		}
 		else
 		{
-			DrawSpriteClipChroma( pos.x + (iWidth * (f->fontWidth)), pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, color );
+			DrawSpriteClipSubstitute( pos.x + (iWidth * (f->fontWidth)), pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, f->chroma, color );
+			iWidth++;
 		}
 	}
 }

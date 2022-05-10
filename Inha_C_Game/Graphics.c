@@ -164,6 +164,57 @@ void DrawSpriteClipChroma( int x, int y, Rect srcRect, const Rect clip, const Su
     }
 }
 
+void DrawSpriteSubstitute( int x, int y, const Surface* const s, Color chroma, Color subColor )
+{
+    DrawSpriteClipSubstitute( x, y, SurfaceGetRect( s ), GetScreenRect(), s, chroma, subColor );
+}
+
+
+void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, const Surface* const s, Color chroma, Color subColor )
+{
+    DrawSpriteClipSubstitute( x, y, *srcRect, GetScreenRect(), s, chroma, subColor );
+}
+
+void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, const Surface* const s, Color chroma, Color subColor )
+{
+    assert( srcRect.left >= 0 );
+    assert( srcRect.right <= SurfaceGetWidth( s ) );
+    assert( srcRect.top >= 0 );
+    assert( srcRect.bottom <= SurfaceGetHeight( s ) );
+
+    if (x < clip.left)
+    {
+        srcRect.left += clip.left - x;
+        x = clip.left;
+    }
+    if (y < clip.top)
+    {
+        srcRect.top += clip.top - y;
+        y = clip.top;
+    }
+    if (x + RectGetWidth( srcRect ) > clip.right)
+    {
+        srcRect.right -= x + RectGetWidth( srcRect ) - clip.right;
+    }
+    if (y + RectGetHeight( srcRect ) > clip.bottom)
+    {
+        srcRect.bottom -= y + RectGetHeight( srcRect ) - clip.bottom;
+    }
+
+    for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+    {
+        for (int sx = srcRect.left; sx < srcRect.right; sx++)
+        {
+            Color curPixelColor = SurfaceGetPixel( s, sx, sy );
+            if (curPixelColor.dword != chroma.dword)
+            {
+                PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, subColor );
+            }
+        }
+    }
+}
+
+
 void DrawRect( int x0, int y0, int x1, int y1, Color c )
 {
     if (x0 > x1)

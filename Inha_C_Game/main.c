@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
         // Compose Frame
         {
             DrawSpriteNonChroma( pos.x, pos.y, &surf );
-            DrawFontText( "A", fontPos, WHITE, &font );
+            DrawFontText( "I want go HOME!", fontPos, WHITE, &font );
             Sleep( 2 );
         }
     }

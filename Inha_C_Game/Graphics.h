@@ -31,6 +31,12 @@ void DrawSpriteRectChroma( int x, int y, const Rect* const srcRect, const Surfac
 
 void DrawSpriteClipChroma( int x, int y, Rect srcRect, Rect clip, const Surface* const s, Color chroma );
 
+void DrawSpriteSubstitute( int x, int y, const Surface* const s, Color chroma, Color subColor );
+
+void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, const Surface* const s, Color chroma, Color subColor );
+
+void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, const Surface* const s, Color chroma, Color subColor );
+
 void DrawRect( int x0, int y0, int x1, int y1, Color c );
 
 void DeletePixel( int x, int y );
