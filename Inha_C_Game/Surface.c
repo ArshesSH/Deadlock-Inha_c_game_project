@@ -117,7 +117,7 @@ Rect SurfaceGetRect( const Surface* const pSurface )
 	return MakeRectBySize( MakeVec2( 0, 0 ), pSurface->width, pSurface->height );
 }
 
-void DeleteSurface( Surface* pSurface )
+void DestroySurface( Surface* pSurface )
 {
 	free( pSurface->pPixels );
 	pSurface->pPixels = NULL;

@@ -26,4 +26,4 @@ int SurfaceGetHeight( const Surface* const pSurface );
 
 Rect SurfaceGetRect( const Surface* const pSurface );
 
-void DeleteSurface( Surface* pSurface );
+void DestroySurface( Surface* pSurface );

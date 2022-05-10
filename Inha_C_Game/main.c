@@ -85,7 +85,9 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    DeleteSurface( &surf );
+    // End Game
+    DestroySurface( &surf );
+    DestroyFont( &font );
 
     return 0;
 }

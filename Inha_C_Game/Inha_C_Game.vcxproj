@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.c" />
+    <ClCompile Include="Character.c" />
     <ClCompile Include="Colors.c" />
     <ClCompile Include="Font.c" />
     <ClCompile Include="Graphics.c" />
@@ -149,7 +151,9 @@
     <ClCompile Include="Vec2.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="cful.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Graphics.h" />
