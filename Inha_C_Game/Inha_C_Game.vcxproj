@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Colors.c" />
+    <ClCompile Include="Font.c" />
     <ClCompile Include="Graphics.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MathSH.c" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="cful.h" />
     <ClInclude Include="Colors.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MathSH.h" />
     <ClInclude Include="Rect.h" />

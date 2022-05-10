@@ -127,10 +127,10 @@ void DrawSpriteRectChroma( int x, int y, const Rect* const srcRect, const Surfac
 
 void DrawSpriteClipChroma( int x, int y, Rect srcRect, const Rect clip, const Surface* const s, Color chroma )
 {
-    //assert( srcRect.left >= 0 );
-    //assert( srcRect.right <= s.GetWidth() );
-    //assert( srcRect.top >= 0 );
-    //assert( srcRect.bottom <= s.GetHeight() );
+    assert( srcRect.left >= 0 );
+    assert( srcRect.right <= SurfaceGetWidth(s) );
+    assert( srcRect.top >= 0 );
+    assert( srcRect.bottom <= SurfaceGetHeight(s) );
 
     if (x < clip.left)
     {

@@ -5,6 +5,7 @@
 #include "Vec2.h"
 #include "Rect.h"
 #include "Surface.h"
+#include "Font.h"
 
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
@@ -30,6 +31,11 @@ int main(int argc, char* argv[]) {
 
     Surface surf;
     MakeSurface( "src/images/LightTankResize20.bmp", &surf );
+
+    Vec2 fontPos = { 200, 200 };
+    Font font;
+    MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~' );
+
 
     Vec2 lastPos = pos;
 
@@ -74,6 +80,7 @@ int main(int argc, char* argv[]) {
         // Compose Frame
         {
             DrawSpriteNonChroma( pos.x, pos.y, &surf );
+            DrawFontText( "A", fontPos, WHITE, &font );
             Sleep( 2 );
         }
     }

@@ -86,11 +86,19 @@ void MakeSurface ( const char* filename, Surface* pSurface )
 
 Color SurfacePutPixel( int x, int y, Color c, Surface* pSurface )
 {
+	assert( x >= 0 );
+	assert( x < pSurface->width );
+	assert( y >= 0 );
+	assert( y < pSurface->height );
 	return pSurface->pPixels[y * pSurface->width + x] = c;
 }
 
 Color SurfaceGetPixel( const Surface* const pSurface, int x, int y )
 {
+	assert( x >= 0 );
+	assert( x < pSurface->width );
+	assert( y >= 0 );
+	assert( y < pSurface->height );
 	return pSurface->pPixels[y * pSurface->width + x];
 }
 
