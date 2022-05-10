@@ -5,16 +5,10 @@
 #include "Vec2.h"
 #include "Rect.h"
 #include "Surface.h"
-
+#include "Game.h"
 
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
-
-#define UP 72
-#define LEFT 75
-#define RIGHT 77
-#define DOWN 80
-
 
 int main(int argc, char* argv[]) {
 
@@ -22,68 +16,16 @@ int main(int argc, char* argv[]) {
     SetConsoleWindowSize(1280, 720);
     HideCursor();
 
-    Vec2 pos = { 100, 100 };
-    int speed = 1;
-    Vec2 up = { 0, -speed };
-    Vec2 down = { 0, speed };
-    Vec2 left = { -(speed), 0 };
-    Vec2 right = { (speed), 0 };
-
-    int key;
-
-    Rect testRect = MakeRect( 10, 10, 10, 10 );
-    Surface surf;
-    MakeSurface( "src/images/awsom.bmp", &surf );
-
-    Vec2 lastPos = pos;
-
     //PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
 
-
+    InitGame();
     while (1)
     {
-        //Update
-        {
-            if (_kbhit())
-            {
-                key = _getch();
-
-                if (key == UP)
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, up );
-                }
-                if (key == DOWN)
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, down );
-                }
-                if (key == LEFT)
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, left );
-                }
-                if (key == RIGHT)
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, right );
-                }
-            }
-        }
-
-        // ComposeFrame
-        {
-            DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
-        }
+        UpdateModel();
+        ComposeFrame();
     }
-
-    DeleteSurface( &surf );
-
-
+    EndGame();
+    
     _getch();
 
     return 0;

@@ -16,7 +16,7 @@ Rect MakeRectByConner( Vec2 topLeft, Vec2 bottomRight );
 
 Rect MakeRectBySize( Vec2 topLeft, int width, int height );
 
-bool RectIsOverlappingWith( Rect target, Rect other );
+bool RectIsOverlappingWith( Rect target, Rect other );	
 
 bool RectIsContainedBy( Rect target, Rect other );
 
