@@ -143,6 +143,7 @@
     <ClCompile Include="Character.c" />
     <ClCompile Include="Colors.c" />
     <ClCompile Include="Font.c" />
+    <ClCompile Include="FrameTimer.c" />
     <ClCompile Include="Graphics.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MathSH.c" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MathSH.h" />
     <ClInclude Include="Rect.h" />

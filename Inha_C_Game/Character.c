@@ -8,7 +8,7 @@ void MakeCharacter( Character* character, Vec2 pos, int spriteStartX, int sprite
 	character->pos = pos;
 	character->chroma = chroma;
 	character->holdTime = 0.2f;
-	character->speed = 0;
+	character->speed = 150;
 
 	character->animations = (Animation*)malloc( sizeof( Animation ) * Count );
 
@@ -75,8 +75,8 @@ void SetCharacterDirection( Character* chara, Vec2 dir )
 
 void UpdateCharacter( Character* chara, float dt )
 {
-	Vec2AddEqual( &(chara->pos), Vec2Mul( chara->vel, dt ) );
-	UpdateAnimation( chara->animations[(int)chara->curSequence], dt );
+	Vec2AddEqual( &(chara->pos), Vec2Mul( chara->vel, (int)dt ) );
+	UpdateAnimation( &(chara->animations[(int)chara->curSequence]), dt );
 }
 
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Vec2.h"
 #include "Surface.h"
 #include "Animation.h"
 
@@ -30,3 +31,13 @@ typedef struct character
 	Animation* animations;
 
 }Character;
+
+void MakeCharacter( Character* character, Vec2 pos, int spriteStartX, int spriteStartY, int width, int height, int sectionCount, Color chroma, const char* filename );
+
+void DrawCharacter( Character* chara );
+
+void SetCharacterDirection( Character* chara, Vec2 dir );
+
+void UpdateCharacter( Character* chara, float dt );
+
+void DestroyCharacter( Character* character );
