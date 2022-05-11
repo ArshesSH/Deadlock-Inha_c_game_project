@@ -37,3 +37,7 @@ void NormalizeVec2( Vec2* src );
 float GetRadianBetween( Vec2 lhs, Vec2 rhs );
 
 float GetAngleBetween( Vec2 lhs, Vec2 rhs );
+
+void RotateVec2( Vec2* src, float angle );
+
+Vec2 GetRotateVec2( Vec2 src, float angle );

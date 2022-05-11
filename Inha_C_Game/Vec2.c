@@ -96,3 +96,16 @@ float GetAngleBetween( Vec2 lhs, Vec2 rhs )
 {
 	return (float)(GetRadianBetween( lhs, rhs ) * (180 / PI));
 }
+
+void RotateVec2( Vec2* src, float angle )
+{
+	const float new_x = src->x * cosf( angle ) - src->y * sinf( angle );
+	src->y = src->x * sinf( angle ) + src->y * cosf( angle );
+	src->x = new_x;
+};
+	
+Vec2 GetRotateVec2( Vec2 src, float angle )
+{
+	RotateVec2( &src, angle );
+	return src;
+}
