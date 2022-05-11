@@ -18,6 +18,7 @@ Rect MakeRectBySize( Vec2 topLeft, int width, int height )
 	return rt;
 }
 
+
 bool RectIsOverlappingWith( Rect target, Rect other )
 {
 	return target.right > other.left && target.left < other.right

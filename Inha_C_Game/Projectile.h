@@ -8,11 +8,16 @@ typedef struct projectile
 	Vec2 pos;
 	Vec2 vel;
 	Vec2 startPos;
+	Vec2 lastPos;
 	Surface* sprite;
+	Rect spriteRect;
 	Color chroma;
 	bool isFired;
 	float time;
 	float timeCmx;
+	float radian;
+	int angle;
+	int power;
 }Projectile;
 
 void MakeProjectile( Projectile* projectile, Vec2 startPos_in, int angle, int power, Surface* sprite, Color chroma );
@@ -21,6 +26,8 @@ void SetProjectileVel( Projectile* projectile, int angle, int power );
 
 void StartFire( Projectile* projectile );
 
+void UpdateProjectile( Projectile* projectile );
+
 void ResetProjectile( Projectile* projectile );
 
 bool IsInScreen( Projectile* projectile );
@@ -28,6 +35,8 @@ bool IsInScreen( Projectile* projectile );
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect );
 
 void MoveProjectile( Projectile* projectile );
+
+void SetParabolaForUser( Projectile* projectile );
 
 void DrawProjectile( Projectile* projectile );
 

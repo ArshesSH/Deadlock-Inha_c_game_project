@@ -12,12 +12,6 @@
 #pragma comment(lib,"winmm.lib")
 
 
-#define UP 72
-#define LEFT 75
-#define RIGHT 77
-#define DOWN 80
-#define SPACE 32
-
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
     SetConsoleWindowSize( 1280, 720 );
@@ -30,13 +24,15 @@ int main(int argc, char* argv[]) {
     Character link;
     MakeCharacter( &link, pos, 90, 90, 90, 90, 4, MAGENTA, "src/images/link90x90.bmp" );
 
+    Vec2 lastPos = pos;
+    bool isKeyInputed = false;
     
     Vec2 projStartPos = { 0, 200 };
     Projectile proj;
     Surface surf;
     MakeSurface( "src/images/awsom.bmp", &surf );
     MakeProjectile( &proj, projStartPos, 40, 50, &surf, MAGENTA );
-    SetProjectileVel( &proj, 50, 50 );
+    SetProjectileVel( &proj, 50, 100 );
 
 
     /*
@@ -50,7 +46,7 @@ int main(int argc, char* argv[]) {
     */
 
 
-    
+    int key;
     Vec2 fontPos = { 0, 0 };
     Font font;
     MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~' );
@@ -110,25 +106,39 @@ int main(int argc, char* argv[]) {
 
             if (_kbhit())
             {
-                if (_getch() == LEFT)
+                key = _getch();
+                if ( key == VK_LEFT)
                 {
-                    dir.x -= 1;
+                    dir.x -= 10;
+                    isKeyInputed = true;
+                    lastPos = pos;
+                    Vec2AddEqual( &pos, dir );
                 }
-                else if (_getch() == RIGHT)
+                else if ( key == VK_RIGHT)
                 {
-                    dir.x += 1;
+                    dir.x += 10;
+                    isKeyInputed = true;
+                    lastPos = pos;
+                    Vec2AddEqual( &pos, dir );
                 }
-                if (_getch() == UP)
+                if ( key == VK_UP)
                 {
-                    dir.y += 1;
+                    dir.y -= 10;
+                    isKeyInputed = true;
+                    lastPos = pos;
+                    Vec2AddEqual( &pos, dir );
                 }
-                else if (_getch() == DOWN)
+                else if ( key == VK_DOWN)
                 {
-                    dir.y -= 1;
+                    dir.y += 10;
+                    isKeyInputed = true;
+                    lastPos = pos;
+                    Vec2AddEqual( &pos, dir );
                 }
-                if ( _getch() == SPACE )
+                if ( key == VK_SPACE )
                 {
                     StartFire( &proj );
+                    SetProjectileVel( &proj, 30, 50 );
                 }
             }
 
@@ -136,20 +146,27 @@ int main(int argc, char* argv[]) {
             {
                 if ( IsInScreen( &proj ) )
                 {
-                    MoveProjectile( &proj );
+                    UpdateProjectile( &proj );
                 }
                 else
                 {
                     ResetProjectile( &proj );
                 }
             }
+
         }
 
         // Compose Frame
         {
+            if ( isKeyInputed )
+            {
+                DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
+            }
+
             if ( proj.isFired == true )
             {
                 DrawProjectileChroma( &proj );
+                Sleep( 30 );
             }
         }
     }
