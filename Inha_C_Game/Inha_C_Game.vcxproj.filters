@@ -51,6 +51,9 @@
     <ClCompile Include="Projectile.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Tank.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec2.h">
@@ -87,6 +90,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
