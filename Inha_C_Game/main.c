@@ -5,14 +5,18 @@
 #include "Character.h"
 #include "Font.h"
 #include "FrameTimer.h"
+#include "Projectile.h"
+#include <math.h>
 
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
+
 
 #define UP 72
 #define LEFT 75
 #define RIGHT 77
 #define DOWN 80
+#define SPACE 32
 
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
@@ -27,6 +31,14 @@ int main(int argc, char* argv[]) {
     MakeCharacter( &link, pos, 90, 90, 90, 90, 4, MAGENTA, "src/images/link90x90.bmp" );
 
     
+    Vec2 projStartPos = { 0, 200 };
+    Projectile proj;
+    Surface surf;
+    MakeSurface( "src/images/awsom.bmp", &surf );
+    MakeProjectile( &proj, projStartPos, 40, 50, &surf, MAGENTA );
+    SetProjectileVel( &proj, 50, 50 );
+
+
     /*
     Vec2 pos = { 100, 100 };
     int speed = 5;
@@ -38,16 +50,23 @@ int main(int argc, char* argv[]) {
     */
 
 
-    /*
-    Vec2 fontPos = { 200, 200 };
+    
+    Vec2 fontPos = { 0, 0 };
     Font font;
     MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~' );
-    */
+    
+    char* text = { 0, };
+    char buf[BUFSIZ];
+    Vec2 a;
+    int angle = 40;
+    int power = 50;
+    float radian = angle * (3.14592 / 180.0);
+    a = MakeVec2( power * cosf( radian ), power * sinf( radian ) );
+    sprintf_s( buf, BUFSIZ, "angle %d, power %d => Vec(%.1f, %.1f)", angle, power, a.x, a.y );
 
     //Vec2 lastPos = pos;
 
     //PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
-
     // Do Game
     while ( 1 )
     {
@@ -107,22 +126,31 @@ int main(int argc, char* argv[]) {
                 {
                     dir.y -= 1;
                 }
+                if ( _getch() == SPACE )
+                {
+                    StartFire( &proj );
+                }
             }
 
-            SetCharacterDirection( &link, dir );
-            UpdateCharacter( &link, MarkFrameTimer( &ft ) );
+            if ( proj.isFired == true )
+            {
+                if ( IsInScreen( &proj ) )
+                {
+                    MoveProjectile( &proj );
+                }
+                else
+                {
+                    ResetProjectile( &proj );
+                }
+            }
         }
 
         // Compose Frame
         {
-            /*
-            DrawSpriteNonChroma( pos.x, pos.y, &surf );
-            DrawFontText( "I want go HOME!", fontPos, WHITE, &font );
-            Sleep( 2 );
-            */
-
-            DrawCharacter( &link );
-
+            if ( proj.isFired == true )
+            {
+                DrawProjectileChroma( &proj );
+            }
         }
     }
 

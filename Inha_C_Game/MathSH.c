@@ -1,4 +1,5 @@
 #include "MathSH.h"
+#include <math.h>
 
 void swapI( int* lhs, int* rhs )
 {

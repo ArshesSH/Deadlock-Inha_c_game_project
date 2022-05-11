@@ -8,13 +8,13 @@ Rect MakeRect( int left, int right, int top, int bottom )
 
 Rect MakeRectByConner( Vec2 topLeft, Vec2 bottomRight )
 {
-	const Rect rt = { topLeft.x, bottomRight.x, topLeft.y, bottomRight.y };
+	const Rect rt = { (int)topLeft.x, (int)bottomRight.x, (int)topLeft.y, (int)bottomRight.y };
 	return rt;
 }
 
 Rect MakeRectBySize( Vec2 topLeft, int width, int height )
 {
-	const Rect rt = MakeRectByConner( topLeft, Vec2Add( topLeft, MakeVec2( width, height ) ) );
+	const Rect rt = MakeRectByConner( topLeft, Vec2Add( topLeft, MakeVec2( (float)width, (float)height ) ) );
 	return rt;
 }
 
@@ -37,7 +37,7 @@ bool RectContains( Rect target, Vec2 point )
 
 Rect RectFromCenter( Vec2 center, int halfWidth, int halfHeight )
 {
-	const Vec2 half = MakeVec2( halfWidth, halfHeight );
+	const Vec2 half = MakeVec2( (float)halfWidth, (float)halfHeight );
 	return MakeRectByConner( Vec2Sub( center , half ) , Vec2Add(center, half) );
 }
 
@@ -48,7 +48,7 @@ Rect RectGetExpanded( Rect target, int offset )
 
 Vec2 RectGetCenter(Rect target)
 {
-	return MakeVec2( (target.left + target.right) / 2, (target.top + target.bottom) / 2 );
+	return MakeVec2( (target.left + target.right) / 2.0f, (target.top + target.bottom) / 2.0f );
 }
 
 int RectGetWidth( Rect target )
