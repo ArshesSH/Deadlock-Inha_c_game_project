@@ -17,6 +17,9 @@ int main(int argc, char* argv[]) {
     SetConsoleWindowSize( 1920, 1080 );
     HideCursor();
 
+    const int screenWidth = GetScreenRect().right;
+    const int screenHeight = GetScreenRect().bottom;
+
     srand( (unsigned int)time( NULL ) );
 
     Vec2 pos = { 100,100 };
