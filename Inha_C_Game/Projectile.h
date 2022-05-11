@@ -14,10 +14,18 @@ typedef struct projectile
 	Color chroma;
 	bool isFired;
 	float time;
-	float timeCmx;
 	float radian;
 	int angle;
 	int power;
+
+	// ai feature
+	Vec2 impactPos;
+	float maxTime;
+	int yDiffer;
+	float height;
+	float fakeGravity;
+	float endTime;
+	
 }Projectile;
 
 void MakeProjectile( Projectile* projectile, Vec2 startPos_in, int angle, int power, Surface* sprite, Color chroma );

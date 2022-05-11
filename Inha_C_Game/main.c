@@ -14,7 +14,7 @@
 
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
-    SetConsoleWindowSize( 1280, 720 );
+    SetConsoleWindowSize( 1920, 1080 );
     HideCursor();
 
     time_t ft;
@@ -100,8 +100,8 @@ int main(int argc, char* argv[]) {
                 }
             }
             */
-
-
+            /*
+            
             Vec2 dir = { 0, 0 };
 
             if (_kbhit())
@@ -154,11 +154,17 @@ int main(int argc, char* argv[]) {
                 }
             }
 
+            */
+
+
+
+
         }
 
         // Compose Frame
         {
-            if ( isKeyInputed )
+            /*
+                        if ( isKeyInputed )
             {
                 DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
             }
@@ -168,6 +174,8 @@ int main(int argc, char* argv[]) {
                 DrawProjectileChroma( &proj );
                 Sleep( 30 );
             }
+            */
+
         }
     }
 
