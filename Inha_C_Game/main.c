@@ -6,6 +6,7 @@
 #include "Font.h"
 #include "Projectile.h"
 #include <math.h>
+#include <time.h>
 
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
