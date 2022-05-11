@@ -4,7 +4,6 @@
 #include "Graphics.h"
 #include "Character.h"
 #include "Font.h"
-#include "FrameTimer.h"
 #include "Projectile.h"
 #include <math.h>
 
@@ -17,8 +16,7 @@ int main(int argc, char* argv[]) {
     SetConsoleWindowSize( 1920, 1080 );
     HideCursor();
 
-    time_t ft;
-    StartFrameTimer( &ft );
+    srand( (unsigned int)time( NULL ) );
 
     Vec2 pos = { 100,100 };
     Character link;
@@ -31,7 +29,7 @@ int main(int argc, char* argv[]) {
     Projectile proj;
     Surface surf;
     MakeSurface( "src/images/awsom.bmp", &surf );
-    MakeProjectile( &proj, projStartPos, 40, 50, &surf, MAGENTA );
+    MakeProjectile( &proj, projStartPos, &surf, MAGENTA );
     SetProjectileVel( &proj, 50, 100 );
 
 
@@ -63,45 +61,27 @@ int main(int argc, char* argv[]) {
     //Vec2 lastPos = pos;
 
     //PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
-    // Do Game
+
+    /************************
+    *       Main Game       *
+    *************************/
+
+    /************************
+    *       Init Game       *
+    *************************/
+    bool isDrawOnce = false;
+    Vec2 userPos = { 50, 500 };
+    Vec2 aiPos = { 500,500 };
+    Projectile aiProj;
+    MakeProjectile( &aiProj, aiPos, &surf, MAGENTA );
+
     while ( 1 )
     {
-        // Update Model
+        /****************************
+        *       Update Model        *
+        *****************************/
         {
             /*
-            
-             if ( _kbhit() )
-            {
-                key = _getch();
-
-                if ( key == UP )
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, up );
-                }
-                if ( key == DOWN )
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, down );
-                }
-                if ( key == LEFT )
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, left );
-                }
-                if ( key == RIGHT )
-                {
-                    DeleteRect( SurfaceGetRect( &surf ), pos.x, pos.y );
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, right );
-                }
-            }
-            */
-            /*
-            
             Vec2 dir = { 0, 0 };
 
             if (_kbhit())
@@ -153,18 +133,43 @@ int main(int argc, char* argv[]) {
                     ResetProjectile( &proj );
                 }
             }
-
             */
 
+            // Parabola Enemy Test
+            {
+                if (_kbhit())
+                {
+                    key = _getch();
 
-
+                    if (key == VK_SPACE)
+                    {
+                        SetProjectileVelAI( &aiProj, userPos, aiPos, 50 );
+                        StartProjectileFire( &aiProj );
+                    }
+                }
+                
+                if (aiProj.isFired == true)
+                {
+                    if (IsInScreen( &aiProj ))
+                    {
+                        UpdatePrjectileAI( &aiProj );
+                    }
+                    else
+                    {
+                        ResetProjectile( &aiProj );
+                    }
+                }
+            }
 
         }
 
-        // Compose Frame
+        /****************************
+        *       Compose Frame       *
+        *****************************/
         {
             /*
-                        if ( isKeyInputed )
+            DrawFontText( buf, fontPos, WHITE, &font );
+            if ( isKeyInputed )
             {
                 DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
             }
@@ -176,10 +181,24 @@ int main(int argc, char* argv[]) {
             }
             */
 
+            //Test Parabola Enemy
+            {
+                if (!isDrawOnce)
+                {
+                    DrawSpriteChroma( (float)userPos.x, (float)userPos.y, &surf, MAGENTA );
+                    isDrawOnce = true;
+                }
+                if (IsProjectFired( &aiProj ))
+                {
+                    DrawProjectileChroma( &aiProj );
+                }
+            }
         }
     }
 
-    // End Game
+    /************************
+    *       End Game        *
+    *************************/
     /*
     DestroySurface( &surf );
     DestroyFont( &font );

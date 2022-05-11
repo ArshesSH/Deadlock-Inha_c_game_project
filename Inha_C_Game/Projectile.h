@@ -28,13 +28,17 @@ typedef struct projectile
 	
 }Projectile;
 
-void MakeProjectile( Projectile* projectile, Vec2 startPos_in, int angle, int power, Surface* sprite, Color chroma );
+void MakeProjectile( Projectile* projectile, Vec2 startPos_in, Surface* sprite, Color chroma );
+
+void SetProjectileVelAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset );
 
 void SetProjectileVel( Projectile* projectile, int angle, int power );
 
-void StartFire( Projectile* projectile );
+void StartProjectileFire( Projectile* projectile );
 
 void UpdateProjectile( Projectile* projectile );
+
+void UpdatePrjectileAI( Projectile* projectile );
 
 void ResetProjectile( Projectile* projectile );
 
@@ -45,6 +49,10 @@ bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect );
 void MoveProjectile( Projectile* projectile );
 
 void SetParabolaForUser( Projectile* projectile );
+
+void SetParabolaForAI( Projectile* projectile );
+
+bool IsProjectFired( Projectile* projectile );
 
 void DrawProjectile( Projectile* projectile );
 
