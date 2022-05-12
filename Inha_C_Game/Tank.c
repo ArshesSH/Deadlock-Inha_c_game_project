@@ -157,6 +157,11 @@ void SetTankAIStateMove( Tank* tank )
 	tank->state = TankMove;
 }
 
+void SetTankPlayerStateMove( Tank* tank )
+{
+	tank->state = TankMove;
+}
+
 void MoveTankAI( Tank* tank )
 {
 	MoveTank( tank, MakeVec2( (float)aiDir, 0.0f ) );

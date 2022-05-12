@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
     Vec2 fontPos = { 0, 0 };
     Font font;
     MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~' );
+
     
     char* text = { 0, };
     char buf[BUFSIZ];
@@ -66,7 +67,7 @@ int main(int argc, char* argv[]) {
     Vec2 aiPos = { 500,screenHeight - 47 - 30 };
 
     // Make Ground
-    Vec2 groundPos = { 0, screenHeight - 47 };
+    Vec2 groundPos = { 0, screenHeight - 200 };
     Surface groundSurf;
     MakeSurface( "src/images/GroundTile.bmp", &groundSurf );
     Ground testGround;
@@ -143,22 +144,36 @@ int main(int argc, char* argv[]) {
 
             // Parabola Enemy Test
             {
+                Vec2 dir = { 0,0 };
                 if (_kbhit())
                 {
                     key = _getch();
 
                     if ( key == LEFT )
                     {
-                        SetTankAIStateMove( &tankAI );
+                        SetTankPlayerStateMove( &tank );
+                        dir.x -= 1;
                     }
+                    else if ( key == RIGHT )
+                    {
+                        //SetTankAIStateMove( &tankAI );
+                        SetTankPlayerStateMove( &tank );
+                        dir.x += 1;
+                    }
+
 
                     if (key == SPACE )
                     {
-                        SetTankAIStateFire( &tankAI );
+                       // SetTankAIStateFire( &tankAI );
                     }
                 }
+                else
+                {
+                    tank.state = TankWait;
+                }
                 
-                UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
+                UpdateTankPlayer( &tank, dir );
+               // UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
 
         }
@@ -184,6 +199,7 @@ int main(int argc, char* argv[]) {
             //Test Parabola Enemy
             {
                 DrawTank( &tankAI );
+                DrawTank( &tank );
             }
         }
     }
