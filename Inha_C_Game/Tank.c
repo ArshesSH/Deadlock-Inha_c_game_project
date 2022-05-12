@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include <stdlib.h>
+#include <Windows.h>
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 {

@@ -57,6 +57,9 @@
     <ClCompile Include="Ground.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec2.h">
@@ -99,6 +102,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

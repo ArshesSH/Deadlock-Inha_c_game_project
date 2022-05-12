@@ -33,8 +33,6 @@ int main(int argc, char* argv[]) {
     bool isKeyInputed = false;
 
 
-    
-
 
     int key;
     Vec2 fontPos = { 0, 0 };
@@ -42,7 +40,7 @@ int main(int argc, char* argv[]) {
     MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~', "src/images/Fixedsys16x28.bmp" );
 
     Font smallFont;
-    MakeFont( &font, 0, 0, 8, 14, 32, 3, WHITE, ' ', '~', "src/images/Fixedsys8x14.bmp" );
+    MakeFont( &smallFont, 0, 0, 8, 14, 32, 3, WHITE, ' ', '~', "src/images/Fixedsys8x14.bmp" );
     
     char* text = { 0, };
     char buf[BUFSIZ];
@@ -224,7 +222,7 @@ int main(int argc, char* argv[]) {
             if ( isDrawed == false )
             {
                 DeleteRect( font.textRect );
-                DrawFontText( buf, fontPos, WHITE, &font );
+                DrawFontText( buf, fontPos, WHITE, &smallFont );
                 isDrawed = true;
             }
 
