@@ -6,6 +6,7 @@
 #include "Font.h"
 #include "Projectile.h"
 #include "Ground.h"
+#include "Tank.h"
 #include <math.h>
 #include <time.h>
 
@@ -18,35 +19,13 @@ int main(int argc, char* argv[]) {
     SetConsoleWindowSize( 1920, 1080 );
     HideCursor();
 
-    const int screenWidth = GetScreenRect().right;
-    const int screenHeight = GetScreenRect().bottom;
-
     srand( (unsigned int)time( NULL ) );
 
-    Vec2 pos = { 100,100 };
-    Character link;
-    MakeCharacter( &link, pos, 90, 90, 90, 90, 4, MAGENTA, "src/images/link90x90.bmp" );
 
-    Vec2 lastPos = pos;
     bool isKeyInputed = false;
+
+
     
-    Vec2 projStartPos = { 0, 200 };
-    Projectile proj;
-    Surface surf;
-    MakeSurface( "src/images/awsom.bmp", &surf );
-    MakeProjectile( &proj, projStartPos, &surf, MAGENTA );
-    SetProjectileVel( &proj, 50, 100 );
-
-
-    /*
-    Vec2 pos = { 100, 100 };
-    int speed = 5;
-    Vec2 up = { 0, -speed };
-    Vec2 down = { 0, speed };
-    Vec2 left = { -(speed), 0 };
-    Vec2 right = { (speed), 0 };
-    int key;
-    */
 
 
     int key;
@@ -89,7 +68,15 @@ int main(int argc, char* argv[]) {
     Ground testGround;
     MakeFlatGround( &testGround, &groundSurf, groundPos, 20, MAGENTA );
     DrawGround( &testGround );
-    DrawSpriteChroma( (float)userPos.x, (float)userPos.y, &surf, MAGENTA );
+
+    Tank tank;
+    MakeTank( &tank, (int)HeavyTank, 30, groundPos );
+    DrawTank( &tank );
+
+    Tank tankAI;
+    MakeTank( &tankAI, (int)MRLAI, 600, groundPos );
+    DrawTank( &tankAI );
+
     while ( 1 )
     {
         /****************************
@@ -156,7 +143,12 @@ int main(int argc, char* argv[]) {
                 {
                     key = _getch();
 
-                    if (key == VK_SPACE)
+                    if ( key == VK_SPACE )
+                    {
+                        SetTankAI( &tankAI );
+                    }
+
+                    if (key == VK_LEFT )
                     {
                         if ( aiProj.isFired != true )
                         {
@@ -166,6 +158,8 @@ int main(int argc, char* argv[]) {
                     }
                 }
                 
+                UpdateTankAI( &tankAI );
+
                 if (aiProj.isFired == true)
                 {
                     if (IsInScreen( &aiProj ))
@@ -209,6 +203,11 @@ int main(int argc, char* argv[]) {
                 {
                     DrawProjectileChroma( &aiProj );
                     Sleep( 10 );
+                }
+
+                if ( tankAI.isMoving == true )
+                {
+                    DrawTank( &tankAI );
                 }
             }
         }

@@ -4,8 +4,8 @@
 #include "Rect.h"
 #include "Surface.h"
 
-static int screenWidth;
-static int screenHeight;
+int screenWidth;
+int screenHeight;
 
 void HideCursor();
 
