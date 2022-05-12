@@ -5,7 +5,7 @@ void MakeStage( Game* stage, StageType type )
 	switch (type)
 	{
 	case StageStart:
-
+		
 		break;
 	case Stage1:
 		break;

@@ -27,8 +27,7 @@ typedef struct font
 	Rect* fontList;
 }Font;
 
-
-void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar, const char* filename );
+void MakeFont( Font* f, FontType fontType );
 
 void DrawFontText( const char* text, Vec2 pos, Color color, Font* f );
 
