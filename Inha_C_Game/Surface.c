@@ -119,6 +119,11 @@ Rect SurfaceGetRect( const Surface* const pSurface )
 	return MakeRectBySize( MakeVec2( 0, 0 ), pSurface->width, pSurface->height );
 }
 
+bool WasSurfaceDrew(Surface* pSurface)
+{
+	return pSurface->wasDrew;
+}
+
 void DestroySurface( Surface* pSurface )
 {
 	free( pSurface->pPixels );

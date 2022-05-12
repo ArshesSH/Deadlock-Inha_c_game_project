@@ -33,7 +33,7 @@ typedef struct game
 	Surface easyMode;
 	Surface hardMode;
 	Difficulty difficulty;
-	
+	int difficultOffset;
 
 	Ground ground;
 	Tank player;
@@ -42,3 +42,9 @@ typedef struct game
 }Game;
 
 void MakeStage( Game* stage, StageType type );
+
+void UpdateModel( Game* stage, StageType type );
+
+void ChooseDifficulty( Difficulty* current );
+
+bool IsPlayerInput( int vKey );

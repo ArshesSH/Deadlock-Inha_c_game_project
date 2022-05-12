@@ -162,6 +162,7 @@ int main(int argc, char* argv[]) {
                // UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
             */
+            UpdateModel( &game, StageStart );
         }
 
         /****************************

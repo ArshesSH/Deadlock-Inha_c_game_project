@@ -245,7 +245,7 @@ void DeletePixel( int x, int y )
     printf( "  " );
 }
 
-void DeleteSurfScreen( Surface* pSurf, int pos_x, int pos_y )
+void DeleteSurfaceScreen( Surface* pSurf, int pos_x, int pos_y )
 {
     DeleteSizeRect( SurfaceGetRect( pSurf ), pos_x, pos_y );
     pSurf->wasDrew = false;

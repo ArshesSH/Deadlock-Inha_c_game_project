@@ -27,4 +27,6 @@ int SurfaceGetHeight( const Surface* const pSurface );
 
 Rect SurfaceGetRect( const Surface* const pSurface );
 
+bool WasSurfaceDrew( Surface* pSurface );
+
 void DestroySurface( Surface* pSurface );

@@ -15,7 +15,7 @@ void MakeStage( Game* stage, StageType type )
 
 		MakeSurface( "src/images/easymode.bmp", &(stage->easyMode) );
 		MakeSurface( "src/images/hardmode.bmp", &(stage->hardMode) );
-		DrawSpriteChroma( 300, 300, &(stage->easyMode), MAGENTA );
+		DrawSpriteChroma( 420, 300, &(stage->easyMode), MAGENTA );
 	}
 	else if (type == Stage1)
 	{
@@ -36,38 +36,87 @@ void MakeStage( Game* stage, StageType type )
 
 }
 
-void UpdateStage( Game* stage, StageType type)
+void UpdateModel( Game* game )
 {
-	if (type == StageStart)
+	if (game->stage == StageStart)
 	{
-		if (stage->difficulty == MenuEasy)
+		ChooseDifficulty( &(game->difficulty) );
+
+		if (game->difficulty == MenuEasy)
 		{
-			DeleteSizeRect( SurfaceGetRect( &(stage->easyMode) ), 300, 300 );
-			DrawSpriteChroma( 300, 300, &(stage->easyMode), MAGENTA );
+			if (WasSurfaceDrew( &(game->hardMode) ))
+			{
+				DeleteSurfaceScreen( &(game->hardMode), 420, 300 );
+				DrawSpriteChroma( 420, 300, &(game->easyMode), MAGENTA );
+			}
+
 		}
-		else if (stage->difficulty == MenuHard)
+		else if (game->difficulty == MenuHard)
 		{
-			DeleteSizeRect( SurfaceGetRect( &(stage->easyMode) ), 300, 300 );
-			DrawSpriteChroma( 300, 300, &(stage->easyMode), MAGENTA );
+			if (WasSurfaceDrew( &(game->easyMode) ))
+			{
+				DeleteSurfaceScreen( &(game->easyMode), 420, 300 );
+				DrawSpriteChroma( 420, 300, &(game->hardMode), MAGENTA );
+			}
 		}
-
-
+		else if (game->difficulty == SelectEasy)
+		{
+			game->difficultOffset = 150;
+			game->stage = Stage1;
+		}
+		else if (game->difficulty == SelectHard)
+		{
+			game->difficultOffset = 100;
+			game->stage = Stage1;
+		}
 	}
-	else if (type == Stage1)
+	else if (game->stage == Stage1)
 	{
 
 	}
-	else if (type == Stage2)
+	else if (game->stage == Stage2)
 	{
 
 	}
-	else if (type == Stage3)
+	else if (game->stage == Stage3)
 	{
 
 	}
-	else if (type == StageEnd)
+	else if (game->stage == StageEnd)
 	{
 
+	}
+}
+
+void DrawFrame( Game* game )
+{
+
+}
+
+
+void ChooseDifficulty(Difficulty* current)
+{
+	if (IsPlayerInput( VK_LEFT ) || IsPlayerInput(VK_RIGHT))
+	{
+		if (*current == MenuEasy)
+		{
+			*current = MenuHard;
+		}
+		else if (*current == MenuHard)
+		{
+			*current = MenuEasy;
+		}
+	}
+	if (IsPlayerInput( VK_RETURN ))
+	{
+		if (*current == MenuEasy)
+		{
+			*current = SelectEasy;
+		}
+		else if (*current == MenuHard)
+		{
+			*current = SelectHard;
+		}
 	}
 }
 
