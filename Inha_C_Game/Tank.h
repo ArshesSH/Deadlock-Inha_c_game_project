@@ -13,7 +13,11 @@ typedef enum tankType
 	LightTankAI,
 	MiddleTankAI,
 	HeavyTankAI,
-	MRLAI
+	MRLAI,
+	SelectLightTank,
+	SelectMiddleTank,
+	SelectHeavyTank,
+	SelectMRL
 }TankType;
 
 typedef enum tankState

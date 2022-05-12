@@ -25,13 +25,13 @@ SceneType UpdateStartScene( StartScene* scene )
 	{
 		scene->difficultOffset = 150;
 		DestroyStartScene( scene );
-		return Stage1;
+		return StageSelectTank;
 	}
 	else if (scene->difficulty == SelectHard)
 	{
 		scene->difficultOffset = 100;
 		DestroyStartScene( scene );
-		return Stage1;
+		return StageSelectTank;
 	}
 	
 	return StageStart;
@@ -89,4 +89,5 @@ void DestroyStartScene(StartScene* scene)
 	DestroyFont( &(scene->title) );
 	DestroySurface( &(scene->easyMode) );
 	DestroySurface( &(scene->hardMode) );
+	system( "cls" );
 }

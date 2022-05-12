@@ -93,6 +93,9 @@
     <ClCompile Include="Tank.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="SelectScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

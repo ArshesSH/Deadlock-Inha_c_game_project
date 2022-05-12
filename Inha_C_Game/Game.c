@@ -10,9 +10,13 @@ void MakeStage( Game* game )
 	{
 		InitStartScene( &(game->startScene) );
 	}
+	else if (game->stage == StageSelectTank)
+	{
+		InitSelectScene( &(game->selectScene) );
+	}
 	else if (game->stage == Stage1)
 	{
-
+		
 	}
 	else if (game->stage == Stage2)
 	{
@@ -36,6 +40,10 @@ void UpdateModel( Game* game )
 	if (game->stage == StageStart)
 	{
 		game->stage = UpdateStartScene( &(game->startScene) );
+	}
+	else if (game->stage == StageSelectTank)
+	{
+
 	}
 	else if (game->stage == Stage1)
 	{
@@ -62,6 +70,10 @@ void DrawFrame( Game* game )
 	if (game->stage == StageStart)
 	{
 		DrawStartScene( &(game->startScene) );
+	}
+	else if (game->stage == StageSelectTank)
+	{
+
 	}
 	else if (game->stage == Stage1)
 	{

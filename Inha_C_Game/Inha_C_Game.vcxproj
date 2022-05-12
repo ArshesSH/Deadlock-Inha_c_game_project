@@ -153,6 +153,7 @@
     <ClCompile Include="PlayerController.c" />
     <ClCompile Include="Projectile.c" />
     <ClCompile Include="Rect.c" />
+    <ClCompile Include="SelectScene.c" />
     <ClCompile Include="StartScene.c" />
     <ClCompile Include="Surface.c" />
     <ClCompile Include="Tank.c" />

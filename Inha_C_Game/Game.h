@@ -5,12 +5,14 @@
 #include "Font.h"
 #include "SceneType.h"
 #include "StartScene.h"
+#include "SelectScene.h"
 
 typedef struct game
 {
 	SceneType stage;
 
 	StartScene startScene;
+	SelectScene selectScene;
 
 	bool IsStageChanged;
 
