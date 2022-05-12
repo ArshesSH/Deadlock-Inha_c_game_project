@@ -16,8 +16,10 @@ typedef struct projectile
 	Vec2 vel;
 	Vec2 startPos;
 	Vec2 lastPos;
+	Vec2 nextPos;
 	Surface* sprite;
 	Rect rect;
+	Rect nextRect;
 	Color chroma;
 	float time;
 	float radian;
@@ -55,7 +57,7 @@ void UpdatePrjectileAI( Projectile* projectile );
 
 void EndProjectile( Projectile* projectile, Vec2 pos );
 
-bool IsInScreen( Projectile* projectile );
+bool IsNextProjectileInScreen( Projectile* projectile );
 
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect );
 

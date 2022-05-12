@@ -110,7 +110,7 @@ void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset )
 		}
 		else if ( tank->bullet.state == ProjFire )
 		{
-			if ( IsInScreen( &(tank->bullet) ) )
+			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
 			{
 				UpdatePrjectileAI( &(tank->bullet) );
 				if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
@@ -190,7 +190,8 @@ void DrawTank( Tank* tank )
 		if ( tank->bullet.state == ProjFire )
 		{
 			DrawProjectileChroma( &(tank->bullet) );
-			Sleep( 10 );
+			Sleep( 20 );
+			//DeleteRect( tank->bullet.rect );
 		}
 	}
 }

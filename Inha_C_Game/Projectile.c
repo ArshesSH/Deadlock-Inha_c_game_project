@@ -16,6 +16,7 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 	// Set Image of projectile
 	projectile->sprite = sprite;
 	projectile->rect = MakeRectBySize( projectile->pos, sprite->width, sprite->height );
+	projectile->nextRect = projectile->rect;
 
 	// Set Image Chroma
 	projectile->chroma = chroma;
@@ -77,6 +78,7 @@ void SetProjectile( Projectile* projectile, Vec2 pos )
 	projectile->time = 0;
 	projectile->pos = pos;
 	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
+	projectile->nextRect = projectile->rect;
 	projectile->lastPos = pos;
 	projectile->startPos = pos;
 }
@@ -86,13 +88,13 @@ void EndProjectile( Projectile* projectile, Vec2 pos )
 	projectile->state = ProjWait;
 }
 
-bool IsInScreen( Projectile* projectile )
+bool IsNextProjectileInScreen( Projectile* projectile )
 {
 	const Rect screenRect = GetScreenRect();
 	
 	// Check except Screen Top
-	return projectile->rect.left >= screenRect.left && projectile->rect.right <= screenRect.right
-		&& projectile->rect.bottom <= screenRect.bottom;
+	return projectile->nextRect.left >= screenRect.left && projectile->nextRect.right <= screenRect.right
+		&& projectile->nextRect.bottom <= screenRect.bottom;
 }
 
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect )
@@ -109,8 +111,15 @@ void SetParabolaForUser( Projectile* projectile )
 
 void SetParabolaForAI( Projectile* projectile )
 {
-	projectile->pos.x = projectile->startPos.x + (projectile->vel.x * projectile->time);
-	projectile->pos.y = projectile->startPos.y - ((float)(projectile->vel.y * projectile->time) - (0.5 * projectile->fakeGravity * pow( projectile->time, 2 )));
+	projectile->nextPos.x = projectile->startPos.x + (projectile->vel.x * projectile->time);
+	projectile->nextPos.y = projectile->startPos.y - ((float)(projectile->vel.y * projectile->time) - (0.5 * projectile->fakeGravity * pow( projectile->time, 2 )));
+	projectile->nextRect = MakeRectBySize( projectile->nextPos, projectile->sprite->width, projectile->sprite->height );
+	// Screen Check
+	if ( IsNextProjectileInScreen(projectile) )
+	{
+		projectile->pos = projectile->nextPos;
+		projectile->rect = projectile->nextRect;
+	}
 }
 
 void DrawProjectile( Projectile* projectile )
@@ -132,6 +141,7 @@ void DrawProjectileChroma(  Projectile* projectile )
 
 void DrawProjectileClipChroma( Rect clip, Projectile* projectile )
 {
+	//DeleteRect( projectile->rect );
 	//DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipChroma( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect( (projectile->sprite) ), clip, projectile->sprite, projectile->chroma );
 }
