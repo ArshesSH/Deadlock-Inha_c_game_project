@@ -74,7 +74,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	tank->state = TankWait;
 }
 
-void UpdateTankPlayer( Tank* tank, Vec2 dir )
+void UpdateTankPlayer( Tank* tank, Vec2 dir, int angle, int power )
 {
 	if ( tank->state == TankMove )
 	{
@@ -82,7 +82,11 @@ void UpdateTankPlayer( Tank* tank, Vec2 dir )
 	}
 	else if ( tank->state == TankFire )
 	{
-
+		if ( tank->bullet.state == ProjWait )
+		{
+			SetProjectile( &(tank->bullet), tank->gunPos );
+			SetProjectilePlayer( &(tank->bullet), angle, power );
+		}
 	}
 }
 

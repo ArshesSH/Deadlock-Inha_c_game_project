@@ -14,12 +14,14 @@ typedef struct font
 	Surface fontTable;
 	char firstChar;
 	char lastChar;
+	Rect textRect;
 
 	// Must Free font List when finish use it
 	Rect* fontList;
 }Font;
 
-void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar );
+
+void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar, const char* filename );
 
 void DrawFontText( const char* text, Vec2 pos, Color color, Font* f );
 

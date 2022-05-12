@@ -39,17 +39,17 @@ int main(int argc, char* argv[]) {
     int key;
     Vec2 fontPos = { 0, 0 };
     Font font;
-    MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~' );
+    MakeFont( &font, 0, 0, 16, 28, 32, 3, WHITE, ' ', '~', "src/images/Fixedsys16x28.bmp" );
 
+    Font smallFont;
+    MakeFont( &font, 0, 0, 8, 14, 32, 3, WHITE, ' ', '~', "src/images/Fixedsys8x14.bmp" );
     
     char* text = { 0, };
     char buf[BUFSIZ];
     Vec2 a;
     int angle = 40;
     int power = 50;
-    float radian = angle * (3.14592 / 180.0);
-    a = MakeVec2( power * cosf( radian ), power * sinf( radian ) );
-    sprintf_s( buf, BUFSIZ, "angle %d, power %d => Vec(%.1f, %.1f)", angle, power, a.x, a.y );
+
 
     //Vec2 lastPos = pos;
 
@@ -81,6 +81,8 @@ int main(int argc, char* argv[]) {
     Tank tankAI;
     MakeTank( &tankAI, (int)MRLAI, 600, groundPos );
     DrawTankOnce( &tankAI );
+
+    bool isDrawed = false;
 
     while ( 1 )
     {
@@ -144,6 +146,10 @@ int main(int argc, char* argv[]) {
 
             // Parabola Enemy Test
             {
+                float radian = angle * (3.14592 / 180.0);
+                a = MakeVec2( power * cosf( radian ), power * sinf( radian ) );
+                sprintf_s( buf, BUFSIZ, "angle %d, power %d => Vec(%.1f, %.1f)", angle, power, a.x, a.y );
+
                 Vec2 dir = { 0,0 };
                 if (_kbhit())
                 {
@@ -160,8 +166,21 @@ int main(int argc, char* argv[]) {
                         SetTankPlayerStateMove( &tank );
                         dir.x += 1;
                     }
+                    if ( key == UP )
+                    {
+                        angle++;
+                        isDrawed = false;
+                    }
+                    if ( key == DOWN )
+                    {
+                        angle--;
+                        isDrawed = false;
+                    }
 
-
+                    if ( key == ENTER )
+                    {
+                        
+                    }
                     if (key == SPACE )
                     {
                        // SetTankAIStateFire( &tankAI );
@@ -195,6 +214,13 @@ int main(int argc, char* argv[]) {
                 Sleep( 30 );
             }
             */
+
+            if ( isDrawed == false )
+            {
+                DeleteRect( font.textRect );
+                DrawFontText( buf, fontPos, WHITE, &font );
+                isDrawed = true;
+            }
 
             //Test Parabola Enemy
             {

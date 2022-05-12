@@ -5,9 +5,9 @@
 
 #include "Graphics.h"
 
-void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar )
+void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar, const char* filename )
 {
-	MakeSurface( "src/images/Fixedsys16x28.bmp", &(f->fontTable) );
+	MakeSurface( filename, &(f->fontTable) );
 	f->chroma = c;
 	f->fontWidth = width;
 	f->fontHeight = height;
@@ -62,6 +62,9 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 			iWidth++;
 		}
 	}
+
+	const int rectRight = pos.x + (iWidth * (f->fontWidth));
+	f->textRect = MakeRectBySize( pos, rectRight, f->fontHeight );
 }
 
 
