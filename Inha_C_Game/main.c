@@ -171,12 +171,21 @@ int main(int argc, char* argv[]) {
                         angle++;
                         isDrawed = false;
                     }
-                    if ( key == DOWN )
+                    else if ( key == DOWN )
                     {
                         angle--;
                         isDrawed = false;
                     }
-
+                    if ( key == 'Q' )
+                    {
+                        power++;
+                        isDrawed = false;
+                    }
+                    else if(key == 'A')
+                    {
+                        power--;
+                        isDrawed = false;
+                    }
                     if ( key == ENTER )
                     {
                         SetTankStateFire( &tank );

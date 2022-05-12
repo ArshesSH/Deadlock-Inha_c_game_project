@@ -220,7 +220,7 @@ void DrawTank( Tank* tank )
 		{
 			DrawProjectileChroma( &(tank->bullet) );
 			Sleep( 20 );
-			//DeleteRect( tank->bullet.rect );
+			DeleteRect( tank->bullet.rect );
 		}
 	}
 }

@@ -106,9 +106,15 @@ bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect )
 
 void SetParabolaForUser( Projectile* projectile )
 {
-	projectile->pos.x = projectile->startPos.x + projectile->power * cosf( projectile->radian ) * projectile->time;
-	projectile->pos.y = projectile->startPos.y - (float)(projectile->power * sinf( projectile->radian ) * projectile->time
+	projectile->nextPos.x = projectile->startPos.x + projectile->power * cosf( projectile->radian ) * projectile->time;
+	projectile->nextPos.y = projectile->startPos.y - (float)(projectile->power * sinf( projectile->radian ) * projectile->time
 		- (0.5 * G * projectile->time * projectile->time));
+	projectile->nextRect = MakeRectBySize( projectile->nextPos, projectile->sprite->width, projectile->sprite->height );
+	if ( IsNextProjectileInScreen( projectile ) )
+	{
+		projectile->pos = projectile->nextPos;
+		projectile->rect = projectile->nextRect;
+	}
 }
 
 void SetParabolaForAI( Projectile* projectile )
