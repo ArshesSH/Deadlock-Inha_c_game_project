@@ -1,10 +1,11 @@
 #pragma once
 
-typedef enum stageType
+typedef enum sceneType
 {
 	StageStart,
+	StageSelectTank,
 	Stage1,
 	Stage2,
 	Stage3,
 	StageEnd
-}StageType;
+}SceneType;

@@ -17,7 +17,7 @@ void InitStartScene(StartScene* scene)
 	DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
 }
 
-StageType UpdateStartScene( StartScene* scene )
+SceneType UpdateStartScene( StartScene* scene )
 {
 	ChooseDifficulty( &(scene->difficulty) );
 

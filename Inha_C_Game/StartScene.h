@@ -2,7 +2,7 @@
 
 #include "Font.h"
 #include "Surface.h"
-#include "StageType.h"
+#include "SceneType.h"
 
 typedef enum difficulty
 {
@@ -27,7 +27,7 @@ typedef struct startScene
 
 void InitStartScene( StartScene* scene );
 
-StageType UpdateStartScene( StartScene* scene );
+SceneType UpdateStartScene( StartScene* scene );
 
 void DrawStartScene( StartScene* scene );
 

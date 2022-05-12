@@ -3,12 +3,12 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "Font.h"
-#include "StageType.h"
+#include "SceneType.h"
 #include "StartScene.h"
 
 typedef struct game
 {
-	StageType stage;
+	SceneType stage;
 
 	StartScene startScene;
 
@@ -22,6 +22,6 @@ void UpdateModel( Game* stage );
 
 void DrawFrame( Game* game );
 
-bool CheckStageChange( StageType last, StageType current );
+bool CheckStageChange( SceneType last, SceneType current );
 
 

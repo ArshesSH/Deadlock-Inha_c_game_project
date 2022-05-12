@@ -1,6 +1,6 @@
-#include "FirstStage.h"
+#include "FirstScene.h"
 
-void InitFirstStage( FirstStage* scene )
+void InitFirstStage( FirstScene* scene )
 {
 	// Generate Ground
 	scene->groundStartPos = MakeVec2( 0.0f, 300.0f );
@@ -12,17 +12,17 @@ void InitFirstStage( FirstStage* scene )
 	//Generate 
 }
 
-void UpdateFirstStage( FirstStage* scene )
+void UpdateFirstStage( FirstScene* scene )
 {
 
 }
 
-void DrawFirstStage( FirstStage* scene )
+void DrawFirstStage( FirstScene* scene )
 {
 
 }
 
-void DestroyFirstStage( FirstStage* scene )
+void DestroyFirstStage( FirstScene* scene )
 {
 
 }

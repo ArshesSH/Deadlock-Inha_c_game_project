@@ -5,7 +5,7 @@
 #include "Tank.h"
 #include "Ground.h"
 
-typedef struct firstStage
+typedef struct firstScene
 {
 	Font ui;
 	Surface tile;
@@ -17,4 +17,4 @@ typedef struct firstStage
 
 	int tileCount;
 
-}FirstStage;
+}FirstScene;

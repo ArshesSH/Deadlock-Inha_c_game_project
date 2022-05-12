@@ -142,7 +142,7 @@
     <ClCompile Include="Animation.c" />
     <ClCompile Include="Character.c" />
     <ClCompile Include="Colors.c" />
-    <ClCompile Include="FirstStage.c" />
+    <ClCompile Include="FirstScene.c" />
     <ClCompile Include="Font.c" />
     <ClCompile Include="FrameTimer.c" />
     <ClCompile Include="Game.c" />
@@ -163,7 +163,7 @@
     <ClInclude Include="cful.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Colors.h" />
-    <ClInclude Include="FirstStage.h" />
+    <ClInclude Include="FirstScene.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
@@ -173,7 +173,8 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Rect.h" />
-    <ClInclude Include="StageType.h" />
+    <ClInclude Include="SelectScene.h" />
+    <ClInclude Include="SceneType.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Tank.h" />

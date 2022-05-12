@@ -31,7 +31,7 @@ void MakeStage( Game* game )
 
 void UpdateModel( Game* game )
 {
-	const StageType lastState = game->stage;
+	const SceneType lastState = game->stage;
 
 	if (game->stage == StageStart)
 	{
@@ -81,7 +81,7 @@ void DrawFrame( Game* game )
 	}
 }
 
-bool CheckStageChange( StageType last, StageType current )
+bool CheckStageChange( SceneType last, SceneType current )
 {
 	return last != current;
 }
