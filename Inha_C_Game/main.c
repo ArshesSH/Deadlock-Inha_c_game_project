@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
     srand( (unsigned int)time( NULL ) );
 
-    Game game;
+
     /************************
     *       Main Game       *
     *************************/
@@ -39,10 +39,9 @@ int main(int argc, char* argv[]) {
     /************************
     *       Init Game       *
     *************************/
-    MakeStage( &game, StageStart );
-
-
-
+    Game game;
+    game.stage = StageStart;
+    MakeStage( &game );
 
 
     /*
@@ -162,7 +161,12 @@ int main(int argc, char* argv[]) {
                // UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
             */
-            UpdateModel( &game, StageStart );
+
+            if (game.IsStageChanged)
+            {
+                MakeStage( &game );
+            }
+            UpdateModel( &game );
         }
 
         /****************************
@@ -185,6 +189,8 @@ int main(int argc, char* argv[]) {
                 }
             }*/
 
+
+            DrawFrame( &game );
         }
     }
 

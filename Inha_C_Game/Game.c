@@ -2,34 +2,27 @@
 
 #include <Windows.h>
 #include "Graphics.h"
-void MakeStage( Game* stage, StageType type )
+
+
+void MakeStage( Game* game )
 {
-
-	if (type == StageStart)
+	if (game->stage == StageStart)
 	{
-		// Make Title and Draw
-		MakeFont( &(stage->title), FontLarge );
-		const Vec2 titlePos = { 336, 100 };
-		DrawFontText( "Last Crew", titlePos, WHITE, &(stage->title) );
-		stage->difficulty = MenuEasy;
-
-		MakeSurface( "src/images/easymode.bmp", &(stage->easyMode) );
-		MakeSurface( "src/images/hardmode.bmp", &(stage->hardMode) );
-		DrawSpriteChroma( 420, 300, &(stage->easyMode), MAGENTA );
+		InitStartScene( &(game->startScene) );
 	}
-	else if (type == Stage1)
+	else if (game->stage == Stage1)
 	{
 
 	}
-	else if (type == Stage2)
+	else if (game->stage == Stage2)
 	{
 
 	}
-	else if (type == Stage3)
+	else if (game->stage == Stage3)
 	{
 
 	}
-	else if (type == StageEnd)
+	else if (game->stage == StageEnd)
 	{
 
 	}
@@ -38,37 +31,37 @@ void MakeStage( Game* stage, StageType type )
 
 void UpdateModel( Game* game )
 {
+	const StageType lastState = game->stage;
+
 	if (game->stage == StageStart)
 	{
-		ChooseDifficulty( &(game->difficulty) );
+		game->stage = UpdateStartScene( &(game->startScene) );
+	}
+	else if (game->stage == Stage1)
+	{
 
-		if (game->difficulty == MenuEasy)
-		{
-			if (WasSurfaceDrew( &(game->hardMode) ))
-			{
-				DeleteSurfaceScreen( &(game->hardMode), 420, 300 );
-				DrawSpriteChroma( 420, 300, &(game->easyMode), MAGENTA );
-			}
+	}
+	else if (game->stage == Stage2)
+	{
 
-		}
-		else if (game->difficulty == MenuHard)
-		{
-			if (WasSurfaceDrew( &(game->easyMode) ))
-			{
-				DeleteSurfaceScreen( &(game->easyMode), 420, 300 );
-				DrawSpriteChroma( 420, 300, &(game->hardMode), MAGENTA );
-			}
-		}
-		else if (game->difficulty == SelectEasy)
-		{
-			game->difficultOffset = 150;
-			game->stage = Stage1;
-		}
-		else if (game->difficulty == SelectHard)
-		{
-			game->difficultOffset = 100;
-			game->stage = Stage1;
-		}
+	}
+	else if (game->stage == Stage3)
+	{
+
+	}
+	else if (game->stage == StageEnd)
+	{
+
+	}
+
+	game->IsStageChanged = CheckStageChange(lastState, game->stage);
+}
+
+void DrawFrame( Game* game )
+{
+	if (game->stage == StageStart)
+	{
+		DrawStartScene( &(game->startScene) );
 	}
 	else if (game->stage == Stage1)
 	{
@@ -88,39 +81,7 @@ void UpdateModel( Game* game )
 	}
 }
 
-void DrawFrame( Game* game )
+bool CheckStageChange( StageType last, StageType current )
 {
-
-}
-
-
-void ChooseDifficulty(Difficulty* current)
-{
-	if (IsPlayerInput( VK_LEFT ) || IsPlayerInput(VK_RIGHT))
-	{
-		if (*current == MenuEasy)
-		{
-			*current = MenuHard;
-		}
-		else if (*current == MenuHard)
-		{
-			*current = MenuEasy;
-		}
-	}
-	if (IsPlayerInput( VK_RETURN ))
-	{
-		if (*current == MenuEasy)
-		{
-			*current = SelectEasy;
-		}
-		else if (*current == MenuHard)
-		{
-			*current = SelectHard;
-		}
-	}
-}
-
-bool IsPlayerInput(int vKey)
-{
-	return GetAsyncKeyState( vKey ) & 0x8000;
+	return last != current;
 }

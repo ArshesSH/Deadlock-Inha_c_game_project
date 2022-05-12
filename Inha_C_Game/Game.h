@@ -3,48 +3,25 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "Font.h"
-
-typedef enum difficulty
-{
-	MenuEasy,
-	MenuHard,
-	SelectEasy,
-	SelectHard
-}Difficulty;
-
-typedef enum stageType
-{
-	StageStart,
-	Stage1,
-	Stage2,
-	Stage3,
-	StageEnd
-}StageType;
+#include "StageType.h"
+#include "StartScene.h"
 
 typedef struct game
 {
 	StageType stage;
-	bool IsStageCreated;
 
-	/************************
-	*		Stage Start		*
-	*************************/
-	Font title;
-	Surface easyMode;
-	Surface hardMode;
-	Difficulty difficulty;
-	int difficultOffset;
+	StartScene startScene;
 
-	Ground ground;
-	Tank player;
-	Tank ai;
-	Font font;
+	bool IsStageChanged;
+
 }Game;
 
-void MakeStage( Game* stage, StageType type );
+void MakeStage( Game* stage );
 
-void UpdateModel( Game* stage, StageType type );
+void UpdateModel( Game* stage );
 
-void ChooseDifficulty( Difficulty* current );
+void DrawFrame( Game* game );
 
-bool IsPlayerInput( int vKey );
+bool CheckStageChange( StageType last, StageType current );
+
+
