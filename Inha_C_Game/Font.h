@@ -5,6 +5,13 @@
 #include "Rect.h"
 #include "Surface.h"
 
+typedef enum fontType
+{
+	FontSmall,
+	FontMiddle,
+	FontLarge
+}FontType;
+
 typedef struct font
 {
 	Vec2 pos;

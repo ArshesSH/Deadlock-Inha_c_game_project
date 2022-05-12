@@ -13,11 +13,11 @@ typedef enum stageType
 	StageEnd
 }StageType;
 
-typedef struct stage
+typedef struct game
 {
 	StageType stage;
 	Ground ground;
 	Tank player;
 	Tank ai;
-	
-}Stage;
+	Font font;
+}Game;

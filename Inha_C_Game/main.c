@@ -80,7 +80,10 @@ int main(int argc, char* argv[]) {
     MakeTank( &tankAI, (int)MRLAI, 600, groundPos );
     DrawTankOnce( &tankAI );
 
-    bool isDrawed = false;
+
+    /************************
+    *       Init Draw        *
+    *************************/
 
     while ( 1 )
     {
@@ -89,59 +92,6 @@ int main(int argc, char* argv[]) {
         *****************************/
         {
             /*
-            Vec2 dir = { 0, 0 };
-
-            if (_kbhit())
-            {
-                key = _getch();
-                if ( key == VK_LEFT)
-                {
-                    dir.x -= 10;
-                    isKeyInputed = true;
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, dir );
-                }
-                else if ( key == VK_RIGHT)
-                {
-                    dir.x += 10;
-                    isKeyInputed = true;
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, dir );
-                }
-                if ( key == VK_UP)
-                {
-                    dir.y -= 10;
-                    isKeyInputed = true;
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, dir );
-                }
-                else if ( key == VK_DOWN)
-                {
-                    dir.y += 10;
-                    isKeyInputed = true;
-                    lastPos = pos;
-                    Vec2AddEqual( &pos, dir );
-                }
-                if ( key == VK_SPACE )
-                {
-                    StartFire( &proj );
-                    SetProjectileVel( &proj, 30, 50 );
-                }
-            }
-
-            if ( proj.isFired == true )
-            {
-                if ( IsInScreen( &proj ) )
-                {
-                    UpdateProjectile( &proj );
-                }
-                else
-                {
-                    ResetProjectile( &proj );
-                }
-            }
-            */
-
             // Parabola Enemy Test
             {
                 float radian = angle * (3.14592 / 180.0);
@@ -198,7 +148,7 @@ int main(int argc, char* argv[]) {
                 UpdateTankPlayer( &tank, testGround.rect, dir, angle, power );
                // UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
-
+            */
         }
 
         /****************************
@@ -206,37 +156,28 @@ int main(int argc, char* argv[]) {
         *****************************/
         {
             /*
-            DrawFontText( buf, fontPos, WHITE, &font );
-            if ( isKeyInputed )
             {
-                DrawSpriteChroma( pos.x, pos.y, &surf, MAGENTA );
-            }
+                if (isDrawed == false)
+                {
+                    DeleteRect( font.textRect );
+                    DrawFontText( buf, fontPos, WHITE, &smallFont );
+                    isDrawed = true;
+                }
 
-            if ( proj.isFired == true )
-            {
-                DrawProjectileChroma( &proj );
-                Sleep( 30 );
-            }
-            */
+                //Test Parabola Enemy
+                {
+                    DrawTank( &tankAI );
+                    DrawTank( &tank );
+                }
+            }*/
 
-            if ( isDrawed == false )
-            {
-                DeleteRect( font.textRect );
-                DrawFontText( buf, fontPos, WHITE, &smallFont );
-                isDrawed = true;
-            }
-
-            //Test Parabola Enemy
-            {
-                DrawTank( &tankAI );
-                DrawTank( &tank );
-            }
         }
     }
 
     /************************
     *       End Game        *
     *************************/
+
     /*
     DestroySurface( &surf );
     DestroyFont( &font );

@@ -57,7 +57,7 @@
     <ClCompile Include="Ground.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.c">
+    <ClCompile Include="Game.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,7 @@
     <ClInclude Include="Ground.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
+    <ClInclude Include="Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

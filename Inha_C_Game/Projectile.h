@@ -25,6 +25,7 @@ typedef struct projectile
 	float radian;
 	int angle;
 	int power;
+	int damage;
 
 	ProjectileState state;
 

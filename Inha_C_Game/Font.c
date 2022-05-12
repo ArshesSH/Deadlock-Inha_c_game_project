@@ -5,17 +5,44 @@
 
 #include "Graphics.h"
 
-void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, int sectionLine, Color c, char firstChar, char lastChar, const char* filename )
+void MakeFont( Font* f, FontType fontType )
 {
-	MakeSurface( filename, &(f->fontTable) );
-	f->chroma = c;
-	f->fontWidth = width;
-	f->fontHeight = height;
-	f->firstChar = firstChar;
-	f->lastChar = lastChar;
-	f->pos.x = x;
-	f->pos.y = y;
-	
+	const int sectionCount = 32;
+	const int sectionLine = 3;
+	switch (fontType)
+	{
+	case FontSmall:
+		MakeSurface( "src/images/Fixedsys8x14.bmp", &(f->fontTable) );
+		f->pos.x = 0;
+		f->pos.y = 0;
+		f->fontWidth = 8;
+		f->fontHeight = 14;
+		f->firstChar = ' ';
+		f->lastChar = '~';
+		f->chroma = WHITE;
+		break;
+	case FontMiddle:
+		MakeSurface( "src/images/Fixedsys16x28.bmp", &(f->fontTable) );
+		f->pos.x = 0;
+		f->pos.y = 0;
+		f->fontWidth = 16;
+		f->fontHeight = 28;
+		f->firstChar = ' ';
+		f->lastChar = '~';
+		f->chroma = WHITE;
+		break;
+	case FontLarge:
+		MakeSurface( "src/images/Fixedsys32x56.bmp", &(f->fontTable) );
+		f->pos.x = 0;
+		f->pos.y = 0;
+		f->fontWidth = 32;
+		f->fontHeight = 56;
+		f->firstChar = ' ';
+		f->lastChar = '~';
+		f->chroma = WHITE;
+		break;
+	}
+
 	// Reserve fontList (malloc)
 	f->fontList = (Rect*)malloc( sizeof( Rect ) * sectionCount * sectionLine );
 	if (f->fontList == NULL)
@@ -28,10 +55,10 @@ void MakeFont( Font* f, int x, int y, int width, int height, int sectionCount, i
 		for (int iSection = 0; iSection < sectionCount; iSection++)
 		{
 			const Rect tmp = MakeRect(
-				x + iSection * width,
-				x + (iSection + 1) * width,
-				y + iLine * height,
-				y + (iLine + 1) * height );
+				f->pos.x + iSection * f->fontWidth,
+				f->pos.x + (iSection + 1) * f->fontWidth,
+				f->pos.y + iLine * f->fontHeight,
+				f->pos.y + (iLine + 1) * f->fontHeight );
 			f->fontList[iLine * sectionCount + iSection] = tmp;
 		}
 	}

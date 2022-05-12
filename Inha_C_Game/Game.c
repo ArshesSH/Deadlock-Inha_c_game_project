@@ -1,6 +1,6 @@
-#include "Stage.h"
+#include "Game.h"
 
-void MakeStage(Stage* stage, StageType type)
+void MakeStage( Game* stage, StageType type )
 {
 	switch (type)
 	{
@@ -17,3 +17,5 @@ void MakeStage(Stage* stage, StageType type)
 		break;
 	}
 }
+
+void UpdateStage( Game* stage, )

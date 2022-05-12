@@ -37,6 +37,7 @@ typedef struct tank
 	Rect lastRect;
 	int speed;
 	TankState state;
+	int Health;
 }Tank;
 
 static int aiCount;
