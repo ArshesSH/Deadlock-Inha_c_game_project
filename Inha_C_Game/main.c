@@ -64,10 +64,6 @@ int main(int argc, char* argv[]) {
     bool isDrawOnce = false;
     Vec2 userPos = { 50, screenHeight - 47 - 30 };
     Vec2 aiPos = { 500,screenHeight - 47 - 30 };
-    Surface aiProjSurf;
-    MakeSurface( "src/images/bullet.bmp", &aiProjSurf );
-    Projectile aiProj;
-    MakeProjectile( &aiProj, aiPos, &aiProjSurf, MAGENTA );
 
     // Make Ground
     Vec2 groundPos = { 0, screenHeight - 47 };
@@ -79,11 +75,11 @@ int main(int argc, char* argv[]) {
 
     Tank tank;
     MakeTank( &tank, (int)HeavyTank, 30, groundPos );
-    DrawTank( &tank );
+    DrawTankOnce( &tank );
 
     Tank tankAI;
     MakeTank( &tankAI, (int)MRLAI, 600, groundPos );
-    DrawTank( &tankAI );
+    DrawTankOnce( &tankAI );
 
     while ( 1 )
     {
@@ -153,36 +149,16 @@ int main(int argc, char* argv[]) {
 
                     if ( key == LEFT )
                     {
-                        SetTankAIToMove( &tankAI );
+                        SetTankAIStateMove( &tankAI );
                     }
 
                     if (key == SPACE )
                     {
-                        if ( aiProj.state == ProjWait)
-                        {
-                            SetProjectileAI( &aiProj, userPos, aiPos, 50 );
-                            SetProjectileStateFire( &aiProj );
-                        }
+                        SetTankAIStateFire( &tankAI );
                     }
                 }
                 
-                UpdateTankAI( &tankAI );
-
-                if (aiProj.state == ProjFire)
-                {
-                    if (IsInScreen( &aiProj ))
-                    {
-                        UpdatePrjectileAI( &aiProj );
-                        if ( IsOverlapWithTarget( &aiProj, testGround.rect ) )
-                        {
-                            ResetProjectile( &aiProj );
-                        }
-                    }
-                    else
-                    {
-                        ResetProjectile( &aiProj );
-                    }
-                }
+                UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
 
         }
@@ -207,16 +183,7 @@ int main(int argc, char* argv[]) {
 
             //Test Parabola Enemy
             {
-                if (aiProj.state == ProjFire)
-                {
-                    DrawProjectileChroma( &aiProj );
-                    Sleep( 10 );
-                }
-
-                if ( tankAI.state == TankMove )
-                {
-                    DrawTank( &tankAI );
-                }
+                DrawTank( &tankAI );
             }
         }
     }

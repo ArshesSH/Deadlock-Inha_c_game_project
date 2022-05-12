@@ -26,7 +26,7 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 	projectile->state = ProjWait;
 }
 
-void UpdateProjectile( Projectile* projectile )
+void UpdateProjectilePlayer( Projectile* projectile )
 {
 	projectile->lastPos = projectile->pos;
 	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
@@ -54,7 +54,7 @@ void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int di
 	projectile->maxTime = (float)(rand() % 2 + 3.0f);
 	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->rect ), playerPos.y );
 	projectile->yDiffer = (int)(playerPos.y - aiPos.y);
-	projectile->height = (float)(rand() % 200 + 50);
+	projectile->height = (float)(rand() % aiParabolaRandomRange + aiParbolaMinHeight);
 	projectile->fakeGravity = (float)(projectile->height * 2) / (projectile->maxTime * projectile->maxTime);
 	projectile->vel.y = sqrtf( 2 * projectile->fakeGravity * projectile->height );
 
@@ -72,11 +72,17 @@ void SetProjectilePlayer( Projectile* projectile, int angle, int power)
 	projectile->vel = MakeVec2( power * cosf( projectile->radian ), -power * sinf( projectile->radian ) );
 }
 
-void ResetProjectile( Projectile* projectile )
+void SetProjectile( Projectile* projectile, Vec2 pos )
 {
-	projectile->pos = projectile->startPos;
-	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
 	projectile->time = 0;
+	projectile->pos = pos;
+	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
+	projectile->lastPos = pos;
+	projectile->startPos = pos;
+}
+
+void EndProjectile( Projectile* projectile, Vec2 pos )
+{
 	projectile->state = ProjWait;
 }
 
@@ -92,13 +98,6 @@ bool IsInScreen( Projectile* projectile )
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect )
 {
 	return RectIsOverlappingWith( projectile->rect, targetRect );
-}
-
-void MoveProjectile( Projectile* projectile )
-{
-	projectile->vel.y += G;
-	projectile->pos.x += projectile->vel.x;
-	projectile->pos.y = projectile->pos.y + projectile->vel.y;
 }
 
 void SetParabolaForUser( Projectile* projectile )
@@ -121,7 +120,7 @@ void DrawProjectile( Projectile* projectile )
 
 void DrawProjectileClip( Rect clip, Projectile* projectile )
 {
-	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	//DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipNonChroma( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect( (projectile->sprite) ), clip, projectile->sprite );
 }
 
@@ -133,7 +132,7 @@ void DrawProjectileChroma(  Projectile* projectile )
 
 void DrawProjectileClipChroma( Rect clip, Projectile* projectile )
 {
-	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	//DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipChroma( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect( (projectile->sprite) ), clip, projectile->sprite, projectile->chroma );
 }
 
@@ -145,6 +144,6 @@ void DrawProjectileColor( Projectile* projectile, Color subColor )
 
 void DrawProjectileClipColor( Rect clip, Projectile* projectile, Color subColor )
 {
-	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	//DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipSubstitute( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect((projectile->sprite)), clip, projectile->sprite, projectile->chroma, subColor );
 }

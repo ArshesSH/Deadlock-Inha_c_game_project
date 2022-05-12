@@ -19,6 +19,7 @@ typedef enum tankType
 typedef enum tankState
 {
 	TankWait,
+	TankDrawAndWait,
 	TankMove,
 	TankFire,
 	TankCount
@@ -27,6 +28,7 @@ typedef enum tankState
 typedef struct tank
 {
 	TankType type;
+	Surface bulletSprite;
 	Projectile bullet;
 	Vec2 gunPos;
 	Surface sprite;
@@ -43,14 +45,18 @@ static int aiDir;
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos );
 
-void SetTankAIToMove( Tank* tank );
-
-void UpdateTankAI( Tank* tank );
+void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset );
 
 void MoveTank( Tank* tank, Vec2 dir );
 
+void SetTankAIStateMove( Tank* tank );
+
 void MoveTankAI( Tank* tank );
+
+void SetTankAIStateFire( Tank* tank );
 
 bool IsTankOverlapWith( Tank* tank, Rect target );
 
 void DrawTank( Tank* tank );
+
+void DrawTankOnce( Tank* tank );

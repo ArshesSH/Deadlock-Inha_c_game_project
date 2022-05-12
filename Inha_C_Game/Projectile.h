@@ -36,25 +36,28 @@ typedef struct projectile
 	
 }Projectile;
 
+static const int aiParbolaMinHeight = 50;
+static int aiParabolaRandomRange = 100;
+
 void MakeProjectile( Projectile* projectile, Vec2 startPos_in, Surface* sprite, Color chroma );
 
 void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset );
 
 void SetProjectilePlayer( Projectile* projectile, int angle, int power );
 
+void SetProjectile( Projectile* projectile, Vec2 pos );
+
 void SetProjectileStateFire( Projectile* projectile );
 
-void UpdateProjectile( Projectile* projectile );
+void UpdateProjectilePlayer( Projectile* projectile );
 
 void UpdatePrjectileAI( Projectile* projectile );
 
-void ResetProjectile( Projectile* projectile );
+void EndProjectile( Projectile* projectile, Vec2 pos );
 
 bool IsInScreen( Projectile* projectile );
 
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect );
-
-void MoveProjectile( Projectile* projectile );
 
 void SetParabolaForUser( Projectile* projectile );
 
