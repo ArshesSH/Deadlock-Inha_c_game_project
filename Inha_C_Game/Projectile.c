@@ -29,7 +29,7 @@ void SetProjectileVelAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int
 {
 	// Set for ParabolaAI
 
-	projectile->maxTime = 2.0f;
+	projectile->maxTime = (float)(rand() % 2 + 3.0f);
 	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->spriteRect), playerPos.y );
 	projectile->yDiffer = (int)(playerPos.y - aiPos.y);
 	projectile->height = (float)(rand() % 200 + 50);

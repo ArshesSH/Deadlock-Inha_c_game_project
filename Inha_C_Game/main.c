@@ -5,6 +5,7 @@
 #include "Character.h"
 #include "Font.h"
 #include "Projectile.h"
+#include "Ground.h"
 #include <math.h>
 #include <time.h>
 
@@ -78,6 +79,14 @@ int main(int argc, char* argv[]) {
     Vec2 aiPos = { 500,500 };
     Projectile aiProj;
     MakeProjectile( &aiProj, aiPos, &surf, MAGENTA );
+
+    // Make Ground
+    Vec2 groundPos = { 0, screenHeight - 47 };
+    Surface groundSurf;
+    MakeSurface( "src/images/GroundTile.bmp", &groundSurf );
+    Ground testGround;
+    MakeFlatGround( &testGround, &groundSurf, groundPos, 20, MAGENTA );
+    DrawGround( &testGround );
 
     while ( 1 )
     {
@@ -207,7 +216,7 @@ int main(int argc, char* argv[]) {
     DestroySurface( &surf );
     DestroyFont( &font );
     */
-
+    DestroyGround( &testGround );
 
     return 0;
 }
