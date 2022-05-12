@@ -12,6 +12,7 @@ typedef struct surface
 	int width;
 	int height;
 	Color* pPixels;
+	bool wasDrew;
 }Surface;
 
 void MakeSurface( const char* filename, Surface* pSurface );

@@ -69,17 +69,17 @@ void PutPixel( int x, int y, Color c )
 }
 
 
-void DrawSpriteNonChroma( int x, int y, const Surface* const s )
+void DrawSpriteNonChroma( int x, int y, Surface* const s )
 {
     DrawSpriteClipNonChroma( x, y, SurfaceGetRect( s ), GetScreenRect(), s );
 }
 
-void DrawSpriteRectNonChroma( int x, int y, const Rect* const srcRect, const Surface* const s )
+void DrawSpriteRectNonChroma( int x, int y, const Rect* const srcRect, Surface* const s )
 {
     DrawSpriteClipNonChroma( x, y, *srcRect, GetScreenRect(), s );
 }
 
-void DrawSpriteClipNonChroma( int x, int y, Rect srcRect, const Rect clip, const Surface* const s )
+void DrawSpriteClipNonChroma( int x, int y, Rect srcRect, const Rect clip, Surface* const s )
 {
     //assert( srcRect.left >= 0 );
     //assert( srcRect.right <= s.GetWidth() );
@@ -112,20 +112,21 @@ void DrawSpriteClipNonChroma( int x, int y, Rect srcRect, const Rect clip, const
             PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, SurfaceGetPixel( s, sx, sy ) );
         }
     }
+    s->wasDrew = true;
 }
 
 
-void DrawSpriteChroma( int x, int y, const Surface* const s, Color chroma )
+void DrawSpriteChroma( int x, int y, Surface* const s, Color chroma )
 {
     DrawSpriteClipChroma( x, y, SurfaceGetRect(s), GetScreenRect(), s, chroma );
 }
 
-void DrawSpriteRectChroma( int x, int y, const Rect* const srcRect, const Surface* const s, Color chroma )
+void DrawSpriteRectChroma( int x, int y, const Rect* const srcRect, Surface* const s, Color chroma )
 {
     DrawSpriteClipChroma( x, y, *srcRect, GetScreenRect(), s, chroma );
 }
 
-void DrawSpriteClipChroma( int x, int y, Rect srcRect, const Rect clip, const Surface* const s, Color chroma )
+void DrawSpriteClipChroma( int x, int y, Rect srcRect, const Rect clip, Surface* const s, Color chroma )
 {
     assert( srcRect.left >= 0 );
     assert( srcRect.right <= SurfaceGetWidth(s) );
@@ -162,20 +163,21 @@ void DrawSpriteClipChroma( int x, int y, Rect srcRect, const Rect clip, const Su
             }
         }
     }
+    s->wasDrew = true;
 }
 
-void DrawSpriteSubstitute( int x, int y, const Surface* const s, Color chroma, Color subColor )
+void DrawSpriteSubstitute( int x, int y, Surface* const s, Color chroma, Color subColor )
 {
     DrawSpriteClipSubstitute( x, y, SurfaceGetRect( s ), GetScreenRect(), s, chroma, subColor );
 }
 
 
-void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, const Surface* const s, Color chroma, Color subColor )
+void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, Surface* const s, Color chroma, Color subColor )
 {
     DrawSpriteClipSubstitute( x, y, *srcRect, GetScreenRect(), s, chroma, subColor );
 }
 
-void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, const Surface* const s, Color chroma, Color subColor )
+void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, Surface* const s, Color chroma, Color subColor )
 {
     assert( srcRect.left >= 0 );
     assert( srcRect.right <= SurfaceGetWidth( s ) );
@@ -212,6 +214,7 @@ void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, cons
             }
         }
     }
+    s->wasDrew = true;
 }
 
 
@@ -242,6 +245,11 @@ void DeletePixel( int x, int y )
     printf( "  " );
 }
 
+void DeleteSurfScreen( Surface* pSurf, int pos_x, int pos_y )
+{
+    DeleteSizeRect( SurfaceGetRect( pSurf ), pos_x, pos_y );
+    pSurf->wasDrew = false;
+}
 
 void DeleteSizeRect( Rect rect, int pos_x, int pos_y )
 {

@@ -9,6 +9,7 @@
 #include "Tank.h"
 #include <math.h>
 #include <time.h>
+#include "Game.h"
 
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
@@ -24,11 +25,27 @@
 
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
+    // 960 540
     SetConsoleWindowSize( 1920, 1080 );
     HideCursor();
 
     srand( (unsigned int)time( NULL ) );
 
+    Game game;
+    /************************
+    *       Main Game       *
+    *************************/
+
+    /************************
+    *       Init Game       *
+    *************************/
+    MakeStage( &game, StageStart );
+
+
+
+
+
+    /*
 
     bool isKeyInputed = false;
 
@@ -47,19 +64,15 @@ int main(int argc, char* argv[]) {
     Vec2 a;
     int angle = 40;
     int power = 50;
-
+    */
 
     //Vec2 lastPos = pos;
 
     //PlaySound(TEXT("src/coin.wav"), NULL, SND_ASYNC);
 
-    /************************
-    *       Main Game       *
-    *************************/
 
-    /************************
-    *       Init Game       *
-    *************************/
+    /*
+
     bool isDrawOnce = false;
     Vec2 userPos = { 50, screenHeight - 47 - 30 };
     Vec2 aiPos = { 500,screenHeight - 47 - 30 };
@@ -79,7 +92,7 @@ int main(int argc, char* argv[]) {
     Tank tankAI;
     MakeTank( &tankAI, (int)MRLAI, 600, groundPos );
     DrawTankOnce( &tankAI );
-
+    */
 
     /************************
     *       Init Draw        *
@@ -182,7 +195,7 @@ int main(int argc, char* argv[]) {
     DestroySurface( &surf );
     DestroyFont( &font );
     */
-    DestroyGround( &testGround );
+    //DestroyGround( &testGround );
 
     return 0;
 }

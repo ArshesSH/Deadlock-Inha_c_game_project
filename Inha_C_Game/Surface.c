@@ -82,6 +82,8 @@ void MakeSurface ( const char* filename, Surface* pSurface )
 	}
 
 	fclose( pFile );
+
+	pSurface->wasDrew = false;
 }
 
 Color SurfacePutPixel( int x, int y, Color c, Surface* pSurface )
@@ -121,4 +123,5 @@ void DestroySurface( Surface* pSurface )
 {
 	free( pSurface->pPixels );
 	pSurface->pPixels = NULL;
+	pSurface->wasDrew = false;
 }
