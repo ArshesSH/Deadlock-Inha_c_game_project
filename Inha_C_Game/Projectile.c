@@ -12,14 +12,15 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 	projectile->startPos = startPos_in;
 	projectile->pos = startPos_in;
 	projectile->lastPos = startPos_in;
+	projectile->isFired = false;
+	projectile->isFlying = false;
 
 	// Set Image of projectile
 	projectile->sprite = sprite;
-	projectile->spriteRect = MakeRectBySize( projectile->pos, sprite->width, sprite->height );
+	projectile->rect = MakeRectBySize( projectile->pos, sprite->width, sprite->height );
 
 	// Set Image Chroma
 	projectile->chroma = chroma;
-	projectile->isFired = false;
 
 	// Set Time
 	projectile->time = 0.0f;
@@ -30,7 +31,7 @@ void SetProjectileVelAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int
 	// Set for ParabolaAI
 
 	projectile->maxTime = (float)(rand() % 2 + 3.0f);
-	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->spriteRect), playerPos.y );
+	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->rect ), playerPos.y );
 	projectile->yDiffer = (int)(playerPos.y - aiPos.y);
 	projectile->height = (float)(rand() % 200 + 50);
 	projectile->fakeGravity = (float)(projectile->height * 2) / (projectile->maxTime * projectile->maxTime);
@@ -59,7 +60,7 @@ void StartProjectileFire(Projectile* projectile)
 void UpdateProjectile( Projectile* projectile )
 {
 	projectile->lastPos = projectile->pos;
-	projectile->spriteRect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
+	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
 	SetParabolaForUser( projectile );
 	projectile->time += 0.1f;
 }
@@ -67,7 +68,7 @@ void UpdateProjectile( Projectile* projectile )
 void UpdatePrjectileAI( Projectile* projectile )
 {
 	projectile->lastPos = projectile->pos;
-	projectile->spriteRect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
+	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
 	SetParabolaForAI( projectile );
 	projectile->time += 0.1f;
 }
@@ -76,7 +77,7 @@ void UpdatePrjectileAI( Projectile* projectile )
 void ResetProjectile( Projectile* projectile )
 {
 	projectile->pos = projectile->startPos;
-	projectile->spriteRect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
+	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
 	projectile->time = 0;
 	projectile->isFired = false;
 }
@@ -86,13 +87,13 @@ bool IsInScreen( Projectile* projectile )
 	const Rect screenRect = GetScreenRect();
 	
 	// Check except Screen Top
-	return projectile->spriteRect.left >= screenRect.left && projectile->spriteRect.right <= screenRect.right
-		&& projectile->spriteRect.bottom <= screenRect.bottom;
+	return projectile->rect.left >= screenRect.left && projectile->rect.right <= screenRect.right
+		&& projectile->rect.bottom <= screenRect.bottom;
 }
 
 bool IsOverlapWithTarget( Projectile* projectile, Rect targetRect )
 {
-	return RectIsOverlappingWith( SurfaceGetRect( projectile->sprite ), targetRect );
+	return RectIsOverlappingWith( projectile->rect, targetRect );
 }
 
 void MoveProjectile( Projectile* projectile )

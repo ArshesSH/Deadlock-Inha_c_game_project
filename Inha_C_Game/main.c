@@ -75,10 +75,12 @@ int main(int argc, char* argv[]) {
     *       Init Game       *
     *************************/
     bool isDrawOnce = false;
-    Vec2 userPos = { 50, 500 };
-    Vec2 aiPos = { 500,500 };
+    Vec2 userPos = { 50, screenHeight - 47 - 30 };
+    Vec2 aiPos = { 500,screenHeight - 47 - 30 };
+    Surface aiProjSurf;
+    MakeSurface( "src/images/bullet.bmp", &aiProjSurf );
     Projectile aiProj;
-    MakeProjectile( &aiProj, aiPos, &surf, MAGENTA );
+    MakeProjectile( &aiProj, aiPos, &aiProjSurf, MAGENTA );
 
     // Make Ground
     Vec2 groundPos = { 0, screenHeight - 47 };
@@ -87,7 +89,7 @@ int main(int argc, char* argv[]) {
     Ground testGround;
     MakeFlatGround( &testGround, &groundSurf, groundPos, 20, MAGENTA );
     DrawGround( &testGround );
-
+    DrawSpriteChroma( (float)userPos.x, (float)userPos.y, &surf, MAGENTA );
     while ( 1 )
     {
         /****************************
@@ -156,8 +158,11 @@ int main(int argc, char* argv[]) {
 
                     if (key == VK_SPACE)
                     {
-                        SetProjectileVelAI( &aiProj, userPos, aiPos, 50 );
-                        StartProjectileFire( &aiProj );
+                        if ( aiProj.isFired != true )
+                        {
+                            SetProjectileVelAI( &aiProj, userPos, aiPos, 50 );
+                            StartProjectileFire( &aiProj );
+                        }
                     }
                 }
                 
@@ -166,6 +171,10 @@ int main(int argc, char* argv[]) {
                     if (IsInScreen( &aiProj ))
                     {
                         UpdatePrjectileAI( &aiProj );
+                        if ( IsOverlapWithTarget( &aiProj, testGround.rect ) )
+                        {
+                            ResetProjectile( &aiProj );
+                        }
                     }
                     else
                     {
@@ -196,14 +205,10 @@ int main(int argc, char* argv[]) {
 
             //Test Parabola Enemy
             {
-                if (!isDrawOnce)
-                {
-                    DrawSpriteChroma( (float)userPos.x, (float)userPos.y, &surf, MAGENTA );
-                    isDrawOnce = true;
-                }
                 if (IsProjectFired( &aiProj ))
                 {
                     DrawProjectileChroma( &aiProj );
+                    Sleep( 10 );
                 }
             }
         }

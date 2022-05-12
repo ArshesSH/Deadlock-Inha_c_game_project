@@ -10,13 +10,14 @@ typedef struct projectile
 	Vec2 startPos;
 	Vec2 lastPos;
 	Surface* sprite;
-	Rect spriteRect;
+	Rect rect;
 	Color chroma;
-	bool isFired;
 	float time;
 	float radian;
 	int angle;
 	int power;
+	bool isFired;
+	bool isFlying;
 
 	// ai feature
 	Vec2 impactPos;
