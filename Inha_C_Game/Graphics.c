@@ -243,13 +243,24 @@ void DeletePixel( int x, int y )
 }
 
 
-void DeleteRect( Rect rect, int pos_x, int pos_y )
+void DeleteSizeRect( Rect rect, int pos_x, int pos_y )
 {
     for (int y = rect.top; y < rect.bottom; ++y)
     {
         for (int x = rect.left; x < rect.right; ++x)
         {
             DeletePixel( x + pos_x, y + pos_y );
+        }
+    }
+}
+
+void DeleteRect( Rect rect )
+{
+    for ( int y = rect.top; y < rect.bottom; ++y )
+    {
+        for ( int x = rect.left; x < rect.right; ++x )
+        {
+            DeletePixel( x, y );
         }
     }
 }

@@ -54,12 +54,14 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	tank->pos.x = pos_x;
 	tank->pos.y = groundPos.y - tank->sprite.height;
 	
+
 	tank->gunPos.x += tank->pos.x;
 	tank->gunPos.y = tank->pos.y;
 
 	tank->isMoving = false;
 
 	tank->rect = MakeRectBySize( tank->pos, tank->sprite.width, tank->sprite.height );
+	tank->lastRect = tank->rect;
 }
 
 void SetTankAI( Tank* tank )
@@ -90,6 +92,8 @@ void MoveTank( Tank* tank, Vec2 dir )
 	const Vec2 nextPos = Vec2Add( (tank->pos), Vec2Mul( dir, tank->speed ) );
 	const Rect nextRect = MakeRectBySize( nextPos, tank->sprite.width, tank->sprite.height );
 
+	tank->lastRect = tank->rect;
+
 	// Screen Check
 	if ( RectIsContainedBy( nextRect, GetScreenRect() ) )
 	{
@@ -111,5 +115,6 @@ void IsTankOverlapWith(Tank* tank, Rect target)
 
 void DrawTank( Tank* tank )
 {
+	DeleteRect( tank->lastRect );
 	DrawSpriteNonChroma( (int)tank->pos.x, (int)tank->pos.y, &(tank->sprite) );
 }

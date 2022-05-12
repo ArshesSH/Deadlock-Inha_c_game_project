@@ -24,6 +24,7 @@ typedef struct tank
 	Surface sprite;
 	Vec2 pos;
 	Rect rect;
+	Rect lastRect;
 	int speed;
 	bool isMoving;
 }Tank;

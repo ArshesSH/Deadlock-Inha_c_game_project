@@ -41,4 +41,6 @@ void DrawRect( int x0, int y0, int x1, int y1, Color c );
 
 void DeletePixel( int x, int y );
 
-void DeleteRect( Rect rect, int pos_x, int pos_y );
+void DeleteSizeRect( Rect rect, int pos_x, int pos_y );
+
+void DeleteRect( Rect rect );

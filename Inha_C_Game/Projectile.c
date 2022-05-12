@@ -128,7 +128,7 @@ void DrawProjectile( Projectile* projectile )
 
 void DrawProjectileClip( Rect clip, Projectile* projectile )
 {
-	DeleteRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipNonChroma( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect( (projectile->sprite) ), clip, projectile->sprite );
 }
 
@@ -140,7 +140,7 @@ void DrawProjectileChroma(  Projectile* projectile )
 
 void DrawProjectileClipChroma( Rect clip, Projectile* projectile )
 {
-	DeleteRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipChroma( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect( (projectile->sprite) ), clip, projectile->sprite, projectile->chroma );
 }
 
@@ -152,6 +152,6 @@ void DrawProjectileColor( Projectile* projectile, Color subColor )
 
 void DrawProjectileClipColor( Rect clip, Projectile* projectile, Color subColor )
 {
-	DeleteRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
+	DeleteSizeRect( SurfaceGetRect( (projectile->sprite) ), (int)projectile->lastPos.x, (int)projectile->lastPos.y );
 	DrawSpriteClipSubstitute( (int)projectile->pos.x, (int)projectile->pos.y, SurfaceGetRect((projectile->sprite)), clip, projectile->sprite, projectile->chroma, subColor );
 }
