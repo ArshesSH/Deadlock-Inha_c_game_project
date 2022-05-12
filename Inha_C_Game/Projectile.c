@@ -69,6 +69,8 @@ void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int di
 void SetProjectilePlayer( Projectile* projectile, int angle, int power)
 {
 	// Get Radian from angle, and make Velocity Vec2
+	projectile->angle = angle;
+	projectile->power = power;
 	projectile->radian = angle * (PI / 180.0f);
 	projectile->vel = MakeVec2( power * cosf( projectile->radian ), -power * sinf( projectile->radian ) );
 }

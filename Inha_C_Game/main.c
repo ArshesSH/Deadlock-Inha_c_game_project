@@ -179,19 +179,16 @@ int main(int argc, char* argv[]) {
 
                     if ( key == ENTER )
                     {
-                        
+                        SetTankStateFire( &tank );
                     }
                     if (key == SPACE )
                     {
-                       // SetTankAIStateFire( &tankAI );
+                       // SetTankStateFire( &tankAI );
                     }
                 }
-                else
-                {
-                    tank.state = TankWait;
-                }
+
                 
-                UpdateTankPlayer( &tank, dir );
+                UpdateTankPlayer( &tank, testGround.rect, dir, angle, power );
                // UpdateTankAI( &tankAI, testGround.rect, tank.pos, 150 );
             }
 

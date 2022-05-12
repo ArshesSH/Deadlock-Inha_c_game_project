@@ -45,7 +45,7 @@ static int aiDir;
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos );
 
-void UpdateTankPlayer( Tank* tank, Vec2 dir );
+void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power );
 
 void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset );
 
@@ -57,7 +57,7 @@ void SetTankPlayerStateMove( Tank* tank );
 
 void MoveTankAI( Tank* tank );
 
-void SetTankAIStateFire( Tank* tank );
+void SetTankStateFire( Tank* tank );
 
 bool IsTankOverlapWith( Tank* tank, Rect target );
 

@@ -74,11 +74,12 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	tank->state = TankWait;
 }
 
-void UpdateTankPlayer( Tank* tank, Vec2 dir, int angle, int power )
+void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power )
 {
 	if ( tank->state == TankMove )
 	{
 		MoveTank( tank, dir );
+		tank->state = TankWait;
 	}
 	else if ( tank->state == TankFire )
 	{
@@ -86,6 +87,24 @@ void UpdateTankPlayer( Tank* tank, Vec2 dir, int angle, int power )
 		{
 			SetProjectile( &(tank->bullet), tank->gunPos );
 			SetProjectilePlayer( &(tank->bullet), angle, power );
+			SetProjectileStateFire( &(tank->bullet) );
+		}
+		else if ( tank->bullet.state == ProjFire )
+		{
+			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
+			{
+				UpdateProjectilePlayer( &(tank->bullet) );
+				if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
+				{
+					EndProjectile( &(tank->bullet), tank->gunPos );
+					tank->state = TankWait;
+				}
+			}
+			else
+			{
+				EndProjectile( &(tank->bullet), tank->gunPos );
+				tank->state = TankWait;
+			}
 		}
 	}
 }
@@ -171,7 +190,7 @@ void MoveTankAI( Tank* tank )
 	MoveTank( tank, MakeVec2( (float)aiDir, 0.0f ) );
 }
 
-void SetTankAIStateFire( Tank* tank )
+void SetTankStateFire( Tank* tank )
 {
 	tank->state = TankFire;
 }
@@ -186,6 +205,7 @@ void DrawTank( Tank* tank )
 {
 	if ( tank->state == TankWait )
 	{
+		DeleteRect( tank->lastRect );
 		DrawTankOnce( tank );
 		tank->state = TankDrawAndWait;
 	}
