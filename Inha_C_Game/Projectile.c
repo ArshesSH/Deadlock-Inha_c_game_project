@@ -12,8 +12,6 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 	projectile->startPos = startPos_in;
 	projectile->pos = startPos_in;
 	projectile->lastPos = startPos_in;
-	projectile->isFired = false;
-	projectile->isFlying = false;
 
 	// Set Image of projectile
 	projectile->sprite = sprite;
@@ -24,37 +22,8 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 
 	// Set Time
 	projectile->time = 0.0f;
-}
 
-void SetProjectileVelAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset )
-{
-	// Set for ParabolaAI
-
-	projectile->maxTime = (float)(rand() % 2 + 3.0f);
-	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->rect ), playerPos.y );
-	projectile->yDiffer = (int)(playerPos.y - aiPos.y);
-	projectile->height = (float)(rand() % 200 + 50);
-	projectile->fakeGravity = (float)(projectile->height * 2) / (projectile->maxTime * projectile->maxTime);
-	projectile->vel.y = sqrtf( 2 * projectile->fakeGravity * projectile->height );
-
-	const float a = projectile->fakeGravity;
-	const float b = -2 * projectile->vel.y;
-	const float c = (float)2 * projectile->yDiffer;
-	projectile->endTime = (-b + sqrtf( b * b - (4 * a * c) )) / (2 * a);
-	projectile->vel.x = (projectile->impactPos.x - aiPos.x) / projectile->endTime;
-}
-
-void SetProjectileVel( Projectile* projectile, int angle, int power)
-{
-	// Get Radian from angle, and make Velocity Vec2
-	projectile->radian = angle * (PI / 180.0f);
-	projectile->vel = MakeVec2( power * cosf( projectile->radian ), -power * sinf( projectile->radian ) );
-}
-
-void StartProjectileFire(Projectile* projectile)
-{
-	projectile->isFired = true;
-	projectile->lastPos = projectile->startPos;
+	projectile->state = ProjWait;
 }
 
 void UpdateProjectile( Projectile* projectile )
@@ -74,12 +43,41 @@ void UpdatePrjectileAI( Projectile* projectile )
 }
 
 
+void SetProjectileStateFire( Projectile* projectile )
+{
+	projectile->state = ProjFire;
+}
+
+void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset )
+{
+	// Set for ParabolaAI
+	projectile->maxTime = (float)(rand() % 2 + 3.0f);
+	projectile->impactPos = MakeVec2( playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(projectile->rect ), playerPos.y );
+	projectile->yDiffer = (int)(playerPos.y - aiPos.y);
+	projectile->height = (float)(rand() % 200 + 50);
+	projectile->fakeGravity = (float)(projectile->height * 2) / (projectile->maxTime * projectile->maxTime);
+	projectile->vel.y = sqrtf( 2 * projectile->fakeGravity * projectile->height );
+
+	const float a = projectile->fakeGravity;
+	const float b = -2 * projectile->vel.y;
+	const float c = (float)2 * projectile->yDiffer;
+	projectile->endTime = (-b + sqrtf( b * b - (4 * a * c) )) / (2 * a);
+	projectile->vel.x = (projectile->impactPos.x - aiPos.x) / projectile->endTime;
+}
+
+void SetProjectilePlayer( Projectile* projectile, int angle, int power)
+{
+	// Get Radian from angle, and make Velocity Vec2
+	projectile->radian = angle * (PI / 180.0f);
+	projectile->vel = MakeVec2( power * cosf( projectile->radian ), -power * sinf( projectile->radian ) );
+}
+
 void ResetProjectile( Projectile* projectile )
 {
 	projectile->pos = projectile->startPos;
 	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
 	projectile->time = 0;
-	projectile->isFired = false;
+	projectile->state = ProjWait;
 }
 
 bool IsInScreen( Projectile* projectile )
@@ -114,11 +112,6 @@ void SetParabolaForAI( Projectile* projectile )
 {
 	projectile->pos.x = projectile->startPos.x + (projectile->vel.x * projectile->time);
 	projectile->pos.y = projectile->startPos.y - ((float)(projectile->vel.y * projectile->time) - (0.5 * projectile->fakeGravity * pow( projectile->time, 2 )));
-}
-
-bool IsProjectFired( Projectile* projectile )
-{
-	return projectile->isFired;
 }
 
 void DrawProjectile( Projectile* projectile )

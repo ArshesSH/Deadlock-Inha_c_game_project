@@ -16,6 +16,14 @@ typedef enum tankType
 	MRLAI
 }TankType;
 
+typedef enum tankState
+{
+	TankWait,
+	TankMove,
+	TankFire,
+	TankCount
+}TankState;
+
 typedef struct tank
 {
 	TankType type;
@@ -26,7 +34,7 @@ typedef struct tank
 	Rect rect;
 	Rect lastRect;
 	int speed;
-	bool isMoving;
+	TankState state;
 }Tank;
 
 static int aiCount;
@@ -35,7 +43,7 @@ static int aiDir;
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos );
 
-void SetTankAI( Tank* tank );
+void SetTankAIToMove( Tank* tank );
 
 void UpdateTankAI( Tank* tank );
 
@@ -43,6 +51,6 @@ void MoveTank( Tank* tank, Vec2 dir );
 
 void MoveTankAI( Tank* tank );
 
-void IsTankOverlapWith( Tank* tank, Rect target );
+bool IsTankOverlapWith( Tank* tank, Rect target );
 
 void DrawTank( Tank* tank );

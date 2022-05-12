@@ -3,6 +3,13 @@
 #include <stdbool.h>
 #include "Surface.h"
 
+typedef enum projectileState
+{
+	ProjWait,
+	ProjFire,
+	ProjCount
+}ProjectileState;
+
 typedef struct projectile
 {
 	Vec2 pos;
@@ -16,8 +23,8 @@ typedef struct projectile
 	float radian;
 	int angle;
 	int power;
-	bool isFired;
-	bool isFlying;
+
+	ProjectileState state;
 
 	// ai feature
 	Vec2 impactPos;
@@ -31,11 +38,11 @@ typedef struct projectile
 
 void MakeProjectile( Projectile* projectile, Vec2 startPos_in, Surface* sprite, Color chroma );
 
-void SetProjectileVelAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset );
+void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset );
 
-void SetProjectileVel( Projectile* projectile, int angle, int power );
+void SetProjectilePlayer( Projectile* projectile, int angle, int power );
 
-void StartProjectileFire( Projectile* projectile );
+void SetProjectileStateFire( Projectile* projectile );
 
 void UpdateProjectile( Projectile* projectile );
 
@@ -52,8 +59,6 @@ void MoveProjectile( Projectile* projectile );
 void SetParabolaForUser( Projectile* projectile );
 
 void SetParabolaForAI( Projectile* projectile );
-
-bool IsProjectFired( Projectile* projectile );
 
 void DrawProjectile( Projectile* projectile );
 

@@ -13,6 +13,14 @@
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
+#define ENTER 13
+#define ESC 27
+#define SPACE 32
+#define UP 72
+#define LEFT 75
+#define RIGHT 77
+#define DOWN 80
+
 
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
@@ -143,24 +151,24 @@ int main(int argc, char* argv[]) {
                 {
                     key = _getch();
 
-                    if ( key == VK_SPACE )
+                    if ( key == LEFT )
                     {
-                        SetTankAI( &tankAI );
+                        SetTankAIToMove( &tankAI );
                     }
 
-                    if (key == VK_LEFT )
+                    if (key == SPACE )
                     {
-                        if ( aiProj.isFired != true )
+                        if ( aiProj.state == ProjWait)
                         {
-                            SetProjectileVelAI( &aiProj, userPos, aiPos, 50 );
-                            StartProjectileFire( &aiProj );
+                            SetProjectileAI( &aiProj, userPos, aiPos, 50 );
+                            SetProjectileStateFire( &aiProj );
                         }
                     }
                 }
                 
                 UpdateTankAI( &tankAI );
 
-                if (aiProj.isFired == true)
+                if (aiProj.state == ProjFire)
                 {
                     if (IsInScreen( &aiProj ))
                     {
@@ -199,13 +207,13 @@ int main(int argc, char* argv[]) {
 
             //Test Parabola Enemy
             {
-                if (IsProjectFired( &aiProj ))
+                if (aiProj.state == ProjFire)
                 {
                     DrawProjectileChroma( &aiProj );
                     Sleep( 10 );
                 }
 
-                if ( tankAI.isMoving == true )
+                if ( tankAI.state == TankMove )
                 {
                     DrawTank( &tankAI );
                 }
