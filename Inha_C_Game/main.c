@@ -14,15 +14,6 @@
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
-#define ENTER 13
-#define ESC 27
-#define SPACE 32
-#define UP 72
-#define LEFT 75
-#define RIGHT 77
-#define DOWN 80
-
-
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
     // 960 540
@@ -188,7 +179,6 @@ int main(int argc, char* argv[]) {
                     DrawTank( &tank );
                 }
             }*/
-
 
             DrawFrame( &game );
         }

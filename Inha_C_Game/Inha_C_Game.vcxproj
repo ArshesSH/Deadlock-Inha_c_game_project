@@ -142,6 +142,7 @@
     <ClCompile Include="Animation.c" />
     <ClCompile Include="Character.c" />
     <ClCompile Include="Colors.c" />
+    <ClCompile Include="FirstStage.c" />
     <ClCompile Include="Font.c" />
     <ClCompile Include="FrameTimer.c" />
     <ClCompile Include="Game.c" />
@@ -162,6 +163,7 @@
     <ClInclude Include="cful.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Colors.h" />
+    <ClInclude Include="FirstStage.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />

@@ -66,6 +66,9 @@
     <ClCompile Include="PlayerController.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="FirstStage.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec2.h">
@@ -120,6 +123,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="StageType.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
