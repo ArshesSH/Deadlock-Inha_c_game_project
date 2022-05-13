@@ -28,3 +28,5 @@ void SetStatusAngle( Status* status, int angle );
 void SetStatusPower( Status* status, int power );
 
 void SetStatusSpeed( Status* status, int speed );
+
+void ChangeStatusState( Status* status, StatusChanged state );

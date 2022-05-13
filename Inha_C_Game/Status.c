@@ -15,19 +15,27 @@ void CalcStatusHealth( Status* status, float damage )
 {
 	status->health -= damage;
 	status->healthPercentage = status->health / status->maxHelath * status->healthPercentage;
+	status->statusChange = ChangePower;
 }
 
 void SetStatusAngle( Status* status, int angle )
 {
 	status->angle = angle;
+	status->statusChange = ChangeAngle;
 }
 
 void SetStatusPower( Status* status, int power )
 {
 	status->power = power;
+	status->statusChange = ChangePower;
 }
 
 void SetStatusSpeed( Status* status, int speed )
 {
 	status->speed = speed;
+}
+
+void ChangeStatusState( Status* status, StatusChanged state )
+{
+	status->statusChange = state;
 }

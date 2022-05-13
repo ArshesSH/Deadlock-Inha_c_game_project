@@ -8,6 +8,9 @@ typedef struct ui
 {
 	Status* targetStatus;
 	Font textFont;
+	Rect healthRect;
+	Rect angleRect;
+	Rect powerRect;
 	Vec2 UIPos;
 	Vec2 healthPos;
 	Vec2 anglePos;

@@ -49,14 +49,19 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		scene->playerDir.y = 0;
 		PlayerMoveInput( scene );
 		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+		UpdateUI( &(scene->playerUI) );
 	}
 	else if ( scene->turn == PlayerShoot )
 	{
-		
+		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+		if ( scene->playerTank.state == TankDrawAndWait )
+		{
+			scene->turn = AITurn;
+		}
 	}
 	else if ( scene->turn == AITurn )
 	{
-
+		scene->turn = PlayerMove;
 	}
 	return Stage1;
 }
@@ -66,10 +71,11 @@ void DrawFirstScene( FirstScene* scene )
 	if ( scene->turn == PlayerMove )
 	{
 		DrawTank( &(scene->playerTank) );
+		DrawUI( &(scene->playerUI) );
 	}
 	else if ( scene->turn == PlayerShoot )
 	{
-
+		DrawTank( &(scene->playerTank) );
 	}
 	else if ( scene->turn == AITurn )
 	{
@@ -88,7 +94,7 @@ void PlayerMoveInput(FirstScene* scene)
 	if ( IsPlayerInput( VK_RETURN ) )
 	{
 		scene->turn = PlayerShoot;
-		scene->playerTank.state = TankFire;
+		SetTankStateFire( &(scene->playerTank) );
 		return;
 	}
 
@@ -113,20 +119,20 @@ void PlayerMoveInput(FirstScene* scene)
 	// Input angle
 	if ( IsPlayerInput( VK_UP ) )
 	{
-		scene->playerStatus.angle = min( scene->playerStatus.angle, scene->playerTank.tankMaxAngle );
+		SetStatusAngle( &(scene->playerStatus), min( ++(scene->playerStatus.angle), scene->playerTank.tankMaxAngle ) );
 	}
 	else if ( IsPlayerInput( VK_DOWN ) )
 	{
-		scene->playerStatus.angle = max( scene->playerStatus.angle, scene->playerTank.tankMinAngle );
+		SetStatusAngle( &(scene->playerStatus), max( --(scene->playerStatus.angle), scene->playerTank.tankMinAngle ) );
 	}
 
 	// Input Power
 	if ( IsPlayerInput( VK_SHIFT ) )
 	{
-		scene->playerStatus.power = min( scene->playerStatus.power, scene->playerTank.tankMaxPower );
+		SetStatusPower( &(scene->playerStatus), min( ++(scene->playerStatus.power), scene->playerTank.tankMaxPower ) );
 	}
 	else if ( IsPlayerInput( VK_CONTROL ) )
 	{
-		scene->playerStatus.power = max( scene->playerStatus.power, scene->playerTank.tankMinPower );
+		SetStatusPower( &(scene->playerStatus), max( --(scene->playerStatus.power), scene->playerTank.tankMinPower ) );
 	}
 }

@@ -18,15 +18,15 @@ void UpdateUI( UI* ui )
 {
 	if ( ui->targetStatus->statusChange == ChangeHealth )
 	{
-		sprintf_s( ui->text, BUFSIZ, "Health : %.f", ui->targetStatus->health );
+		sprintf_s( ui->text, BUFSIZ, "Health : %3.f", ui->targetStatus->health );
 	}
 	else if ( ui->targetStatus->statusChange == ChangeAngle )
 	{
-		sprintf_s( ui->text, BUFSIZ, "angle : %d", ui->targetStatus->angle );
+		sprintf_s( ui->text, BUFSIZ, "angle : %3d", ui->targetStatus->angle );
 	}
 	else if ( ui->targetStatus->statusChange == ChangePower )
 	{
-		sprintf_s( ui->text, BUFSIZ, "Power : %d", ui->targetStatus->power );
+		sprintf_s( ui->text, BUFSIZ, "Power : %3d", ui->targetStatus->power );
 	}
 
 }
@@ -35,32 +35,42 @@ void DrawUI( UI* ui )
 {
 	if ( ui->targetStatus->statusChange == ChangeHealth )
 	{
+		DeleteRect( ui->healthRect );
 		DrawFontText( ui->text, ui->healthPos, WHITE, &(ui->textFont) );
+		ChangeStatusState( ui->targetStatus, NoChange );
 	}
 	else if ( ui->targetStatus->statusChange == ChangeAngle )
 	{
+		DeleteRect( ui->angleRect );
 		DrawFontText( ui->text, ui->anglePos, WHITE, &(ui->textFont) );
+		ChangeStatusState( ui->targetStatus, NoChange );
 	}
 	else if ( ui->targetStatus->statusChange == ChangePower )
 	{
+		DeleteRect( ui->powerRect );
 		DrawFontText( ui->text, ui->powerPos, WHITE, &(ui->textFont) );
+		ChangeStatusState( ui->targetStatus, NoChange );
 	}
 }
 
 void DrawPlayerUI( UI* ui )
 {
-	sprintf_s( ui->text, BUFSIZ, "Health : %.f", ui->targetStatus->health );
+	sprintf_s( ui->text, BUFSIZ, "Health : %3.f", ui->targetStatus->health );
 	DrawFontText( ui->text, ui->healthPos, WHITE, &(ui->textFont) );
-	sprintf_s( ui->text, BUFSIZ, "angle : %d", ui->targetStatus->angle );
+	ui->healthRect = ui->textFont.textRect;
+	sprintf_s( ui->text, BUFSIZ, "angle : %3d", ui->targetStatus->angle );
 	DrawFontText( ui->text, ui->anglePos, WHITE, &(ui->textFont) );
-	sprintf_s( ui->text, BUFSIZ, "Power : %d", ui->targetStatus->power );
+	ui->angleRect = ui->textFont.textRect;
+	sprintf_s( ui->text, BUFSIZ, "Power : %3d", ui->targetStatus->power );
 	DrawFontText( ui->text, ui->powerPos, WHITE, &(ui->textFont) );
+	ui->powerRect = ui->textFont.textRect;
 }
 
 void DrawHealth( UI* ui )
 {
-	sprintf_s( ui->text, BUFSIZ, "Health : %.f", ui->targetStatus->health );
+	sprintf_s( ui->text, BUFSIZ, "Health : %3.f", ui->targetStatus->health );
 	DrawFontText( ui->text, ui->healthPos, WHITE, &(ui->textFont) );
+	ui->healthRect = ui->textFont.textRect;
 }
 
 void DestroyUI( UI* ui )
