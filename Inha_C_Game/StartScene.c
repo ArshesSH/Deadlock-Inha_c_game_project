@@ -12,8 +12,10 @@ void InitStartScene(StartScene* scene)
 	DrawFontText( "Last Crew", titlePos, WHITE, &(scene->title) );
 	scene->difficulty = MenuEasy;
 
+	MakeSurface( "src/images/Background.bmp", &(scene->startImage) );
 	MakeSurface( "src/images/easymode.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hardmode.bmp", &(scene->hardMode) );
+	DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
 	DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
 }
 
@@ -87,6 +89,7 @@ void ChooseDifficulty( Difficulty* current )
 void DestroyStartScene(StartScene* scene)
 {
 	DestroyFont( &(scene->title) );
+	DestroySurface( &(scene->startImage) );
 	DestroySurface( &(scene->easyMode) );
 	DestroySurface( &(scene->hardMode) );
 	system( "cls" );

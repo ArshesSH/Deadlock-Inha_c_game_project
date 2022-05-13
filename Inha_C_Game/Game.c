@@ -47,7 +47,7 @@ void UpdateModel( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-
+		game->stage = UpdateFirstScene( &(game->firstScene) );
 	}
 	else if (game->stage == Stage2)
 	{
@@ -77,7 +77,7 @@ void DrawFrame( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-
+		DrawFirstScene( &(game->firstScene) );
 	}
 	else if (game->stage == Stage2)
 	{

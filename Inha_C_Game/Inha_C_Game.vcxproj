@@ -182,6 +182,7 @@
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="Turn.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>

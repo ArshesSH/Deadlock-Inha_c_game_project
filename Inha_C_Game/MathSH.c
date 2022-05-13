@@ -12,3 +12,8 @@ int MaxI( int lhs, int rhs )
 {
 	return (lhs > rhs) ? lhs : rhs;
 }
+
+int MinI(int lhs, int rhs)
+{
+	return (lhs < rhs) ? lhs : rhs;
+}

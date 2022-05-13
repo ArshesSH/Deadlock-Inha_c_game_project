@@ -19,6 +19,7 @@ typedef enum difficulty
 typedef struct startScene
 {
 	Font title;
+	Surface startImage;
 	Surface easyMode;
 	Surface hardMode;
 	Difficulty difficulty;

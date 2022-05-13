@@ -103,15 +103,16 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 
 	tank->rect = MakeRectBySize( tank->pos, tank->sprite.width, tank->sprite.height );
 	tank->lastRect = tank->rect;
+	tank->nextRect = tank->rect;
 
 	tank->state = TankWait;
 }
 
-void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power )
+void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, Rect limitZone )
 {
 	if ( tank->state == TankMove )
 	{
-		MoveTank( tank, dir );
+		MoveTank( tank, dir, limitZone );
 		tank->state = TankWait;
 	}
 	else if ( tank->state == TankFire )
@@ -142,13 +143,40 @@ void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power )
 	}
 }
 
-void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset )
+void ShootProjectile( Tank* tank, Rect ground, int angle, int power)
+{
+	if ( tank->bullet.state == ProjWait )
+	{
+		SetProjectile( &(tank->bullet), tank->gunPos );
+		SetProjectilePlayer( &(tank->bullet), angle, power );
+		SetProjectileStateFire( &(tank->bullet) );
+	}
+	else if ( tank->bullet.state == ProjFire )
+	{
+		if ( IsNextProjectileInScreen( &(tank->bullet) ) )
+		{
+			UpdateProjectilePlayer( &(tank->bullet) );
+			if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
+			{
+				EndProjectile( &(tank->bullet), tank->gunPos );
+				tank->state = TankWait;
+			}
+		}
+		else
+		{
+			EndProjectile( &(tank->bullet), tank->gunPos );
+			tank->state = TankWait;
+		}
+	}
+}
+
+void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone )
 {
 	if ( tank->state == TankMove )
 	{
 		if ( aiMaxCount <= 10 )
 		{
-			MoveTankAI( tank );
+			MoveTankAI( tank, limitZone );
 			aiMaxCount++;
 		}
 		else
@@ -186,19 +214,19 @@ void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset )
 
 
 
-void MoveTank( Tank* tank, Vec2 dir )
+void MoveTank( Tank* tank, Vec2 dir, Rect limitZone )
 {
 	const Vec2 vel = Vec2Mul( dir, (float)tank->tankSpeed );
 	const Vec2 nextPos = Vec2Add( (tank->pos), vel );
-	const Rect nextRect = MakeRectBySize( nextPos, tank->sprite.width, tank->sprite.height );
+	tank->nextRect = MakeRectBySize( nextPos, tank->sprite.width, tank->sprite.height );
 
 	tank->lastRect = tank->rect;
 
 	// Screen Check
-	if ( RectIsContainedBy( nextRect, GetScreenRect() ) )
+	if ( IsTankInMoveZone( tank->nextRect, limitZone) )
 	{
 		tank->pos = nextPos;
-		tank->rect = nextRect;
+		tank->rect = tank->nextRect;
 		Vec2AddEqual( &(tank->gunPos), vel );
 	}
 }
@@ -218,9 +246,9 @@ void SetTankPlayerStateMove( Tank* tank )
 	tank->state = TankMove;
 }
 
-void MoveTankAI( Tank* tank )
+void MoveTankAI( Tank* tank, Rect limitZone )
 {
-	MoveTank( tank, MakeVec2( (float)aiDir, 0.0f ) );
+	MoveTank( tank, MakeVec2( (float)aiDir, 0.0f ), limitZone );
 }
 
 void SetTankStateFire( Tank* tank )
@@ -261,4 +289,9 @@ void DrawTank( Tank* tank )
 void DrawTankOnce( Tank* tank )
 {
 	DrawSpriteNonChroma( (int)tank->pos.x, (int)tank->pos.y, &(tank->sprite) );
+}
+
+bool IsTankInMoveZone(Rect targetRect, Rect limitZone)
+{
+	return RectIsContainedBy( targetRect, GetScreenRect() ) && !RectIsOverlappingWith( targetRect, limitZone );
 }

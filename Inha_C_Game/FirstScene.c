@@ -1,5 +1,8 @@
 #include "FirstScene.h"
 
+#include "Graphics.h"
+
+// Init First Stage
 void InitFirstScene( FirstScene* scene, TankType playerTankType )
 {
 	// Generate Ground
@@ -24,25 +27,106 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType )
 	MakeUI( &(scene->playerUI), &(scene->playerStatus), playerUIPos );
 	MakeUI( &(scene->aiUI), &(scene->aiStatus), aiUIPos );
 
+	scene->limitZone = MakeRect( screenHalfWidth - 100, screenHalfWidth + 100, 0, scene->groundStartPos.y );
+
 	// Draw First State
 	DrawGround( &(scene->ground) );
 	DrawTank( &(scene->playerTank) );
 	DrawTank( &(scene->aiTank) );
 	DrawPlayerUI( &(scene->playerUI) );
 	DrawHealth( &(scene->aiUI) );
+
+	scene->playerDir = MakeVec2( 0.0f, 0.0f );
+
+	scene->turn = PlayerMove;
 }
 
-void UpdateFirstStage( FirstScene* scene )
+SceneType UpdateFirstScene( FirstScene* scene )
+{
+	if ( scene->turn == PlayerMove )
+	{
+		scene->playerDir.x = 0;
+		scene->playerDir.y = 0;
+		PlayerMoveInput( scene );
+		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+	}
+	else if ( scene->turn == PlayerShoot )
+	{
+		
+	}
+	else if ( scene->turn == AITurn )
+	{
+
+	}
+	return Stage1;
+}
+
+void DrawFirstScene( FirstScene* scene )
+{
+	if ( scene->turn == PlayerMove )
+	{
+		DrawTank( &(scene->playerTank) );
+	}
+	else if ( scene->turn == PlayerShoot )
+	{
+
+	}
+	else if ( scene->turn == AITurn )
+	{
+
+	}
+}
+
+void DestroyFirstScene( FirstScene* scene )
 {
 
 }
 
-void DrawFirstStage( FirstScene* scene )
+void PlayerMoveInput(FirstScene* scene)
 {
+	// Input Shoot
+	if ( IsPlayerInput( VK_RETURN ) )
+	{
+		scene->turn = PlayerShoot;
+		scene->playerTank.state = TankFire;
+		return;
+	}
 
-}
+	// Input Move
+	if ( IsPlayerInput( VK_RIGHT ) )
+	{
+		if ( IsTankInMoveZone( scene->playerTank.rect, scene->limitZone ) )
+		{
+			scene->playerDir.x += 1;
+			scene->playerTank.state = TankMove;
+		}
+	}
+	else if ( IsPlayerInput( VK_LEFT ) )
+	{
+		if ( IsTankInMoveZone( scene->playerTank.rect, scene->limitZone ) )
+		{
+			scene->playerDir.x -= 1;
+			scene->playerTank.state = TankMove;
+		}
+	}
 
-void DestroyFirstStage( FirstScene* scene )
-{
+	// Input angle
+	if ( IsPlayerInput( VK_UP ) )
+	{
+		scene->playerStatus.angle = min( scene->playerStatus.angle, scene->playerTank.tankMaxAngle );
+	}
+	else if ( IsPlayerInput( VK_DOWN ) )
+	{
+		scene->playerStatus.angle = max( scene->playerStatus.angle, scene->playerTank.tankMinAngle );
+	}
 
+	// Input Power
+	if ( IsPlayerInput( VK_SHIFT ) )
+	{
+		scene->playerStatus.power = min( scene->playerStatus.power, scene->playerTank.tankMaxPower );
+	}
+	else if ( IsPlayerInput( VK_CONTROL ) )
+	{
+		scene->playerStatus.power = max( scene->playerStatus.power, scene->playerTank.tankMinPower );
+	}
 }

@@ -45,6 +45,7 @@ typedef struct tank
 	Vec2 pos;
 	Rect rect;
 	Rect lastRect;
+	Rect nextRect;
 	Projectile bullet;
 	int tankSpeed;
 	int tankMaxHealth;
@@ -60,17 +61,17 @@ static int aiDir;
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos );
 
-void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power );
+void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, Rect limitZone );
 
-void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset );
+void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone );
 
-void MoveTank( Tank* tank, Vec2 dir );
+void MoveTank( Tank* tank, Vec2 dir, Rect limitZone );
 
 void SetTankAIStateMove( Tank* tank );
 
 void SetTankPlayerStateMove( Tank* tank );
 
-void MoveTankAI( Tank* tank );
+void MoveTankAI( Tank* tank, Rect limitZone );
 
 void SetTankStateFire( Tank* tank );
 
@@ -79,3 +80,5 @@ bool IsTankOverlapWith( Tank* tank, Rect target );
 void DrawTank( Tank* tank );
 
 void DrawTankOnce( Tank* tank );
+
+bool IsTankInMoveZone( Rect targetRect, Rect limitZone );
