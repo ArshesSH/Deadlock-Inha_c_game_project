@@ -1,8 +1,9 @@
 #include "Font.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
+#include "MathSH.h"
 #include "Graphics.h"
 
 void MakeFont( Font* f, FontType fontType )
@@ -73,6 +74,7 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 {
 	int iWidth = 0;
 	int iHeight = 0;
+	int maxWidth = 0;
 
 	for (size_t i = 0; i < strlen( text ); i++)
 	{
@@ -88,9 +90,10 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 			DrawSpriteClipSubstitute( pos.x + (iWidth * (f->fontWidth)), pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, f->chroma, color );
 			iWidth++;
 		}
+		maxWidth = MaxI( maxWidth, iWidth );
 	}
 
-	const int rectRight = pos.x + (iWidth * (f->fontWidth));
+	const int rectRight = pos.x + (maxWidth * (f->fontWidth));
 	f->textRect = MakeRectBySize( pos, rectRight, f->fontHeight );
 }
 
