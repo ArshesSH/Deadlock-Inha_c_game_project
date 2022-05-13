@@ -146,6 +146,7 @@ void DestroySelectScene( SelectScene* scene )
 	DestroySurface( &(scene->medium) );
 	DestroySurface( &(scene->heavy) );
 	DestroySurface( &(scene->mrl) );
+	system( "cls" );
 }
 
 // Choose Tank type in SelectScene by user kbd Input

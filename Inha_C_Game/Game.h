@@ -6,6 +6,7 @@
 #include "SceneType.h"
 #include "StartScene.h"
 #include "SelectScene.h"
+#include "FirstScene.h"
 
 typedef struct game
 {
@@ -13,6 +14,7 @@ typedef struct game
 
 	StartScene startScene;
 	SelectScene selectScene;
+	FirstScene firstScene;
 
 	bool IsStageChanged;
 

@@ -151,12 +151,14 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="MathSH.c" />
     <ClCompile Include="PlayerController.c" />
+    <ClCompile Include="Status.c" />
     <ClCompile Include="Projectile.c" />
     <ClCompile Include="Rect.c" />
     <ClCompile Include="SelectScene.c" />
     <ClCompile Include="StartScene.c" />
     <ClCompile Include="Surface.c" />
     <ClCompile Include="Tank.c" />
+    <ClCompile Include="UI.c" />
     <ClCompile Include="Vec2.c" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +174,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="MathSH.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Status.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="SelectScene.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

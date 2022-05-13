@@ -12,49 +12,81 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	case LightTank:
 		MakeSurface( "src/images/tank/player/LightTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 10;
+		tank->tankMaxHealth = 100;
+		tank->tankMaxAngle = 20;
+		tank->tankMinAngle = 10;
+		tank->tankMaxPower = 100;
+		tank->tankMinPower = 15;
+		tank->bullet.damage = 1;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case LightTankAI:
 		MakeSurface( "src/images/tank/ai/LightTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 10;
+		tank->tankMaxHealth = 100;
+		tank->bullet.damage = 1;
 		tank->gunPos.x = 0.0f;
 		break;
 	case MediumTank:
 		MakeSurface( "src/images/tank/player/MediumTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 5;
+		tank->tankMaxHealth = 150;
+		tank->tankMaxAngle = 22;
+		tank->tankMinAngle = 10;
+		tank->tankMaxPower = 100;
+		tank->tankMinPower = 15;
+		tank->bullet.damage = 2;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case MediumTankAI:
 		MakeSurface( "src/images/tank/ai/MediumTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 5;
+		tank->tankMaxHealth = 150;
+		tank->bullet.damage = 2;
 		tank->gunPos.x = 0.0f;
 		break;
 	case HeavyTank:
 		MakeSurface( "src/images/tank/player/HeavyTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 1;
+		tank->tankMaxHealth = 200;
+		tank->tankMaxAngle = 35;
+		tank->tankMinAngle = 10;
+		tank->tankMaxPower = 100;
+		tank->tankMinPower = 15;
+		tank->bullet.damage = 3;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case HeavyTankAI:
 		MakeSurface( "src/images/tank/ai/HeavyTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 1;
+		tank->tankMaxHealth = 200;
+		tank->bullet.damage = 3;
 		tank->gunPos.x = 0.0f;
 		break;
 	case MRL:
 		MakeSurface( "src/images/tank/player/MRLGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 3;
+		tank->tankMaxHealth = 80;
+		tank->tankMaxAngle = 75;
+		tank->tankMinAngle = 40;
+		tank->tankMaxPower = 100;
+		tank->tankMinPower = 15;
+		tank->bullet.damage = 5;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case MRLAI:
 		MakeSurface( "src/images/tank/ai/MRLGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
-		tank->speed = 10;
+		tank->tankSpeed = 3;
+		tank->tankMaxHealth = 80;
+		tank->bullet.damage = 5;
 		tank->gunPos.x = 0.0f;
 		break;
 	default:
@@ -156,7 +188,7 @@ void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset )
 
 void MoveTank( Tank* tank, Vec2 dir )
 {
-	const Vec2 vel = Vec2Mul( dir, (float)tank->speed );
+	const Vec2 vel = Vec2Mul( dir, (float)tank->tankSpeed );
 	const Vec2 nextPos = Vec2Add( (tank->pos), vel );
 	const Rect nextRect = MakeRectBySize( nextPos, tank->sprite.width, tank->sprite.height );
 

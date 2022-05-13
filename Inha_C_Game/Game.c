@@ -16,7 +16,7 @@ void MakeStage( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-		
+		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection );
 	}
 	else if (game->stage == Stage2)
 	{

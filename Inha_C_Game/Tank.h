@@ -38,16 +38,20 @@ typedef enum tankState
 typedef struct tank
 {
 	TankType type;
-	Surface bulletSprite;
-	Projectile bullet;
-	Vec2 gunPos;
+	TankState state;
 	Surface sprite;
+	Surface bulletSprite;
+	Vec2 gunPos;
 	Vec2 pos;
 	Rect rect;
 	Rect lastRect;
-	int speed;
-	TankState state;
-	int Health;
+	Projectile bullet;
+	int tankSpeed;
+	int tankMaxHealth;
+	int tankMinAngle;
+	int tankMaxAngle;
+	int tankMinPower;
+	int tankMaxPower;
 }Tank;
 
 static int aiCount;

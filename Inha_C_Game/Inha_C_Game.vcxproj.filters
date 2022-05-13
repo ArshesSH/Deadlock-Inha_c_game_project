@@ -96,6 +96,12 @@
     <ClCompile Include="SelectScene.c">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="UI.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Status.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -157,6 +163,12 @@
     </ClInclude>
     <ClInclude Include="SceneType.h">
       <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

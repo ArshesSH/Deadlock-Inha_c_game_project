@@ -1,20 +1,26 @@
 #pragma once
 
-#include "Font.h"
-#include "Surface.h"
+#include "UI.h"
+#include "Status.h"
 #include "Tank.h"
 #include "Ground.h"
 
 typedef struct firstScene
 {
-	Font ui;
 	Surface tile;
-	Vec2 groundStartPos;
+	Tank playerTank;
+	Tank aiTank;
 	Ground ground;
+	UI playerUI;
+	UI aiUI;
+
+	Status playerStatus;
+	Status aiStatus;
+
+	Vec2 groundStartPos;
 	Color tileChroma;
-	Tank player;
-	Tank ai;
 
 	int tileCount;
-
 }FirstScene;
+
+void InitFirstScene( FirstScene* scene, TankType playerTankType );
