@@ -137,8 +137,12 @@ void DrawFirstScene( FirstScene* scene )
 
 void DestroyFirstScene( FirstScene* scene )
 {
-	DestroySurface( scene->tile );
-	Destroy
+	DestroySurface( &(scene->tile) );
+	DestroyTank( &(scene->playerTank) );
+	DestroyTank( &(scene->aiTank) );
+	DestroyGround( &(scene->ground) );
+	DestroyUI( &(scene->playerUI) );
+	DestroyUI( &(scene->aiUI) );
 }
 
 void PlayerMoveInput(FirstScene* scene)

@@ -11,7 +11,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	{
 	case LightTank:
 		MakeSurface( "src/images/tank/player/LightTankGray30.bmp", &(tank->sprite) );
-		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeSurface( "src/images/bullet1.bmp", &(tank->bulletSprite) );
 		tank->tankSpeed = 10;
 		tank->tankMaxHealth = 100;
 		tank->tankMaxAngle = 20;
@@ -150,41 +150,6 @@ void UpdateTankPlayer( Tank* tank, Rect targetTankRect, Rect ground, Vec2 dir, i
 	}
 }
 
-//// This function is executed when a projectile is fired.
-//void ShootProjectile( Tank* tank, Rect ground, int angle, int power)
-//{
-//	// State Wait -> Init projectile and change to state fire
-//	if ( tank->bullet.state == ProjWait )
-//	{
-//		SetProjectile( &(tank->bullet), tank->gunPos );
-//		SetProjectilePlayer( &(tank->bullet), angle, power );
-//		SetProjectileStateFire( &(tank->bullet) );
-//	}
-//	// State Fire -> Update Position and Check collision
-//	else if ( tank->bullet.state == ProjFire )
-//	{
-//		// Is Projectile In Screen
-//		if ( IsNextProjectileInScreen( &(tank->bullet) ) )
-//		{
-//			UpdateProjectilePlayer( &(tank->bullet) );
-//			
-//
-//
-//			// If Overlapping With Ground
-//			if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
-//			{
-//				EndProjectile( &(tank->bullet), tank->gunPos );
-//				tank->state = TankWait;
-//			}
-//		}
-//		else
-//		{
-//			EndProjectile( &(tank->bullet), tank->gunPos );
-//			tank->state = TankWait;
-//		}
-//	}
-//}
-
 void UpdateTankAI( Tank* tank, Rect targetTankRect, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone )
 {
 	if ( tank->state == TankMove )
@@ -322,5 +287,4 @@ void DestroyTank( Tank* tank )
 {
 	DestroySurface( &(tank->sprite) );
 	DestroySurface( &(tank->bulletSprite) );
-
 }

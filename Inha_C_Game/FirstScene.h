@@ -37,4 +37,6 @@ SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset );
 
 void DrawFirstScene( FirstScene* scene );
 
+void DestroyFirstScene( FirstScene* scene );
+
 void PlayerMoveInput( FirstScene* scene );

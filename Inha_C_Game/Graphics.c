@@ -83,10 +83,10 @@ void DrawSpriteRectNonChroma( int x, int y, const Rect* const srcRect, Surface* 
 
 void DrawSpriteClipNonChroma( int x, int y, Rect srcRect, const Rect clip, Surface* const s )
 {
-    //assert( srcRect.left >= 0 );
-    //assert( srcRect.right <= s.GetWidth() );
-    //assert( srcRect.top >= 0 );
-    //assert( srcRect.bottom <= s.GetHeight() );
+    assert( srcRect.left >= 0 );
+    assert( srcRect.right <= s->width );
+    assert( srcRect.top >= 0 );
+    assert( srcRect.bottom <= s->height );
 
     if (x < clip.left)
     {
@@ -218,7 +218,6 @@ void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, Surf
     }
     s->wasDrew = true;
 }
-
 
 
 void DrawRect( int x0, int y0, int x1, int y1, Color c )

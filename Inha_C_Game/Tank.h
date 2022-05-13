@@ -82,3 +82,5 @@ void DrawTank( Tank* tank );
 void DrawTankOnce( Tank* tank );
 
 bool IsTankInMoveZone( Rect targetRect, Rect limitZone );
+
+void DestroyTank( Tank* tank );
