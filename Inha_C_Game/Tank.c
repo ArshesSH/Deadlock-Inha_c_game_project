@@ -17,8 +17,8 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxAngle = 20;
 		tank->tankMinAngle = 10;
 		tank->tankMaxPower = 100;
-		tank->tankMinPower = 15;
-		tank->bullet.damage = 1;
+		tank->tankMinPower = 40;
+		tank->bullet.damage = 10;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case LightTankAI:
@@ -26,7 +26,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->tankSpeed = 10;
 		tank->tankMaxHealth = 100;
-		tank->bullet.damage = 1;
+		tank->bullet.damage = 10;
 		tank->gunPos.x = 0.0f;
 		break;
 	case MediumTank:
@@ -36,9 +36,9 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxHealth = 150;
 		tank->tankMaxAngle = 22;
 		tank->tankMinAngle = 10;
-		tank->tankMaxPower = 100;
-		tank->tankMinPower = 15;
-		tank->bullet.damage = 2;
+		tank->tankMaxPower = 120;
+		tank->tankMinPower = 40;
+		tank->bullet.damage = 20;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case MediumTankAI:
@@ -46,7 +46,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->tankSpeed = 5;
 		tank->tankMaxHealth = 150;
-		tank->bullet.damage = 2;
+		tank->bullet.damage = 20;
 		tank->gunPos.x = 0.0f;
 		break;
 	case HeavyTank:
@@ -56,9 +56,9 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxHealth = 200;
 		tank->tankMaxAngle = 35;
 		tank->tankMinAngle = 10;
-		tank->tankMaxPower = 100;
-		tank->tankMinPower = 15;
-		tank->bullet.damage = 3;
+		tank->tankMaxPower = 120;
+		tank->tankMinPower = 40;
+		tank->bullet.damage = 30;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case HeavyTankAI:
@@ -66,7 +66,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->tankSpeed = 1;
 		tank->tankMaxHealth = 200;
-		tank->bullet.damage = 3;
+		tank->bullet.damage = 30;
 		tank->gunPos.x = 0.0f;
 		break;
 	case MRL:
@@ -75,10 +75,10 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankSpeed = 3;
 		tank->tankMaxHealth = 80;
 		tank->tankMaxAngle = 75;
-		tank->tankMinAngle = 40;
-		tank->tankMaxPower = 100;
-		tank->tankMinPower = 15;
-		tank->bullet.damage = 5;
+		tank->tankMinAngle = 50;
+		tank->tankMaxPower = 150;
+		tank->tankMinPower = 40;
+		tank->bullet.damage = 50;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
 	case MRLAI:
@@ -86,7 +86,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->tankSpeed = 3;
 		tank->tankMaxHealth = 80;
-		tank->bullet.damage = 5;
+		tank->bullet.damage = 50;
 		tank->gunPos.x = 0.0f;
 		break;
 	default:
@@ -316,4 +316,11 @@ void DrawTankOnce( Tank* tank )
 bool IsTankInMoveZone(Rect targetRect, Rect limitZone)
 {
 	return RectIsContainedBy( targetRect, GetScreenRect() ) && !RectIsOverlappingWith( targetRect, limitZone );
+}
+
+void DestroyTank( Tank* tank )
+{
+	DestroySurface( &(tank->sprite) );
+	DestroySurface( &(tank->bulletSprite) );
+
 }

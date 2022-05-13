@@ -17,9 +17,11 @@ void CalcStatusHealth( Status* status, float damage )
 {
 	status->health = MaxF( status->health - damage, 0 );
 	status->healthPercentage = status->health / status->maxHelath * status->healthPercentage;
-	
 	status->statusChange = ChangeHealth;
-	
+	if ( IsActorDead( status->health ) )
+	{
+		status->statusChange = ActorDead;
+	}
 }
 
 void SetStatusAngle( Status* status, int angle )

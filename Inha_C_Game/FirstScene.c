@@ -98,6 +98,17 @@ SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset )
 		}
 	}
 
+	if ( &(scene->playerStatus) == ActorDead )
+	{
+		DestroyFirstScene( scene );
+		return StageStart;
+	}
+	else if ( &(scene->aiStatus) == ActorDead )
+	{
+		DestroyFirstScene( scene );
+		return Stage2;
+	}
+
 	return Stage1;
 }
 
@@ -126,7 +137,8 @@ void DrawFirstScene( FirstScene* scene )
 
 void DestroyFirstScene( FirstScene* scene )
 {
-
+	DestroySurface( scene->tile );
+	Destroy
 }
 
 void PlayerMoveInput(FirstScene* scene)
