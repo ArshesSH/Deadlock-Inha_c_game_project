@@ -21,14 +21,14 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->speed = 10;
 		tank->gunPos.x = 0.0f;
 		break;
-	case MiddleTank:
-		MakeSurface( "src/images/tank/player/MiddleTankGray30.bmp", &(tank->sprite) );
+	case MediumTank:
+		MakeSurface( "src/images/tank/player/MediumTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->speed = 10;
 		tank->gunPos.x = (float)tank->sprite.width;
 		break;
-	case MiddleTankAI:
-		MakeSurface( "src/images/tank/ai/MiddleTankGrayFlip30.bmp", &(tank->sprite) );
+	case MediumTankAI:
+		MakeSurface( "src/images/tank/ai/MediumTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
 		tank->speed = 10;
 		tank->gunPos.x = 0.0f;

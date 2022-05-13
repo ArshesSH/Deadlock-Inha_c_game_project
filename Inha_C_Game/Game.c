@@ -43,7 +43,7 @@ void UpdateModel( Game* game )
 	}
 	else if (game->stage == StageSelectTank)
 	{
-
+		game->stage = UpdateSelectScene( &(game->selectScene) );
 	}
 	else if (game->stage == Stage1)
 	{
@@ -73,7 +73,7 @@ void DrawFrame( Game* game )
 	}
 	else if (game->stage == StageSelectTank)
 	{
-
+		DrawSelectScene( &(game->selectScene) );
 	}
 	else if (game->stage == Stage1)
 	{

@@ -22,7 +22,7 @@ void MakeFont( Font* f, FontType fontType )
 		f->lastChar = '~';
 		f->chroma = WHITE;
 		break;
-	case FontMiddle:
+	case FontMedium:
 		MakeSurface( "src/images/Fixedsys16x28.bmp", &(f->fontTable) );
 		f->pos.x = 0;
 		f->pos.y = 0;
@@ -93,8 +93,9 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 		maxWidth = MaxI( maxWidth, iWidth );
 	}
 
-	const int rectRight = pos.x + (maxWidth * (f->fontWidth));
-	f->textRect = MakeRectBySize( pos, rectRight, f->fontHeight );
+	const int rectRight = (maxWidth * (f->fontWidth));
+	const int rectBottom = ((iHeight + 1) * (f->fontHeight));
+	f->textRect = MakeRectBySize( pos, rectRight, rectBottom );
 }
 
 

@@ -8,7 +8,7 @@
 typedef enum fontType
 {
 	FontSmall,
-	FontMiddle,
+	FontMedium,
 	FontLarge
 }FontType;
 

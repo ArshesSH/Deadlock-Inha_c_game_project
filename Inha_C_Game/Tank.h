@@ -4,18 +4,24 @@
 #include "Surface.h"
 #include "Projectile.h"
 
+// Type of Tanks
 typedef enum tankType
 {
+	// For Check Player Type
 	LightTank,
-	MiddleTank,
+	MediumTank,
 	HeavyTank,
 	MRL,
+
+	// For Check AI Type
 	LightTankAI,
-	MiddleTankAI,
+	MediumTankAI,
 	HeavyTankAI,
 	MRLAI,
+
+	// For Check Player Selection
 	SelectLightTank,
-	SelectMiddleTank,
+	SelectMediumTank,
 	SelectHeavyTank,
 	SelectMRL
 }TankType;

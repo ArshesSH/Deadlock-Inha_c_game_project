@@ -101,9 +101,6 @@
     <ClInclude Include="Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SceneType.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="StartScene.h">
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
       <Filter>헤더 파일\Engines</Filter>
     </ClInclude>
     <ClInclude Include="SelectScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneType.h">
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -40,6 +40,8 @@ void SetConsoleWindowSize( int consoleWidth, int consoleHeight )
 
     screenWidth = halfWidth;
     screenHeight = halfHeight;
+    screenHalfWidth = screenWidth / 2;
+    screenHalfHeight = screenHeight / 2;
 
     DWORD dwWidth = GetSystemMetrics( SM_CXSCREEN );
     DWORD dwHeight = GetSystemMetrics( SM_CYSCREEN );

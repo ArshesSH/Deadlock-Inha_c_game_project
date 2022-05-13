@@ -7,3 +7,8 @@ void swapI( int* lhs, int* rhs )
 	*lhs = *rhs;
 	*rhs = tmp;
 }
+
+int MaxI( int lhs, int rhs )
+{
+	return (lhs > rhs) ? lhs : rhs;
+}
