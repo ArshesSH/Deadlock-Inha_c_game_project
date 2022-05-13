@@ -27,6 +27,7 @@ void MakeProjectile(Projectile* projectile, Vec2 startPos_in, Surface* sprite, C
 	projectile->state = ProjWait;
 }
 
+// Update Position of Projectile
 void UpdateProjectilePlayer( Projectile* projectile )
 {
 	projectile->lastPos = projectile->pos;
@@ -47,6 +48,16 @@ void UpdatePrjectileAI( Projectile* projectile )
 void SetProjectileStateFire( Projectile* projectile )
 {
 	projectile->state = ProjFire;
+}
+
+void SetProjectileStateHit( Projectile* projectile )
+{
+	projectile->state = ProjHit;
+}
+
+void SetProjectileStateWait( Projectile* projectile )
+{
+	projectile->state = ProjWait;
 }
 
 void SetProjectileAI( Projectile* projectile, Vec2 playerPos, Vec2 aiPos, int difficultOffset )

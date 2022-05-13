@@ -7,6 +7,7 @@ typedef enum projectileState
 {
 	ProjWait,
 	ProjFire,
+	ProjHit,
 	ProjCount
 }ProjectileState;
 
@@ -51,6 +52,8 @@ void SetProjectilePlayer( Projectile* projectile, int angle, int power );
 void SetProjectile( Projectile* projectile, Vec2 pos );
 
 void SetProjectileStateFire( Projectile* projectile );
+
+void SetProjectileStateHit( Projectile* projectile );
 
 void UpdateProjectilePlayer( Projectile* projectile );
 

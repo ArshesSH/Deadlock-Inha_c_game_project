@@ -1,11 +1,14 @@
 #pragma once
 
+#include <stdbool.h>
+
 typedef enum statusChanged
 {
 	NoChange,
 	ChangeHealth,
 	ChangeAngle,
-	ChangePower
+	ChangePower,
+	ActorDead
 }StatusChanged;
 
 typedef struct status

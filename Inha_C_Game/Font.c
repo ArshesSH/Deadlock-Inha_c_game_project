@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "MathSH.h"
 #include "Graphics.h"
 
 void MakeFont( Font* f, FontType fontType )
@@ -90,7 +89,7 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 			DrawSpriteClipSubstitute( pos.x + (iWidth * (f->fontWidth)), pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, f->chroma, color );
 			iWidth++;
 		}
-		maxWidth = MaxI( maxWidth, iWidth );
+		maxWidth = max( maxWidth, iWidth );
 	}
 
 	const int rectRight = (maxWidth * (f->fontWidth));

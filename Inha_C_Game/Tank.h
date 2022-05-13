@@ -61,9 +61,9 @@ static int aiDir;
 
 void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos );
 
-void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, Rect limitZone );
+void UpdateTankPlayer( Tank* tank, Rect targetTankRect, Rect ground, Vec2 dir, int angle, int power, Rect limitZone );
 
-void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone );
+void UpdateTankAI( Tank* tank, Rect targetTankRect, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone );
 
 void MoveTank( Tank* tank, Vec2 dir, Rect limitZone );
 

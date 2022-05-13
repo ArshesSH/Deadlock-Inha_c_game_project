@@ -5,6 +5,6 @@
 
 void swapI( int* lhs, int* rhs );
 
-int MaxI( int lhs, int rhs );
+float MaxF( float lhs, float rhs );
 
-int MinI( int lhs, int rhs );
+float MinF( float lhs, float rhs );

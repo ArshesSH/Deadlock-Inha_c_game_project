@@ -108,7 +108,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	tank->state = TankWait;
 }
 
-void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, Rect limitZone )
+void UpdateTankPlayer( Tank* tank, Rect targetTankRect, Rect ground, Vec2 dir, int angle, int power, Rect limitZone )
 {
 	if ( tank->state == TankMove )
 	{
@@ -128,6 +128,13 @@ void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, 
 			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
 			{
 				UpdateProjectilePlayer( &(tank->bullet) );
+
+				// Hit Target(AI)
+				if ( IsOverlapWithTarget( &(tank->bullet), targetTankRect ) )
+				{
+					SetProjectileStateHit( &(tank->bullet) );
+				}
+
 				if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
 				{
 					EndProjectile( &(tank->bullet), tank->gunPos );
@@ -143,34 +150,42 @@ void UpdateTankPlayer( Tank* tank, Rect ground, Vec2 dir, int angle, int power, 
 	}
 }
 
-void ShootProjectile( Tank* tank, Rect ground, int angle, int power)
-{
-	if ( tank->bullet.state == ProjWait )
-	{
-		SetProjectile( &(tank->bullet), tank->gunPos );
-		SetProjectilePlayer( &(tank->bullet), angle, power );
-		SetProjectileStateFire( &(tank->bullet) );
-	}
-	else if ( tank->bullet.state == ProjFire )
-	{
-		if ( IsNextProjectileInScreen( &(tank->bullet) ) )
-		{
-			UpdateProjectilePlayer( &(tank->bullet) );
-			if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
-			{
-				EndProjectile( &(tank->bullet), tank->gunPos );
-				tank->state = TankWait;
-			}
-		}
-		else
-		{
-			EndProjectile( &(tank->bullet), tank->gunPos );
-			tank->state = TankWait;
-		}
-	}
-}
+//// This function is executed when a projectile is fired.
+//void ShootProjectile( Tank* tank, Rect ground, int angle, int power)
+//{
+//	// State Wait -> Init projectile and change to state fire
+//	if ( tank->bullet.state == ProjWait )
+//	{
+//		SetProjectile( &(tank->bullet), tank->gunPos );
+//		SetProjectilePlayer( &(tank->bullet), angle, power );
+//		SetProjectileStateFire( &(tank->bullet) );
+//	}
+//	// State Fire -> Update Position and Check collision
+//	else if ( tank->bullet.state == ProjFire )
+//	{
+//		// Is Projectile In Screen
+//		if ( IsNextProjectileInScreen( &(tank->bullet) ) )
+//		{
+//			UpdateProjectilePlayer( &(tank->bullet) );
+//			
+//
+//
+//			// If Overlapping With Ground
+//			if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
+//			{
+//				EndProjectile( &(tank->bullet), tank->gunPos );
+//				tank->state = TankWait;
+//			}
+//		}
+//		else
+//		{
+//			EndProjectile( &(tank->bullet), tank->gunPos );
+//			tank->state = TankWait;
+//		}
+//	}
+//}
 
-void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone )
+void UpdateTankAI( Tank* tank, Rect targetTankRect, Rect ground, Vec2 userPos, int aiDiffOffset, Rect limitZone )
 {
 	if ( tank->state == TankMove )
 	{
@@ -197,6 +212,13 @@ void UpdateTankAI( Tank* tank, Rect ground, Vec2 userPos, int aiDiffOffset, Rect
 			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
 			{
 				UpdatePrjectileAI( &(tank->bullet) );
+
+				// Hit Target(Player)
+				if ( IsOverlapWithTarget( &(tank->bullet), targetTankRect ) )
+				{
+					SetProjectileStateHit( &(tank->bullet) );
+				}
+
 				if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
 				{
 					EndProjectile( &(tank->bullet), tank->gunPos );

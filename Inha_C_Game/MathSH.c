@@ -8,12 +8,12 @@ void swapI( int* lhs, int* rhs )
 	*rhs = tmp;
 }
 
-int MaxI( int lhs, int rhs )
+float MaxF( float lhs, float rhs )
 {
 	return (lhs > rhs) ? lhs : rhs;
 }
 
-int MinI(int lhs, int rhs)
+float MinF( float lhs, float rhs)
 {
 	return (lhs < rhs) ? lhs : rhs;
 }

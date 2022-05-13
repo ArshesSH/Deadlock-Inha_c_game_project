@@ -1,5 +1,7 @@
 #include "Status.h"
 
+#include "MathSH.h"
+
 void MakeStatus( Status* status, float maxHealth, int angle, int power, int speed )
 {
 	status->maxHelath = maxHealth;
@@ -13,9 +15,11 @@ void MakeStatus( Status* status, float maxHealth, int angle, int power, int spee
 
 void CalcStatusHealth( Status* status, float damage )
 {
-	status->health -= damage;
+	status->health = MaxF( status->health - damage, 0 );
 	status->healthPercentage = status->health / status->maxHelath * status->healthPercentage;
-	status->statusChange = ChangePower;
+	
+	status->statusChange = ChangeHealth;
+	
 }
 
 void SetStatusAngle( Status* status, int angle )
@@ -38,4 +42,9 @@ void SetStatusSpeed( Status* status, int speed )
 void ChangeStatusState( Status* status, StatusChanged state )
 {
 	status->statusChange = state;
+}
+
+bool IsActorDead( float health )
+{
+	return health == 0;
 }

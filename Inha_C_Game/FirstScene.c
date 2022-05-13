@@ -48,12 +48,23 @@ SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset )
 		scene->playerDir.x = 0;
 		scene->playerDir.y = 0;
 		PlayerMoveInput( scene );
-		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+		UpdateTankPlayer( &(scene->playerTank), scene->aiTank.rect, scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
 		UpdateUI( &(scene->playerUI) );
 	}
 	else if ( scene->turn == PlayerShoot )
 	{
-		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+		UpdateTankPlayer( &(scene->playerTank), scene->aiTank.rect, scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+		if ( scene->playerTank.bullet.state == ProjHit )
+		{
+			CalcStatusHealth( &(scene->aiStatus), scene->playerTank.bullet.damage );
+			UpdateUI( &(scene->aiUI) );
+			SetProjectileStateWait( &(scene->playerTank.bullet) );
+
+			scene->playerTank.state = TankDrawAndWait;
+			//scene->turn = AIMove;
+			//SetTankAIStateMove( &(scene->aiTank) );
+		}
+		
 		if ( scene->playerTank.state == TankDrawAndWait )
 		{
 			scene->turn = AIMove;
@@ -62,9 +73,7 @@ SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset )
 	}
 	else if ( scene->turn == AIMove )
 	{
-		
-
-		UpdateTankAI( &(scene->aiTank), scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
+		UpdateTankAI( &(scene->aiTank), scene->playerTank.rect, scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
 
 		if ( scene->aiTank.state == TankDrawAndWait )
 		{
@@ -74,8 +83,14 @@ SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset )
 	}
 	else if ( scene->turn == AIShoot )
 	{
-		
-		UpdateTankAI( &(scene->aiTank), scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
+		UpdateTankAI( &(scene->aiTank), scene->playerTank.rect, scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
+		if ( scene->aiTank.bullet.state == ProjHit )
+		{
+			CalcStatusHealth( &(scene->playerStatus), scene->aiTank.bullet.damage );
+			UpdateUI( &(scene->playerUI) );
+			SetProjectileStateWait( &(scene->aiTank.bullet) );
+			scene->turn = PlayerMove;
+		}
 
 		if ( scene->aiTank.state == TankDrawAndWait )
 		{
@@ -100,10 +115,12 @@ void DrawFirstScene( FirstScene* scene )
 	else if ( scene->turn == AIMove )
 	{
 		DrawTank( &(scene->aiTank) );
+		DrawUI( &(scene->aiUI) );
 	}
 	else if ( scene->turn == AIShoot )
 	{
 		DrawTank( &(scene->aiTank) );
+		DrawUI( &(scene->playerUI) );
 	}
 }
 
