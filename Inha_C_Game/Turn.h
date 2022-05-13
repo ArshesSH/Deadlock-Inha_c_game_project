@@ -3,7 +3,7 @@
 typedef enum turn
 {
 	PlayerMove,
-	PlayerChangeVar,
 	PlayerShoot,
-	AITurn
+	AIMove,
+	AIShoot,
 }Turn;

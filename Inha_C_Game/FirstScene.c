@@ -41,7 +41,7 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType )
 	scene->turn = PlayerMove;
 }
 
-SceneType UpdateFirstScene( FirstScene* scene )
+SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset )
 {
 	if ( scene->turn == PlayerMove )
 	{
@@ -56,13 +56,33 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		UpdateTankPlayer( &(scene->playerTank), scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
 		if ( scene->playerTank.state == TankDrawAndWait )
 		{
-			scene->turn = AITurn;
+			scene->turn = AIMove;
+			SetTankAIStateMove( &(scene->aiTank) );
 		}
 	}
-	else if ( scene->turn == AITurn )
+	else if ( scene->turn == AIMove )
 	{
-		scene->turn = PlayerMove;
+		
+
+		UpdateTankAI( &(scene->aiTank), scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
+
+		if ( scene->aiTank.state == TankDrawAndWait )
+		{
+			scene->turn = AIShoot;
+			SetTankStateFire( &(scene->aiTank) );
+		}
 	}
+	else if ( scene->turn == AIShoot )
+	{
+		
+		UpdateTankAI( &(scene->aiTank), scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
+
+		if ( scene->aiTank.state == TankDrawAndWait )
+		{
+			scene->turn = PlayerMove;
+		}
+	}
+
 	return Stage1;
 }
 
@@ -77,9 +97,13 @@ void DrawFirstScene( FirstScene* scene )
 	{
 		DrawTank( &(scene->playerTank) );
 	}
-	else if ( scene->turn == AITurn )
+	else if ( scene->turn == AIMove )
 	{
-
+		DrawTank( &(scene->aiTank) );
+	}
+	else if ( scene->turn == AIShoot )
+	{
+		DrawTank( &(scene->aiTank) );
 	}
 }
 

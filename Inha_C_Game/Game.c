@@ -47,7 +47,7 @@ void UpdateModel( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-		game->stage = UpdateFirstScene( &(game->firstScene) );
+		game->stage = UpdateFirstScene( &(game->firstScene), game->startScene.difficultOffset );
 	}
 	else if (game->stage == Stage2)
 	{

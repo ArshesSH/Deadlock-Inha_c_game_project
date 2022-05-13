@@ -33,7 +33,7 @@ typedef struct firstScene
 
 void InitFirstScene( FirstScene* scene, TankType playerTankType );
 
-SceneType UpdateFirstScene( FirstScene* scene );
+SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset );
 
 void DrawFirstScene( FirstScene* scene );
 
