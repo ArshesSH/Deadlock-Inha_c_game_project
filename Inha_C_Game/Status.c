@@ -15,7 +15,15 @@ void MakeStatus( Status* status, float maxHealth, int angle, int power, int spee
 
 void CalcStatusHealth( Status* status, float damage )
 {
-	status->health = MaxF( status->health - damage, 0 );
+	const int nextHelath = status->health - damage;
+	if ( nextHelath < 0 )
+	{
+		status->health = 0;
+	}
+	else
+	{
+		status->health = nextHelath;
+	}
 	status->healthPercentage = status->health / status->maxHelath * status->healthPercentage;
 	status->statusChange = ChangeHealth;
 	if ( IsActorDead( status->health ) )

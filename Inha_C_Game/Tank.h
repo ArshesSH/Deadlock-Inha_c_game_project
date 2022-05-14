@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "Surface.h"
 #include "Projectile.h"
+#include "Effect.h"
 
 // Type of Tanks
 typedef enum tankType
@@ -43,16 +44,22 @@ typedef struct tank
 	Surface bulletSprite;
 	Vec2 gunPos;
 	Vec2 pos;
+	Vec2 hitPos;
 	Rect rect;
 	Rect lastRect;
 	Rect nextRect;
 	Projectile bullet;
+	Effect fireEffect;
+	Effect hitEffect;
 	int tankSpeed;
 	int tankMaxHealth;
 	int tankMinAngle;
 	int tankMaxAngle;
 	int tankMinPower;
 	int tankMaxPower;
+	int gunPosYOffset;
+	int firePosXOffset;
+	float fireEffectCenterY;
 }Tank;
 
 static int aiCount;

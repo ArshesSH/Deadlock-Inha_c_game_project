@@ -12,6 +12,7 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	case LightTank:
 		MakeSurface( "src/images/tank/player/LightTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet1.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 10;
 		tank->tankMaxHealth = 100;
 		tank->tankMaxAngle = 20;
@@ -19,19 +20,25 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxPower = 100;
 		tank->tankMinPower = 40;
 		tank->bullet.damage = 10;
+		tank->gunPosYOffset = 5;
 		tank->gunPos.x = (float)tank->sprite.width;
+		tank->firePosXOffset = 0;
 		break;
 	case LightTankAI:
 		MakeSurface( "src/images/tank/ai/LightTankGrayFlip30.bmp", &(tank->sprite) );
-		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeSurface( "src/images/bullet1.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1Flip.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 10;
 		tank->tankMaxHealth = 100;
 		tank->bullet.damage = 10;
 		tank->gunPos.x = 0.0f;
+		tank->gunPosYOffset = 5;
+		tank->firePosXOffset = -tank->fireEffect.sprite.width;
 		break;
 	case MediumTank:
 		MakeSurface( "src/images/tank/player/MediumTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 5;
 		tank->tankMaxHealth = 150;
 		tank->tankMaxAngle = 22;
@@ -39,19 +46,25 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxPower = 120;
 		tank->tankMinPower = 40;
 		tank->bullet.damage = 20;
+		tank->gunPosYOffset = 5;
 		tank->gunPos.x = (float)tank->sprite.width;
+		tank->firePosXOffset = 0;
 		break;
 	case MediumTankAI:
 		MakeSurface( "src/images/tank/ai/MediumTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1Flip.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 5;
 		tank->tankMaxHealth = 150;
 		tank->bullet.damage = 20;
 		tank->gunPos.x = 0.0f;
+		tank->gunPosYOffset = 5;
+		tank->firePosXOffset = -tank->fireEffect.sprite.width;
 		break;
 	case HeavyTank:
 		MakeSurface( "src/images/tank/player/HeavyTankGray30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 1;
 		tank->tankMaxHealth = 200;
 		tank->tankMaxAngle = 35;
@@ -59,19 +72,25 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxPower = 120;
 		tank->tankMinPower = 40;
 		tank->bullet.damage = 30;
+		tank->gunPosYOffset = -2;
 		tank->gunPos.x = (float)tank->sprite.width;
+		tank->firePosXOffset = 0;
 		break;
 	case HeavyTankAI:
 		MakeSurface( "src/images/tank/ai/HeavyTankGrayFlip30.bmp", &(tank->sprite) );
 		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire1Flip.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 1;
 		tank->tankMaxHealth = 200;
 		tank->bullet.damage = 30;
 		tank->gunPos.x = 0.0f;
+		tank->gunPosYOffset = -2;
+		tank->firePosXOffset = -tank->fireEffect.sprite.width;
 		break;
 	case MRL:
 		MakeSurface( "src/images/tank/player/MRLGray30.bmp", &(tank->sprite) );
-		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeSurface( "src/images/bulletFire.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire2.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 3;
 		tank->tankMaxHealth = 80;
 		tank->tankMaxAngle = 75;
@@ -79,15 +98,20 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 		tank->tankMaxPower = 150;
 		tank->tankMinPower = 40;
 		tank->bullet.damage = 50;
+		tank->gunPosYOffset = -10;
 		tank->gunPos.x = (float)tank->sprite.width;
+		tank->firePosXOffset = 0;
 		break;
 	case MRLAI:
 		MakeSurface( "src/images/tank/ai/MRLGrayFlip30.bmp", &(tank->sprite) );
-		MakeSurface( "src/images/bullet.bmp", &(tank->bulletSprite) );
+		MakeSurface( "src/images/bulletFire.bmp", &(tank->bulletSprite) );
+		MakeEffect( &(tank->fireEffect), "src/images/fire2Flip.bmp", MAGENTA, "src/coin.wav", 1.0f );
 		tank->tankSpeed = 3;
 		tank->tankMaxHealth = 80;
 		tank->bullet.damage = 50;
 		tank->gunPos.x = 0.0f;
+		tank->gunPosYOffset = 0;
+		tank->firePosXOffset = -tank->fireEffect.sprite.width;
 		break;
 	default:
 		break;
@@ -97,13 +121,15 @@ void MakeTank( Tank* tank, TankType type, int pos_x, Vec2 groundPos )
 	tank->pos.y = groundPos.y - tank->sprite.height;
 	
 	tank->gunPos.x += tank->pos.x;
-	tank->gunPos.y = tank->pos.y;
+	tank->gunPos.y = tank->pos.y + tank->gunPosYOffset;
 
 	MakeProjectile( &(tank->bullet), tank->gunPos, &(tank->bulletSprite), MAGENTA );
+	MakeEffect( &(tank->hitEffect), "src/images/fire3.bmp", MAGENTA, "src/coin.wav", 1.0f );
 
 	tank->rect = MakeRectBySize( tank->pos, tank->sprite.width, tank->sprite.height );
 	tank->lastRect = tank->rect;
 	tank->nextRect = tank->rect;
+	tank->fireEffectCenterY = (tank->fireEffect.sprite.height / 2) + tank->pos.y + tank->gunPosYOffset;
 
 	tank->state = TankWait;
 }
@@ -122,9 +148,11 @@ void UpdateTankPlayer( Tank* tank, Rect targetTankRect, Rect ground, Vec2 dir, i
 			SetProjectile( &(tank->bullet), tank->gunPos );
 			SetProjectilePlayer( &(tank->bullet), angle, power );
 			SetProjectileStateFire( &(tank->bullet) );
+			StartEffect( &(tank->fireEffect) );
 		}
 		else if ( tank->bullet.state == ProjFire )
 		{
+			UpdateEffect( &(tank->fireEffect) );
 			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
 			{
 				UpdateProjectilePlayer( &(tank->bullet) );
@@ -133,6 +161,7 @@ void UpdateTankPlayer( Tank* tank, Rect targetTankRect, Rect ground, Vec2 dir, i
 				if ( IsOverlapWithTarget( &(tank->bullet), targetTankRect ) )
 				{
 					SetProjectileStateHit( &(tank->bullet) );
+					StartEffect( &(tank->hitEffect) );
 				}
 
 				if ( IsOverlapWithTarget( &(tank->bullet), ground ) )
@@ -171,9 +200,11 @@ void UpdateTankAI( Tank* tank, Rect targetTankRect, Rect ground, Vec2 userPos, i
 			SetProjectile( &(tank->bullet), tank->gunPos );
 			SetProjectileAI( &(tank->bullet), userPos, tank->gunPos, aiDiffOffset );
 			SetProjectileStateFire( &(tank->bullet) );
+			StartEffect( &(tank->fireEffect) );
 		}
 		else if ( tank->bullet.state == ProjFire )
 		{
+			UpdateEffect( &(tank->fireEffect) );
 			if ( IsNextProjectileInScreen( &(tank->bullet) ) )
 			{
 				UpdatePrjectileAI( &(tank->bullet) );
@@ -264,6 +295,8 @@ void DrawTank( Tank* tank )
 	}
 	else if ( tank->state == TankFire )
 	{
+		const Vec2 fireEffectPos = { tank->gunPos.x + tank->firePosXOffset, tank->fireEffectCenterY };
+		DrawEffect( &(tank->fireEffect), fireEffectPos );
 		if ( tank->bullet.state == ProjFire )
 		{
 			DrawProjectileChroma( &(tank->bullet) );
@@ -287,4 +320,5 @@ void DestroyTank( Tank* tank )
 {
 	DestroySurface( &(tank->sprite) );
 	DestroySurface( &(tank->bulletSprite) );
+	DestroySurface( &(tank->fireEffect) );
 }

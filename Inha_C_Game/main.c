@@ -11,9 +11,6 @@
 #include <time.h>
 #include "Game.h"
 
-#include <mmsystem.h>
-#pragma comment(lib,"winmm.lib")
-
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
     // 960 540

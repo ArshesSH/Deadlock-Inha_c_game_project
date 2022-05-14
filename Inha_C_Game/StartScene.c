@@ -16,6 +16,7 @@ void InitStartScene(StartScene* scene)
 	MakeSurface( "src/images/easymode.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hardmode.bmp", &(scene->hardMode) );
 	DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
+	//DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
 	DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
 }
 

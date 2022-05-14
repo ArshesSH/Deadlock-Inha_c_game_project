@@ -102,6 +102,9 @@
     <ClCompile Include="Status.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Effect.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Turn.h">
       <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>헤더 파일\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
