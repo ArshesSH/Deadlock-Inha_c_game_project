@@ -120,6 +120,9 @@
     <ClCompile Include="SecondScene.c">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="EndScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -207,6 +210,9 @@
       <Filter>헤더 파일\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="SecondScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h">
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
