@@ -8,8 +8,8 @@ void InitStartScene(StartScene* scene)
 {
 	// Make Title and Draw
 	MakeFont( &(scene->title), FontLarge );
-	const Vec2 titlePos = { 336, 100 };
-	DrawFontText( "Last Crew", titlePos, WHITE, &(scene->title) );
+	const Vec2 titlePos = { 350, 100 };
+	DrawFontText( "Deadlock", titlePos, WHITE, &(scene->title) );
 	scene->difficulty = MenuEasy;
 
 	MakeSurface( "src/images/Background.bmp", &(scene->startImage) );

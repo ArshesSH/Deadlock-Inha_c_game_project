@@ -18,18 +18,18 @@ void InitSelectScene( SelectScene* scene )
 
 	const int offset = -100;
 
-	scene->posLight = MakeVec2( screenHalfWidth - (scene->light.width / 2),
-		screenHalfHeight - (scene->light.height / 2) + offset );
-	scene->posMedium = MakeVec2( screenHalfWidth - (scene->medium.width / 2),
-		screenHalfHeight - (scene->medium.height / 2) + offset );
-	scene->posHeavy = MakeVec2( screenHalfWidth - (scene->heavy.width / 2),
-		screenHalfHeight - (scene->heavy.height / 2) + offset );
-	scene->posMRL = MakeVec2( screenHalfWidth - (scene->mrl.width / 2),
-		screenHalfHeight - (scene->mrl.height / 2) + offset );
+	scene->posLight = MakeVec2( (float)(screenHalfWidth - (scene->light.width / 2)),
+		(float)(screenHalfHeight - (scene->light.height / 2) + offset) );
+	scene->posMedium = MakeVec2( (float)(screenHalfWidth - (scene->medium.width / 2)),
+		(float)(screenHalfHeight - (scene->medium.height / 2) + offset ));
+	scene->posHeavy = MakeVec2( (float)(screenHalfWidth - (scene->heavy.width / 2)),
+		(float)(screenHalfHeight - (scene->heavy.height / 2) + offset ));
+	scene->posMRL = MakeVec2( (float)(screenHalfWidth - (scene->mrl.width / 2)),
+		(float)(screenHalfHeight - (scene->mrl.height / 2) + offset ));
 	
-	scene->posDisc = MakeVec2( 250, screenHalfHeight );
+	scene->posDisc = MakeVec2( 250.0f, (float)screenHalfHeight );
 
-	DrawSpriteNonChroma( scene->posLight.x, scene->posLight.y, &(scene->light) );
+	DrawSpriteNonChroma( (int)scene->posLight.x, (int)scene->posLight.y, &(scene->light) );
 	DrawFontText( textLight, scene->posDisc, WHITE, &(scene->discription) );
 }
 
@@ -72,15 +72,15 @@ void DrawSelectScene( SelectScene* scene )
 	{
 		if ( WasSurfaceDrew( &(scene->mrl) ) )
 		{
-			DeleteSurfaceScreen( &(scene->mrl), scene->posMRL.x, scene->posMRL.y );
-			DrawSpriteNonChroma( scene->posLight.x, scene->posLight.y, &(scene->light) );
+			DeleteSurfaceScreen( &(scene->mrl), (int)scene->posMRL.x, (int)scene->posMRL.y );
+			DrawSpriteNonChroma( (int)scene->posLight.x, (int)scene->posLight.y, &(scene->light) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textLight, scene->posDisc, WHITE, &(scene->discription) );
 		}
 		else if ( WasSurfaceDrew( &(scene->medium) ) )
 		{
-			DeleteSurfaceScreen( &(scene->medium), scene->posMedium.x, scene->posMedium.y );
-			DrawSpriteNonChroma( scene->posLight.x, scene->posLight.y, &(scene->light) );
+			DeleteSurfaceScreen( &(scene->medium), (int)scene->posMedium.x, (int)scene->posMedium.y );
+			DrawSpriteNonChroma( (int)scene->posLight.x, (int)scene->posLight.y, &(scene->light) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textLight, scene->posDisc, WHITE, &(scene->discription) );
 		}
@@ -89,15 +89,15 @@ void DrawSelectScene( SelectScene* scene )
 	{
 		if ( WasSurfaceDrew( &(scene->light) ) )
 		{
-			DeleteSurfaceScreen( &(scene->light), scene->posLight.x, scene->posLight.y );
-			DrawSpriteNonChroma( scene->posMedium.x, scene->posMedium.y, &(scene->medium) );
+			DeleteSurfaceScreen( &(scene->light), (int)scene->posLight.x, (int)scene->posLight.y );
+			DrawSpriteNonChroma( (int)scene->posMedium.x, (int)scene->posMedium.y, &(scene->medium) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textMedium, scene->posDisc, WHITE, &(scene->discription) );
 		}
 		else if ( WasSurfaceDrew( &(scene->heavy) ) )
 		{
-			DeleteSurfaceScreen( &(scene->heavy), scene->posHeavy.x, scene->posHeavy.y );
-			DrawSpriteNonChroma( scene->posMedium.x, scene->posMedium.y, &(scene->medium) );
+			DeleteSurfaceScreen( &(scene->heavy), (int)scene->posHeavy.x, (int)scene->posHeavy.y );
+			DrawSpriteNonChroma( (int)scene->posMedium.x, (int)scene->posMedium.y, &(scene->medium) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textMedium, scene->posDisc, WHITE, &(scene->discription) );
 		}
@@ -106,15 +106,15 @@ void DrawSelectScene( SelectScene* scene )
 	{
 		if ( WasSurfaceDrew( &(scene->medium) ) )
 		{
-			DeleteSurfaceScreen( &(scene->medium), scene->posMedium.x, scene->posMedium.y );
-			DrawSpriteNonChroma( scene->posHeavy.x, scene->posHeavy.y, &(scene->heavy) );
+			DeleteSurfaceScreen( &(scene->medium), (int)scene->posMedium.x, (int)scene->posMedium.y );
+			DrawSpriteNonChroma( (int)scene->posHeavy.x, (int)scene->posHeavy.y, &(scene->heavy) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textHeavy, scene->posDisc, WHITE, &(scene->discription) );
 		}
 		else if ( WasSurfaceDrew( &(scene->mrl) ) )
 		{
-			DeleteSurfaceScreen( &(scene->mrl), scene->posMRL.x, scene->posMRL.y );
-			DrawSpriteNonChroma( scene->posHeavy.x, scene->posHeavy.y, &(scene->heavy) );
+			DeleteSurfaceScreen( &(scene->mrl), (int)scene->posMRL.x, (int)scene->posMRL.y );
+			DrawSpriteNonChroma( (int)scene->posHeavy.x, (int)scene->posHeavy.y, &(scene->heavy) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textHeavy, scene->posDisc, WHITE, &(scene->discription) );
 		}
@@ -123,15 +123,15 @@ void DrawSelectScene( SelectScene* scene )
 	{
 		if ( WasSurfaceDrew( &(scene->heavy) ) )
 		{
-			DeleteSurfaceScreen( &(scene->heavy), scene->posHeavy.x, scene->posHeavy.y );
-			DrawSpriteNonChroma( scene->posMRL.x, scene->posMRL.y, &(scene->mrl) );
+			DeleteSurfaceScreen( &(scene->heavy), (int)scene->posHeavy.x, (int)scene->posHeavy.y );
+			DrawSpriteNonChroma( (int)scene->posMRL.x, (int)scene->posMRL.y, &(scene->mrl) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textMRL, scene->posDisc, WHITE, &(scene->discription) );
 		}
 		else if ( WasSurfaceDrew( &(scene->light) ) )
 		{
-			DeleteSurfaceScreen( &(scene->light), scene->posLight.x, scene->posLight.y );
-			DrawSpriteNonChroma( scene->posMRL.x, scene->posMRL.y, &(scene->mrl) );
+			DeleteSurfaceScreen( &(scene->light), (int)scene->posLight.x, (int)scene->posLight.y );
+			DrawSpriteNonChroma( (int)scene->posMRL.x, (int)scene->posMRL.y, &(scene->mrl) );
 			DeleteRect( scene->discription.textRect );
 			DrawFontText( textMRL, scene->posDisc, WHITE, &(scene->discription) );
 		}

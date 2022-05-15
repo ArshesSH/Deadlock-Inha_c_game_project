@@ -15,7 +15,7 @@ void MakeStatus( Status* status, float maxHealth, int angle, int power, int spee
 
 void CalcStatusHealth( Status* status, float damage )
 {
-	const int nextHelath = status->health - damage;
+	const float nextHelath = status->health - damage;
 	if ( nextHelath < 0 )
 	{
 		status->health = 0;

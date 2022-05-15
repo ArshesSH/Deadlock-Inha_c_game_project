@@ -16,7 +16,7 @@ void MakeStage( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection );
+		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, game->startScene.difficultOffset );
 	}
 	else if (game->stage == Stage2)
 	{
@@ -47,7 +47,7 @@ void UpdateModel( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-		game->stage = UpdateFirstScene( &(game->firstScene), game->startScene.difficultOffset );
+		game->stage = UpdateFirstScene( &(game->firstScene) );
 	}
 	else if (game->stage == Stage2)
 	{

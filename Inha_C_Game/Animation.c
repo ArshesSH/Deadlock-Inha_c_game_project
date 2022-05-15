@@ -25,7 +25,7 @@ void DrawAnime( Vec2 pos, Animation* anime )
 
 void DrawAnimeClip(Vec2 pos, Rect clip, Animation* anime)
 {
-	DrawSpriteClipNonChroma( pos.x, pos.y, anime->frameList[anime->curFrame], clip, anime->s );
+	DrawSpriteClipNonChroma( (int)pos.x, (int)pos.y, anime->frameList[anime->curFrame], clip, anime->s );
 }
 
 
@@ -36,7 +36,7 @@ void DrawAnimeChroma( Vec2 pos, Animation* anime )
 
 void DrawAnimeClipChroma( Vec2 pos, Rect clip, Animation* anime )
 {
-	DrawSpriteClipChroma( pos.x, pos.y, anime->frameList[anime->curFrame], clip, anime->s, anime->chroma );
+	DrawSpriteClipChroma( (int)pos.x, (int)pos.y, anime->frameList[anime->curFrame], clip, anime->s, anime->chroma );
 }
 
 
@@ -47,7 +47,7 @@ void DrawAnimeColor( Vec2 pos, Animation* anime, Color subColor )
 
 void DrawAnimeClipColor( Vec2 pos, Rect clip, Animation* anime, Color subColor )
 {
-	DrawSpriteClipSubstitute( pos.x, pos.y, anime->frameList[anime->curFrame], clip, anime->s, anime->chroma, subColor );
+	DrawSpriteClipSubstitute( (int)pos.x, (int)pos.y, anime->frameList[anime->curFrame], clip, anime->s, anime->chroma, subColor );
 }
 
 void UpdateAnimation(Animation* anime, float ft)

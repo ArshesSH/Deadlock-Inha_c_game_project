@@ -78,7 +78,7 @@
     <ClCompile Include="PlayerController.c">
       <Filter>소스 파일\Engines</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.c">
+    <ClCompile Include="ProjectileModel.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Rect.c">
@@ -90,7 +90,7 @@
     <ClCompile Include="Vec2.c">
       <Filter>소스 파일\Engines</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.c">
+    <ClCompile Include="TankModel.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.c">
@@ -103,6 +103,18 @@
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Effect.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePlayer.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileAI.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TankPlayer.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TankAI.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,7 +158,7 @@
     <ClInclude Include="PlayerController.h">
       <Filter>헤더 파일\Engines</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
+    <ClInclude Include="ProjectileModel.h">
       <Filter>헤더 파일\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
@@ -155,7 +167,7 @@
     <ClInclude Include="Surface.h">
       <Filter>헤더 파일\Engines</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
+    <ClInclude Include="TankModel.h">
       <Filter>헤더 파일\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Vec2.h">
@@ -177,6 +189,18 @@
       <Filter>헤더 파일\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePlayer.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileAI.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TankPlayer.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TankAI.h">
       <Filter>헤더 파일\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

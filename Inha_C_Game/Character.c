@@ -70,12 +70,12 @@ void SetCharacterDirection( Character* chara, Vec2 dir )
 			chara->curSequence = StandDown;
 		}
 	}
-	chara->vel = Vec2Mul( GetVec2Normalized( dir ), chara->speed );
+	chara->vel = Vec2Mul( GetVec2Normalized( dir ), (float)chara->speed );
 }
 
 void UpdateCharacter( Character* chara, float dt )
 {
-	Vec2AddEqual( &(chara->pos), Vec2Mul( chara->vel, (int)dt ) );
+	Vec2AddEqual( &(chara->pos), Vec2Mul( chara->vel, dt ) );
 	//UpdateAnimation( &(chara->animations[(int)chara->curSequence]), dt );
 	AdvanceImage( &(chara->animations[(int)chara->curSequence]) );
 }

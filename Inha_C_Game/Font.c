@@ -55,10 +55,10 @@ void MakeFont( Font* f, FontType fontType )
 		for (int iSection = 0; iSection < sectionCount; iSection++)
 		{
 			const Rect tmp = MakeRect(
-				f->pos.x + iSection * f->fontWidth,
-				f->pos.x + (iSection + 1) * f->fontWidth,
-				f->pos.y + iLine * f->fontHeight,
-				f->pos.y + (iLine + 1) * f->fontHeight );
+				(int)f->pos.x + iSection * f->fontWidth,
+				(int)f->pos.x + (iSection + 1) * f->fontWidth,
+				(int)f->pos.y + iLine * f->fontHeight,
+				(int)f->pos.y + (iLine + 1) * f->fontHeight );
 			f->fontList[iLine * sectionCount + iSection] = tmp;
 		}
 	}
@@ -86,7 +86,7 @@ void DrawFontTextClip( const char* text, Vec2 pos, Color color, Rect clip, Font*
 		}
 		else
 		{
-			DrawSpriteClipSubstitute( pos.x + (iWidth * (f->fontWidth)), pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, f->chroma, color );
+			DrawSpriteClipSubstitute( (int)pos.x + (iWidth * (f->fontWidth)), (int)pos.y + (iHeight * (f->fontHeight) ), f->fontList[c - ' '], clip, &f->fontTable, f->chroma, color );
 			iWidth++;
 		}
 		maxWidth = max( maxWidth, iWidth );

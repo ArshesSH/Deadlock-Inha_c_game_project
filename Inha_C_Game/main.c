@@ -1,14 +1,9 @@
 #include <stdio.h>
 #include <conio.h>
 #include <Windows.h>
-#include "Graphics.h"
-#include "Character.h"
-#include "Font.h"
-#include "Projectile.h"
-#include "Ground.h"
-#include "Tank.h"
-#include <math.h>
 #include <time.h>
+
+#include "Graphics.h"
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
@@ -28,6 +23,7 @@ int main(int argc, char* argv[]) {
     *       Init Game       *
     *************************/
     Game game;
+    game.IsStageChanged = false;
     game.stage = StageStart;
     MakeStage( &game );
 

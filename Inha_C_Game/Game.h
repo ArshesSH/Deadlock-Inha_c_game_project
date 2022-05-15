@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Ground.h"
-#include "Tank.h"
-#include "Font.h"
 #include "SceneType.h"
 #include "StartScene.h"
 #include "SelectScene.h"

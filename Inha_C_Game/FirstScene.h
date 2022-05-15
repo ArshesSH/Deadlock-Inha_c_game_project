@@ -2,7 +2,8 @@
 
 #include "UI.h"
 #include "Status.h"
-#include "Tank.h"
+#include "TankPlayer.h"
+#include "TankAI.h"
 #include "Ground.h"
 #include "Turn.h"
 #include "PlayerController.h"
@@ -14,15 +15,15 @@ typedef struct firstScene
 	PlayerInput input;
 
 	Surface tile;
-	Tank playerTank;
-	Tank aiTank;
+	TankPlayer playerTank;
+	TankAI aiTank;
 	Ground ground;
+
 	UI playerUI;
 	UI aiUI;
 
+
 	Vec2 playerDir;
-	Status playerStatus;
-	Status aiStatus;
 
 	Vec2 groundStartPos;
 	Color tileChroma;
@@ -31,9 +32,9 @@ typedef struct firstScene
 	Rect limitZone;
 }FirstScene;
 
-void InitFirstScene( FirstScene* scene, TankType playerTankType );
+void InitFirstScene( FirstScene* scene, TankType playerTankType, int difficultOffset );
 
-SceneType UpdateFirstScene( FirstScene* scene, int difficultOffset );
+SceneType UpdateFirstScene( FirstScene* scene);
 
 void DrawFirstScene( FirstScene* scene );
 

@@ -10,7 +10,7 @@
 
 void MakeEffect(Effect* effect, const char* spriteFilename, Color chroma, const char* soundFilename, float playTime)
 {
-	const int soundFilenameSize = strlen( soundFilename ) + 1;
+	const size_t soundFilenameSize = strlen( soundFilename ) + 1;
 	effect->soundFilename = (char*)malloc( soundFilenameSize + 1 );
 	strcpy_s( effect->soundFilename, soundFilenameSize, soundFilename );
 	effect->chorma = chroma;

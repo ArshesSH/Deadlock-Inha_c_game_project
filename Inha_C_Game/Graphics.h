@@ -21,19 +21,19 @@ Rect GetScreenRect();
 
 void PutPixel( int x, int y, Color c );
 
-void DrawSpriteNonChroma( int x, int y, const Surface* const s );
+void DrawSpriteNonChroma( int x, int y, Surface* const s );
 
 void DrawSpriteRectNonChroma( int x, int y, const Rect* const srcRect, Surface* const s );
 
 void DrawSpriteClipNonChroma( int x, int y, Rect srcRect, const Rect clip, Surface* const s );
 
-void DrawSpriteChroma( int x, int y, const Surface* const s, Color chroma );
+void DrawSpriteChroma( int x, int y,  Surface* const s, Color chroma );
 
 void DrawSpriteRectChroma( int x, int y, const Rect* const srcRect, Surface* const s, Color chroma );
 
 void DrawSpriteClipChroma( int x, int y, Rect srcRect, Rect clip, Surface* const s, Color chroma );
 
-void DrawSpriteSubstitute( int x, int y, const Surface* const s, Color chroma, Color subColor );
+void DrawSpriteSubstitute( int x, int y,  Surface* const s, Color chroma, Color subColor );
 
 void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, Surface* const s, Color chroma, Color subColor );
 
