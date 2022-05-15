@@ -3,11 +3,14 @@
 #include <Windows.h>
 #include "Graphics.h"
 
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 void MakeStage( Game* game )
 {
 	if (game->stage == StageStart)
 	{
+		PlaySound( TEXT( "src/sounds/BackgroundMusic.wav" ), NULL, SND_ASYNC );
 		InitStartScene( &(game->startScene) );
 	}
 	else if (game->stage == StageSelectTank)
@@ -16,11 +19,12 @@ void MakeStage( Game* game )
 	}
 	else if (game->stage == Stage1)
 	{
-		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, game->startScene.difficultOffset );
+		PlaySound( NULL, NULL, SND_ASYNC );
+		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
 	}
 	else if (game->stage == Stage2)
 	{
-
+		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
 	}
 	else if (game->stage == Stage3)
 	{

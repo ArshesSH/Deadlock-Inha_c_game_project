@@ -33,9 +33,6 @@ typedef struct projectileModel
 	float time;
 	float damage;
 
-	// Hit Effect
-	Effect hitEffect;
-
 }ProjectileModel;
 
 void MakeProjectile( ProjectileModel* pProj, Surface* sprite, Color chroma, float damage );

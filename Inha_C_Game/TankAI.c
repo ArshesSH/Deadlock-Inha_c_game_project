@@ -1,6 +1,9 @@
 #include "TankAI.h"
 
 #include <stdlib.h>
+#include <Windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 void MakeTankAI( TankAI* pTankAI, TankType type, int pos_x, Vec2 groundPos, Rect limitZone, int aiDifficult )
 {
@@ -34,13 +37,22 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 	}
 	else if (pModel->state == TankFire)
 	{
+		if (GetProjectileState( &(pTankAI->bullet.model) ) == ProjWait)
+		{
+			StartEffect( &(pModel->fireEffect) );
+		}
 		UpdateProjectileAI( &(pTankAI->bullet), pModel->gunPos, targetPos, pTankAI->aiOffset, targetRect, groundRect );
+		UpdateEffect( &(pModel->fireEffect) );
 	}
 	else if (pModel->state == TankDamaged)
 	{
+		PlaySound( TEXT( "src/sounds/explosion.wav" ), NULL, SND_ASYNC );
 		// play effects;
-
+		pModel->hitPos.x = pModel->pos.x;
+		StartEffect( &(pModel->hitEffect) );
+		pModel->state = TankWait;
 	}
+
 }
 
 void SetTankAIMoveCount( TankAI* pTankAI )
@@ -55,4 +67,9 @@ void SetTankAIMoveCount( TankAI* pTankAI )
 ProjectileState GetAIBulletState( TankAI* pTankAI )
 {
 	return pTankAI->bullet.model.state;
+}
+
+void DestroyTankAI( TankAI* pTankAI )
+{
+	DestroyTank( &(pTankAI->model) );
 }

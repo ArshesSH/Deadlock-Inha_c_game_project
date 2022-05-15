@@ -6,15 +6,16 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <Windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float damage)
 {
 	// Set Image of projectile
 	pProj->sprite = sprite;
 	pProj->rect = MakeRectBySize(pProj->pos, sprite->width, sprite->height );
 	pProj->nextRect = pProj->rect;
-
-	// Make Hit Effect
-	MakeEffect( &(pProj->hitEffect), "src/images/fire3.bmp", MAGENTA, "src/coin.wav", 1.0f );
 
 	// Set Image Chroma
 	pProj->chroma = chroma;
@@ -35,6 +36,7 @@ void InitProjectileForParabola(ProjectileModel* pProj, Vec2 curStartPos )
 	pProj->nextRect = pProj->rect;
 	pProj->lastPos = curStartPos;
 	pProj->startPos = curStartPos;
+	PlaySound( TEXT( "src/sounds/fire.wav" ), NULL, SND_ASYNC );
 }
 
 // Check is projectile in screen except top of screen

@@ -6,4 +6,5 @@ typedef enum turn
 	PlayerShoot,
 	AIMove,
 	AIShoot,
+	NotInGame
 }Turn;

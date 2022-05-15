@@ -17,3 +17,4 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 
 ProjectileState GetPlayerBulletState( TankPlayer* pTankPlayer );
 
+void DestroyTankPlayer( TankPlayer* pTankPlayer );

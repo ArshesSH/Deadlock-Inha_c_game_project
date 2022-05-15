@@ -154,6 +154,7 @@
     <ClCompile Include="PlayerController.c" />
     <ClCompile Include="ProjectileAI.c" />
     <ClCompile Include="ProjectilePlayer.c" />
+    <ClCompile Include="SecondScene.c" />
     <ClCompile Include="Status.c" />
     <ClCompile Include="ProjectileModel.c" />
     <ClCompile Include="Rect.c" />
@@ -182,6 +183,7 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ProjectileAI.h" />
     <ClInclude Include="ProjectilePlayer.h" />
+    <ClInclude Include="SecondScene.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="ProjectileModel.h" />
     <ClInclude Include="Rect.h" />

@@ -5,6 +5,8 @@
 #include "MathSH.h"
 #include <math.h>
 
+
+
 void MakeProjectilePlayer(ProjectilePlayer* pProjPlayer, Surface* sprite, Color chroma, float damage )
 {
 	MakeProjectile(&(pProjPlayer->model), sprite, chroma, damage);
@@ -49,7 +51,6 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 			if (IsOverlapWithTarget(pProjModel, targetTankRect ))
 			{
 				SetProjectileHit( pProjModel );
-				StartEffect(&(pProjModel->hitEffect));
 			}
 
 			if (IsOverlapWithTarget( pProjModel, groundRect))

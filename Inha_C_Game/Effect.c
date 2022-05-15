@@ -1,23 +1,16 @@
 #include "Effect.h"
 
-#include <stdlib.h>
-#include <string.h>
+
 #include "Graphics.h"
 
-#include <Windows.h>
-#include <mmsystem.h>
-#pragma comment(lib,"winmm.lib")
-
-void MakeEffect(Effect* effect, const char* spriteFilename, Color chroma, const char* soundFilename, float playTime)
+void MakeEffect(Effect* effect, const char* spriteFilename, Color chroma, float playTime)
 {
-	const size_t soundFilenameSize = strlen( soundFilename ) + 1;
-	effect->soundFilename = (char*)malloc( soundFilenameSize + 1 );
-	strcpy_s( effect->soundFilename, soundFilenameSize, soundFilename );
 	effect->chorma = chroma;
 
 	MakeSurface( spriteFilename, &(effect->sprite) );
 	effect->playTime = playTime;
 	effect->currentTime = 0.0f;
+	effect->state = EffectWait;
 }
 
 void StartEffect( Effect* effect )
@@ -60,5 +53,4 @@ void DrawEffect( Effect* effect, Vec2 pos )
 void DestroyEffect( Effect* effect )
 {
 	DestroySurface( &(effect->sprite) );
-	free( effect->soundFilename );
 }

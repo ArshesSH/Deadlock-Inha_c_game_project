@@ -23,3 +23,5 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 void SetTankAIMoveCount( TankAI* pTankAI );
 
 ProjectileState GetAIBulletState( TankAI* pTankAI );
+
+void DestroyTankAI( TankAI* pTankAI );

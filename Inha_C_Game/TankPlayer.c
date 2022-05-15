@@ -1,5 +1,7 @@
 #include "TankPlayer.h"
 
+#include <Windows.h>
+
 void MakeTankPlayer(TankPlayer* pTankPlayer, TankType type, int pos_x, Vec2 groundPos, Rect limitZone)
 {
 	TankModel* pModel = &(pTankPlayer->model);
@@ -22,12 +24,23 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 	// Tank Fire State
 	else if (pModel->state == TankFire)
 	{
+		if (GetProjectileState(&(pTankPlayer->bullet.model)) == ProjWait)
+		{
+			StartEffect( &(pModel->fireEffect) );
+		}
 		UpdateProjectilePlayer( &(pTankPlayer->bullet), pModel->gunPos,
 			pTankPlayer->status.angle, pTankPlayer->status.power, targetRect, groundRect );
+		UpdateEffect( &(pModel->fireEffect) );
 	}
+
 }
 
 ProjectileState GetPlayerBulletState( TankPlayer* pTankPlayer )
 {
 	return pTankPlayer->bullet.model.state;
+}
+
+void DestroyTankPlayer( TankPlayer* pTankPlayer )
+{
+	DestroyTank( &(pTankPlayer->model) );
 }

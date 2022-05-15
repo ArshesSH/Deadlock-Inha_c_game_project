@@ -45,8 +45,8 @@ typedef struct tankModel
 
 	// Projectile Feature
 	Surface bulletSprite;
-
 	Surface sprite;
+
 	Vec2 gunPos;
 	Vec2 pos;
 	Vec2 hitPos;
@@ -54,18 +54,22 @@ typedef struct tankModel
 	Rect rect;
 	Rect lastRect;
 	Rect nextRect;
+
 	Effect fireEffect;
 	Effect hitEffect;
+
+	float fireEffectCenterY;
 	float bulletDamage;
-	int tankSpeed;
 	float tankMaxHealth;
+
+	int tankSpeed;
 	int tankMinAngle;
 	int tankMaxAngle;
 	int tankMinPower;
 	int tankMaxPower;
 	int gunPosYOffset;
 	int firePosXOffset;
-	float fireEffectCenterY;
+
 }TankModel;
 
 void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, Rect limitZone );
@@ -88,6 +92,6 @@ void DrawTank( TankModel* pTank );
 
 void DrawTankOnce( TankModel* pTank );
 
-bool IsTankInMoveZone( TankModel* pTank );
+bool IsTankInMoveZone( Rect nextRect, Rect limitZone );
 
 void DestroyTank( TankModel* pTank );

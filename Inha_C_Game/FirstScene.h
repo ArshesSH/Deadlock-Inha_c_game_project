@@ -1,7 +1,6 @@
 #pragma once
 
 #include "UI.h"
-#include "Status.h"
 #include "TankPlayer.h"
 #include "TankAI.h"
 #include "Ground.h"
@@ -11,28 +10,31 @@
 
 typedef struct firstScene
 {
+	// Turn state
 	Turn turn;
+
+	// Player Input
 	PlayerInput input;
-
-	Surface tile;
-	TankPlayer playerTank;
-	TankAI aiTank;
-	Ground ground;
-
-	UI playerUI;
-	UI aiUI;
-
-
 	Vec2 playerDir;
 
+	// Ground Contents
+	Surface tile;
+	Ground ground;
 	Vec2 groundStartPos;
 	Color tileChroma;
-
 	int tileCount;
 	Rect limitZone;
+
+	// Tank Contents
+	TankPlayer playerTank;
+	TankAI aiTank;
+
+	// UI
+	UI playerUI;
+	UI aiUI;
 }FirstScene;
 
-void InitFirstScene( FirstScene* scene, TankType playerTankType, int difficultOffset );
+void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITankType, int difficultOffset );
 
 SceneType UpdateFirstScene( FirstScene* scene);
 

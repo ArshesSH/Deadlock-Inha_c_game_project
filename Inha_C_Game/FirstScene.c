@@ -2,8 +2,11 @@
 
 #include "Graphics.h"
 
-// Init First Stage
-void InitFirstScene( FirstScene* scene, TankType playerTankType, int difficultOffset )
+#pragma comment(lib,"winmm.lib")
+/************************
+*		Init Scene		*
+*************************/
+void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITankType, int difficultOffset )
 {
 	// Generate Ground
 	scene->groundStartPos = MakeVec2( 0.0f, 400.0f );
@@ -17,16 +20,7 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType, int difficultOf
 
 	// Generate Tank
 	MakeTankPlayer( &(scene->playerTank), playerTankType, 30, scene->groundStartPos, scene->limitZone );
-	MakeTankAI( &(scene->aiTank), MediumTankAI, 850, scene->groundStartPos, scene->limitZone, difficultOffset );
-	//MakeTank( &(scene->playerTank), playerTankType, 30, scene->groundStartPos );
-	//MakeTank( &(scene->aiTank), MediumTankAI, 850, scene->groundStartPos );
-
-	// Generate Status
-	/*
-	MakeStatus( &(scene->playerStatus), scene->playerTank.tankMaxHealth, scene->playerTank.tankMinAngle,
-		scene->playerTank.tankMinPower, scene->playerTank.tankSpeed );
-	MakeStatus( &(scene->aiStatus), scene->aiTank.tankMaxHealth, 0, 0, scene->aiTank.tankSpeed );
-	*/
+	MakeTankAI( &(scene->aiTank), AITankType, 850, scene->groundStartPos, scene->limitZone, difficultOffset );
 
 	// Generate UI
 	const Vec2 playerUIPos = MakeVec2( 50, scene->groundStartPos.y + 60 );
@@ -42,10 +36,13 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType, int difficultOf
 	DrawHealth( &(scene->aiUI) );
 
 	scene->playerDir = MakeVec2( 0.0f, 0.0f );
-
 	scene->turn = PlayerMove;
 }
 
+
+/****************************
+*		Update Scene		*
+*****************************/
 SceneType UpdateFirstScene( FirstScene* scene )
 {
 	// Turn Player Move
@@ -55,45 +52,40 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		scene->playerDir.y = 0;
 		PlayerMoveInput( scene );
 		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect );
-		//UpdateTankPlayer( &(scene->playerTank), scene->aiTank.rect, scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
-		//UpdateUI( &(scene->playerUI) );
 	}
 	// Turn Player Shoot
 	else if ( scene->turn == PlayerShoot )
 	{
 		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect );
-		//UpdateTankPlayer( &(scene->playerTank), scene->aiTank.rect, scene->ground.rect, scene->playerDir, scene->playerStatus.angle, scene->playerStatus.power, scene->limitZone );
+
+		// If Player Hit the Target
 		if (GetPlayerBulletState( &(scene->playerTank) ) == ProjHit)
 		{
+			// Change AI State Damaged and Calculate AI Health
+			scene->aiTank.model.state = TankDamaged;
 			CalcStatusHealth( &(scene->aiTank.status), scene->playerTank.bullet.model.damage );
-			//UpdateUI( &(scene->aiUI) );
-			
 			SetProjectileWait( &(scene->playerTank.bullet.model));
-			//scene->aiTank.model.state = TankDamaged;
-			scene->playerTank.model.state = TankDrawAndWait;
 
+			scene->playerTank.model.state = TankDrawAndWait;
 			scene->turn = AIMove;
 		}
 		else if (GetPlayerBulletState( &(scene->playerTank) ) == ProjWait)
 		{
+			scene->playerTank.model.state = TankDrawAndWait;
 			scene->turn = AIMove;
 		}
-		
-		//if ( scene->playerTank.model.state == TankDrawAndWait )
-		//{
-		//	scene->turn = AIMove;
-		//}
 	}
+	// Turn AI Move
 	else if ( scene->turn == AIMove )
 	{
 		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect );
-		//UpdateTankAI( &(scene->aiTank), scene->playerTank.rect, scene->ground.rect, scene->playerTank.pos, difficultOffset, scene->limitZone );
 
 		if ( scene->aiTank.model.state == TankFire )
 		{
 			scene->turn = AIShoot;
 		}
 	}
+	// Turn AI Shoot
 	else if ( scene->turn == AIShoot )
 	{
 		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect );
@@ -101,75 +93,114 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		// If Hit target
 		if (GetAIBulletState(&(scene->aiTank)) == ProjHit )
 		{
+			// Play Hit Effect to Player
+			scene->playerTank.model.state = TankDamaged;
+			PlaySound( TEXT( "src/sounds/explosion.wav" ), NULL, SND_ASYNC );
+			scene->playerTank.model.hitPos.x = scene->playerTank.model.pos.x;
+			StartEffect( &(scene->playerTank.model.hitEffect) );
+
+			// Calculate Player Health
 			CalcStatusHealth( &(scene->playerTank.status), scene->aiTank.bullet.model.damage );
 			SetProjectileWait( &(scene->aiTank.bullet.model) );
-
+			scene->aiTank.model.state = TankDrawAndWait;
 			scene->turn = PlayerMove;
 		}
+		// No Hit
 		else if (GetAIBulletState( &(scene->aiTank) ) == ProjWait)
 		{
+			scene->aiTank.model.state = TankDrawAndWait;
 			scene->turn = PlayerMove;
 		}
-		//if (scene->aiTank.model.state == TankDrawAndWait )
-		//{
-		//	scene->turn = PlayerMove;
-		//}
 	}
 
+
+
+	// If player dead, Change to Start Scene
 	if ( scene->playerTank.status.statusChange == ActorDead )
 	{
 		DestroyFirstScene( scene );
+		system( "cls" );
+		scene->turn = NotInGame;
 		return StageStart;
 	}
+	// If AI Dead Change to Next Scene
 	else if (scene->aiTank.status.statusChange == ActorDead )
 	{
 		DestroyFirstScene( scene );
+		system( "cls" );
+		scene->turn = NotInGame;
 		return Stage2;
 	}
+
+	// Update Effect and UI
+	UpdateEffect( &(scene->playerTank.model.hitEffect) );
 	UpdateEffect( &(scene->aiTank.model.hitEffect) );
 	UpdateUI( &(scene->playerUI) );
 	UpdateUI( &(scene->aiUI) );
+
 	return Stage1;
 }
 
+
+/************************
+*		Draw Scene		*
+*************************/
 void DrawFirstScene( FirstScene* scene )
 {
 	if ( scene->turn == PlayerMove )
 	{
-		DrawTank( &(scene->playerTank.model) );
 		DrawUI( &(scene->playerUI) );
 	}
 	else if ( scene->turn == PlayerShoot )
 	{
-		DrawTank( &(scene->playerTank.model) );
 		DrawProjectilePlayer( &(scene->playerTank.bullet) );
 		DrawUI( &(scene->aiUI) );
 	}
 	else if ( scene->turn == AIMove )
 	{
-		DrawTank( &(scene->aiTank.model) );
 		DrawUI( &(scene->aiUI) );
 	}
 	else if ( scene->turn == AIShoot )
 	{
-		DrawTank( &(scene->aiTank.model) );
 		DrawProjectileAI( &(scene->aiTank.bullet) );
 		DrawUI( &(scene->playerUI) );
 	}
-	DrawEffect( &(scene->aiTank.model.hitEffect), pProjModel->pos );
-
+	if (scene->turn != NotInGame)
+	{
+		DrawUI( &(scene->playerUI) );
+		DrawUI( &(scene->aiUI) );
+		DrawTank( &(scene->playerTank.model) );
+		DrawTank( &(scene->aiTank.model) );
+	}
 }
 
+
+/****************************
+*		Destroy Scene		*
+****************************/
+/*
+*	Destroy List
+* 
+*	Surface tile;
+*	Ground ground;
+*	TankPlayer playerTank;
+*	TankAI aiTank;
+*	UI playerUI;
+*	UI aiUI;
+*	All 6 Objects
+*/
 void DestroyFirstScene( FirstScene* scene )
 {
 	DestroySurface( &(scene->tile) );
-	DestroyTank( &(scene->playerTank.model) );
-	DestroyTank( &(scene->aiTank.model) );
+	DestroyTankPlayer( &(scene->playerTank) );
+	DestroyTankAI( &(scene->aiTank) );
 	DestroyGround( &(scene->ground) );
 	DestroyUI( &(scene->playerUI) );
 	DestroyUI( &(scene->aiUI) );
 }
 
+
+// Player Input Function
 void PlayerMoveInput(FirstScene* scene)
 {
 	// Input Shoot
@@ -183,7 +214,7 @@ void PlayerMoveInput(FirstScene* scene)
 	// Input Move
 	if ( IsPlayerInput( VK_RIGHT ) )
 	{
-		if ( IsTankInMoveZone( &(scene->playerTank.model) ) )
+		if ( IsTankInMoveZone( scene->playerTank.model.rect, scene->limitZone ) )
 		{
 			scene->playerDir.x += 1;
 			SetTankStateMove( &(scene->playerTank.model) );
@@ -191,7 +222,7 @@ void PlayerMoveInput(FirstScene* scene)
 	}
 	else if ( IsPlayerInput( VK_LEFT ) )
 	{
-		if (IsTankInMoveZone( &(scene->playerTank.model) ))
+		if (IsTankInMoveZone( scene->playerTank.model.rect, scene->limitZone ))
 		{
 			scene->playerDir.x -= 1;
 			SetTankStateMove( &(scene->playerTank.model) );

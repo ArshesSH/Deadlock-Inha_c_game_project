@@ -12,14 +12,13 @@ typedef enum effectState
 typedef struct effect
 {
 	Surface sprite;
-	char* soundFilename;
 	Color chorma;
 	float playTime;
 	float currentTime;
 	EffectState state;
 }Effect;
 
-void MakeEffect( Effect* effect, const char* spriteFilename, Color chroma, const char* soundFilename, float playTime );
+void MakeEffect( Effect* effect, const char* spriteFilename, Color chroma, float playTime );
 
 void StartEffect( Effect* effect );
 
