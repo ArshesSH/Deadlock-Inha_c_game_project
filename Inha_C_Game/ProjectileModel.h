@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 #include "Surface.h"
+#include "Effect.h"
 
 typedef enum projectileState
 {
@@ -31,7 +32,10 @@ typedef struct projectileModel
 	Vec2 nextPos;
 	float time;
 	float damage;
-	
+
+	// Hit Effect
+	Effect hitEffect;
+
 }ProjectileModel;
 
 void MakeProjectile( ProjectileModel* pProj, Surface* sprite, Color chroma, float damage );

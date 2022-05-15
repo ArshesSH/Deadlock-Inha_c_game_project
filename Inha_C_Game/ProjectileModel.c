@@ -13,6 +13,9 @@ void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float
 	pProj->rect = MakeRectBySize(pProj->pos, sprite->width, sprite->height );
 	pProj->nextRect = pProj->rect;
 
+	// Make Hit Effect
+	MakeEffect( &(pProj->hitEffect), "src/images/fire3.bmp", MAGENTA, "src/coin.wav", 1.0f );
+
 	// Set Image Chroma
 	pProj->chroma = chroma;
 
@@ -21,6 +24,7 @@ void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float
 	pProj->damage = damage;
 
 	pProj->state = ProjWait;
+
 }
 
 void InitProjectileForParabola(ProjectileModel* pProj, Vec2 curStartPos )

@@ -49,7 +49,7 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 			if (IsOverlapWithTarget(pProjModel, targetTankRect ))
 			{
 				SetProjectileHit( pProjModel );
-				//StartEffect(&(tank->hitEffect));
+				StartEffect(&(pProjModel->hitEffect));
 			}
 
 			if (IsOverlapWithTarget( pProjModel, groundRect))

@@ -25,11 +25,6 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 		UpdateProjectilePlayer( &(pTankPlayer->bullet), pModel->gunPos,
 			pTankPlayer->status.angle, pTankPlayer->status.power, targetRect, groundRect );
 	}
-	else if (pModel->state == TankDamaged)
-	{
-		//play Effect
-
-	}
 }
 
 ProjectileState GetPlayerBulletState( TankPlayer* pTankPlayer )

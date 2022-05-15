@@ -126,7 +126,7 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		DestroyFirstScene( scene );
 		return Stage2;
 	}
-
+	UpdateEffect( &(scene->aiTank.model.hitEffect) );
 	UpdateUI( &(scene->playerUI) );
 	UpdateUI( &(scene->aiUI) );
 	return Stage1;
@@ -156,7 +156,7 @@ void DrawFirstScene( FirstScene* scene )
 		DrawProjectileAI( &(scene->aiTank.bullet) );
 		DrawUI( &(scene->playerUI) );
 	}
-
+	DrawEffect( &(scene->aiTank.model.hitEffect), pProjModel->pos );
 
 }
 

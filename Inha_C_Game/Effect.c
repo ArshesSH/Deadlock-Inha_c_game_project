@@ -22,7 +22,6 @@ void MakeEffect(Effect* effect, const char* spriteFilename, Color chroma, const 
 
 void StartEffect( Effect* effect )
 {
-	PlaySound( effect->soundFilename, NULL, SND_ASYNC );
 	effect->state = EffectPlay;
 }
 
