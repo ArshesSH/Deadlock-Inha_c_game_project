@@ -15,6 +15,32 @@ void MakeTankPlayer(TankPlayer* pTankPlayer, TankType type, int pos_x, Vec2 grou
 void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect )
 {
 	TankModel* pModel = &(pTankPlayer->model);
+
+	switch (pModel->state)
+	{
+	case TankMove:
+		MoveTank( pModel, dir, pModel->limitZone );
+		SetTankStateMove( pModel );
+		break;
+	case TankFire:
+		if (GetProjectileState( &(pTankPlayer->bullet.model) ) == ProjWait)
+		{
+			StartEffect( &(pModel->fireEffect) );
+		}
+		UpdateProjectilePlayer( &(pTankPlayer->bullet), pModel->gunPos,
+			pTankPlayer->status.angle, pTankPlayer->status.power, targetRect, groundRect );
+		UpdateEffect( &(pModel->fireEffect) );
+		break;
+	}
+}
+
+void DestroyTankPlayer( TankPlayer* pTankPlayer )
+{
+	DestroyTank( &(pTankPlayer->model) );
+}
+
+/*
+
 	// Tank Move State
 	if (pModel->state == TankMove)
 	{
@@ -32,10 +58,4 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 			pTankPlayer->status.angle, pTankPlayer->status.power, targetRect, groundRect );
 		UpdateEffect( &(pModel->fireEffect) );
 	}
-
-}
-
-void DestroyTankPlayer( TankPlayer* pTankPlayer )
-{
-	DestroyTank( &(pTankPlayer->model) );
-}
+*/

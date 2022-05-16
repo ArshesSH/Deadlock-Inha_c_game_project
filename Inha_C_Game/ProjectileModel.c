@@ -39,6 +39,9 @@ void InitProjectileForParabola(ProjectileModel* pProj, Vec2 curStartPos )
 	PlaySound( TEXT( "src/sounds/fire.wav" ), NULL, SND_ASYNC );
 }
 
+void Up
+
+
 // Check is projectile in screen except top of screen
 bool CheckProjectileScreen(ProjectileModel* pProj )
 {

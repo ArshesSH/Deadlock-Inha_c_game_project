@@ -43,7 +43,6 @@ void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, 
 			// Hit Ground
 			if (IsOverlapWithTarget( pProjModel, groundRect ))
 			{
-				//EndProjectile( pProjModel, tank->gunPos);
 				SetProjectileWait( pProjModel );
 			}
 		}

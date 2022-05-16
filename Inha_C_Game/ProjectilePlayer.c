@@ -55,7 +55,6 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 
 			if (IsOverlapWithTarget( pProjModel, groundRect))
 			{
-				//EndProjectile(&(tank->bullet), tank->gunPos);
 				SetProjectileWait( pProjModel );
 			}
 		}
