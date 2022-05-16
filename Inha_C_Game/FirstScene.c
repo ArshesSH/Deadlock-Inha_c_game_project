@@ -165,7 +165,7 @@ void DrawFirstScene( FirstScene* scene )
 		DrawProjectileAI( &(scene->aiTank.bullet) );
 		DrawUI( &(scene->playerUI) );
 	}
-	if (scene->turn != NotInGame)
+	if (scene->turn >= PlayerMove && scene->turn<= AIShoot)
 	{
 		DrawUI( &(scene->playerUI) );
 		DrawUI( &(scene->aiUI) );
