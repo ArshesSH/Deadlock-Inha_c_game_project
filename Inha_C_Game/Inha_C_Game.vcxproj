@@ -139,14 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.c" />
-    <ClCompile Include="Character.c" />
     <ClCompile Include="Colors.c" />
     <ClCompile Include="Effect.c" />
     <ClCompile Include="EndScene.c" />
     <ClCompile Include="FirstScene.c" />
     <ClCompile Include="Font.c" />
-    <ClCompile Include="FrameTimer.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="Ground.c" />
     <ClCompile Include="Graphics.c" />
@@ -169,15 +166,12 @@
     <ClCompile Include="Vec2.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
     <ClInclude Include="cful.h" />
-    <ClInclude Include="Character.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EndScene.h" />
     <ClInclude Include="FirstScene.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Ground.h" />
