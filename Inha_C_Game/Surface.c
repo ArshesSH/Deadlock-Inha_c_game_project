@@ -13,7 +13,7 @@ void MakeSurface ( const char* filename, Surface* pSurface )
 	
 	if (fopen_s( &pFile, filename, "rb" ) != 0)
 	{
-		fclose( pFile );
+		//fclose( pFile );
 		return;
 	}
 	assert ( pFile != NULL  );
