@@ -35,4 +35,5 @@ void DestroyEndScene( EndScene* scene )
 	DestroyFont( &(scene->title) );
 	DestroyFont( &(scene->script) );
 	DestroyFont( &(scene->guide) );
+	system( "cls" );
 }

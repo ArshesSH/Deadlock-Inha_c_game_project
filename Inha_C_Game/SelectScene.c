@@ -145,9 +145,6 @@ void DrawSelectScene( SelectScene* scene )
 			DrawFontText( textMRL, scene->posDisc, WHITE, &(scene->discription) );
 		}
 		break;
-
-	default:
-		break;
 	}
 }
 
