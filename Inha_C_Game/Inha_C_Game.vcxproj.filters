@@ -37,6 +37,12 @@
     <Filter Include="헤더 파일\TestFeatures">
       <UniqueIdentifier>{4e237fd6-c5f3-49cf-9355-84480c06d65c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\GameObjects\Tank">
+      <UniqueIdentifier>{56e4db56-89fb-4d15-ad27-9f382857f991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObjects\Projectile">
+      <UniqueIdentifier>{1cd088d2-b6cd-4351-8c58-339a220e58ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -78,9 +84,6 @@
     <ClCompile Include="PlayerController.c">
       <Filter>소스 파일\Engines</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectileModel.c">
-      <Filter>소스 파일\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Rect.c">
       <Filter>소스 파일\Engines</Filter>
     </ClCompile>
@@ -89,9 +92,6 @@
     </ClCompile>
     <ClCompile Include="Vec2.c">
       <Filter>소스 파일\Engines</Filter>
-    </ClCompile>
-    <ClCompile Include="TankModel.c">
-      <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.c">
       <Filter>소스 파일\Scenes</Filter>
@@ -105,23 +105,29 @@
     <ClCompile Include="Effect.c">
       <Filter>소스 파일\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectilePlayer.c">
-      <Filter>소스 파일\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileAI.c">
-      <Filter>소스 파일\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="TankPlayer.c">
-      <Filter>소스 파일\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="TankAI.c">
-      <Filter>소스 파일\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="SecondScene.c">
       <Filter>소스 파일\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="EndScene.c">
       <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TankAI.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TankModel.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TankPlayer.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePlayer.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileAI.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileModel.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

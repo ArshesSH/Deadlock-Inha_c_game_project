@@ -181,6 +181,53 @@ bool IsTankOverlapWith(TankModel* pTank, Rect target)
 
 void DrawTank( TankModel* pTank )
 {
+	switch (pTank->state)
+	{
+	case TankWait:
+		// Delete last Sprite and Draw at New Pos
+		DeleteRect( pTank->lastRect );
+		DrawTankSprite( pTank );
+		pTank->state = TankDrawAndWait;
+		break;
+
+	case TankMove:
+		// Delete last Sprite and Draw at New Pos
+		DeleteRect( pTank->lastRect );
+		DrawSpriteNonChroma( (int)pTank->pos.x, (int)pTank->pos.y, &(pTank->sprite) );
+		break;
+
+	case TankFire:
+		// Draw Effects on fireEffectPos
+		DrawEffect( &(pTank->fireEffect), MakeVec2( pTank->gunPos.x + pTank->firePosXOffset, pTank->fireEffectCenterY ) );
+		break;
+	}
+
+	DrawEffect( &(pTank->hitEffect), pTank->hitPos );
+}
+
+void DrawTankSprite( TankModel* pTank )
+{
+	DrawSpriteNonChroma( (int)pTank->pos.x, (int)pTank->pos.y, &(pTank->sprite) );
+}
+
+bool IsTankInMoveZone( Rect nextRect, Rect limitZone )
+{
+	return RectIsContainedBy(nextRect, GetScreenRect() ) && !RectIsOverlappingWith( nextRect, limitZone );
+}
+
+void DestroyTank( TankModel* pTank )
+{
+	DestroySurface( &(pTank->sprite) );
+	DestroySurface( &(pTank->bulletSprite) );
+	DestroyEffect( &(pTank->fireEffect) );
+	DestroyEffect( &(pTank->hitEffect) );
+}
+
+
+
+/*
+* 
+* 
 	if ( pTank->state == TankWait )
 	{
 		DeleteRect( pTank->lastRect );
@@ -198,24 +245,5 @@ void DrawTank( TankModel* pTank )
 		DrawEffect( &(pTank->fireEffect), fireEffectPos );
 	}
 	DrawEffect( &(pTank->hitEffect), pTank->hitPos);
-}
-
-void DrawTankOnce( TankModel* pTank )
-{
-	DrawSpriteNonChroma( (int)pTank->pos.x, (int)pTank->pos.y, &(pTank->sprite) );
-}
-
-bool IsTankInMoveZone( Rect nextRect, Rect limitZone )
-{
-	return RectIsContainedBy(nextRect, GetScreenRect() ) && !RectIsOverlappingWith( nextRect, limitZone );
-}
-
-
-
-void DestroyTank( TankModel* pTank )
-{
-	DestroySurface( &(pTank->sprite) );
-	DestroySurface( &(pTank->bulletSprite) );
-	DestroyEffect( &(pTank->fireEffect) );
-	DestroyEffect( &(pTank->hitEffect) );
-}
+* 
+*/

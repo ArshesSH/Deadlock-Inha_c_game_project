@@ -22,7 +22,9 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 		MoveTank( pModel, dir, pModel->limitZone );
 		SetTankStateMove( pModel );
 		break;
+
 	case TankFire:
+		// If Start Fire, Start Fire effect
 		if (GetProjectileState( &(pTankPlayer->bullet.model) ) == ProjWait)
 		{
 			StartEffect( &(pModel->fireEffect) );

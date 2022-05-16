@@ -11,35 +11,33 @@ void MakeProjectileAI(ProjectileAI* pProjAI, Surface* sprite, Color chroma, floa
 	pProjAI->parpbolaMinHeight = 50;
 	pProjAI->targetRange = 100;
 }
+
 void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, int aiOffset, Rect targetRect, Rect groundRect)
 {
 	ProjectileModel* pProjModel = &(pProjAI->model);
 
-	if (GetProjectileState(pProjModel) == ProjWait)
+	switch (GetProjectileState( pProjModel ))
 	{
-		InitProjectileForParabola(pProjModel, curProjPos);
-		CreateParabolaAI(pProjAI, targetPos, aiOffset);
-		SetProjectileFire( pProjModel );
-		//StartEffect(&(tank->fireEffect));
-	}
-	else if (GetProjectileState(pProjModel) == ProjFire)
-	{
-		//UpdateEffect(&(tank->fireEffect));
+	case ProjWait:
+		// Initialize AI Projectile
+		InitProjectileForParabola( pProjModel, curProjPos );
+		CreateParabolaAI( pProjAI, targetPos, aiOffset );
 
-		if (CheckProjectileScreen(pProjModel))
+		// Change State to Fire
+		SetProjectileFire( pProjModel );
+		break;
+
+	case ProjFire:
+		if (CheckProjectileScreen( pProjModel ))
 		{
 			// Update lastPos
-			pProjModel->lastPos = pProjModel->pos;
-			pProjModel->rect = MakeRectBySize(pProjModel->pos, pProjModel->sprite->width, pProjModel->sprite->height);
-			UpdateParabolaAI(pProjModel, pProjAI->fakeGravity);
+			UpdateParabolaAI( pProjModel, pProjAI->fakeGravity );
 			pProjModel->time += 0.1f;
-
 			// Hit Target(Player)
 			if (IsOverlapWithTarget( pProjModel, targetRect ))
 			{
 				SetProjectileHit( pProjModel );
 			}
-
 			// Hit Ground
 			if (IsOverlapWithTarget( pProjModel, groundRect ))
 			{
@@ -49,10 +47,11 @@ void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, 
 		// Out of screen
 		else
 		{
-			//EndProjectile(&(tank->bullet), tank->gunPos);
 			SetProjectileWait( pProjModel );
 		}
+		break;
 	}
+
 }
 
 void CreateParabolaAI(ProjectileAI* pProjAI, Vec2 playerPos, int difficultOffset)
@@ -81,6 +80,7 @@ void UpdateParabolaAI( ProjectileModel* pProjModel, float fakeGravity)
 	// Screen Check
 	if (CheckProjectileScreen(pProjModel))
 	{
+		pProjModel->lastPos = pProjModel->pos;
 		pProjModel->pos = pProjModel->nextPos;
 		pProjModel->rect = pProjModel->nextRect;
 	}

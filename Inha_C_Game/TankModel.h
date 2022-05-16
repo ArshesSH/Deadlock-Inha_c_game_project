@@ -84,7 +84,7 @@ bool IsTankOverlapWith( TankModel* pTank, Rect target );
 
 void DrawTank( TankModel* pTank );
 
-void DrawTankOnce( TankModel* pTank );
+void DrawTankSprite( TankModel* pTank );
 
 bool IsTankInMoveZone( Rect nextRect, Rect limitZone );
 

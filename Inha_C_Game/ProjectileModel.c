@@ -39,7 +39,6 @@ void InitProjectileForParabola(ProjectileModel* pProj, Vec2 curStartPos )
 	PlaySound( TEXT( "src/sounds/fire.wav" ), NULL, SND_ASYNC );
 }
 
-void Up
 
 
 // Check is projectile in screen except top of screen
@@ -106,57 +105,3 @@ ProjectileState GetProjectileState(ProjectileModel* pProj)
 {
 	return pProj->state;
 }
-
-
-/*
-// Old Function
-void ChangeProjectilePosPlayer( Projectile* projectile )
-{
-	projectile->lastPos = projectile->pos;
-	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
-	SetParabolaForUser( projectile );
-	projectile->time += 0.1f;
-}
-
-// Old Function
-void ChangeProjectilePosAI( Projectile* projectile )
-{
-	projectile->lastPos = projectile->pos;
-	projectile->rect = MakeRectBySize( projectile->pos, projectile->sprite->width, projectile->sprite->height );
-	SetParabolaForAI( projectile );
-	projectile->time += 0.1f;
-}
-
-// Update Function
-void UpdateProjectile(Projectile* pProj, Vec2 startPos)
-{
-	if (pProj->state == ProjWait)
-	{
-		SetProjectile(pProj, tank->gunPos);
-		SetProjectilePlayer(&(tank->bullet), angle, power);
-		SetProjectileStateFire(&(tank->bullet));
-		StartEffect(&(tank->fireEffect));
-	}
-	else if (pProj->state == ProjFire)
-	{
-		// Update lastPos
-		pProj->lastPos = pProj->pos;
-		pProj->rect = MakeRectBySize(pProj->pos, pProj->sprite->width, pProj->sprite->height);
-
-		if (pProj->type == ProjectilePlayer)
-		{
-			SetParabolaForUser(pProj);
-		}
-		else if (pProj->type == ProjectileAI)
-		{
-			SetParabolaForAI(pProj);
-		}
-		pProj->time += 0.1f;
-	}
-	else if (pProj->state == ProjHit)
-	{
-
-	}
-}
-
-*/

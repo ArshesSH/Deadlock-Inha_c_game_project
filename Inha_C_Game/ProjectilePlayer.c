@@ -25,35 +25,31 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 {
 	ProjectileModel* pProjModel = &(pProjPlayer->model);
 
-	// State Wait
-	if (GetProjectileState(pProjModel) == ProjWait)
+	switch (GetProjectileState( pProjModel ))
 	{
+	case ProjWait:
 		// Initialize Player Projectile
-		InitProjectileForParabola(pProjModel, curProjPos);
-		SetProjectilePlayerVars(pProjPlayer, angle, power);
+		InitProjectileForParabola( pProjModel, curProjPos );
+		SetProjectilePlayerVars( pProjPlayer, angle, power );
 
 		// Change State to Fire
 		SetProjectileFire( pProjModel );
-	}
-	// State Fire
-	else if (GetProjectileState(pProjModel) == ProjFire)
-	{
+		break;
+
+	case ProjFire:
 		// Only in Screen
-		if (CheckProjectileScreen(pProjModel))
+		if (CheckProjectileScreen( pProjModel ))
 		{
-			// Update lastPos
-			pProjModel->lastPos = pProjModel->pos;
-			pProjModel->rect = MakeRectBySize(pProjModel->pos, pProjModel->sprite->width, pProjModel->sprite->height);
-			UpdateParabolaPlayer(pProjPlayer);
+			UpdateParabolaPlayer( pProjPlayer );
 			pProjModel->time += 0.1f;
 
 			// Hit Target(AI)
-			if (IsOverlapWithTarget(pProjModel, targetTankRect ))
+			if (IsOverlapWithTarget( pProjModel, targetTankRect ))
 			{
 				SetProjectileHit( pProjModel );
 			}
-
-			if (IsOverlapWithTarget( pProjModel, groundRect))
+			// Hit Ground
+			if (IsOverlapWithTarget( pProjModel, groundRect ))
 			{
 				SetProjectileWait( pProjModel );
 			}
@@ -61,10 +57,11 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 		// Out of Screen
 		else
 		{
-			//EndProjectile(&(tank->bullet), tank->gunPos);
 			SetProjectileWait( pProjModel );
 		}
+		break;
 	}
+
 }
 
 void UpdateParabolaPlayer(ProjectilePlayer* pProjPlayer)
@@ -77,8 +74,10 @@ void UpdateParabolaPlayer(ProjectilePlayer* pProjPlayer)
 
 	if (CheckProjectileScreen(pProjModel))
 	{
+		pProjModel->lastPos = pProjModel->pos;
 		pProjModel->pos = pProjModel->nextPos;
 		pProjModel->rect = pProjModel->nextRect;
+
 	}
 }
 

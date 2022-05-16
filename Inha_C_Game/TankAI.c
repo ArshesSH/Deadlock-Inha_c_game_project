@@ -25,11 +25,13 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 		break;
 
 	case TankMove:
+		// Move unitl aiCount less then aiMaxCount
 		if (pTankAI->aiCount <= pTankAI->aiMaxCount)
 		{
 			MoveTank( pModel, MakeVec2( (float)pTankAI->aiDir, 0.0f ), pModel->limitZone );
 			pTankAI->aiCount++;
 		}
+		// Chnge State when Finish Move
 		else
 		{
 			SetTankStateFire( pModel );
@@ -37,6 +39,7 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 		break;
 
 	case TankFire:
+		// If Start Fire, Start Fire effect
 		if (GetProjectileState( &(pTankAI->bullet.model) ) == ProjWait)
 		{
 			StartEffect( &(pModel->fireEffect) );
