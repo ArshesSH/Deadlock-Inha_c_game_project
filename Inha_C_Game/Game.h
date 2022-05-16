@@ -4,6 +4,7 @@
 #include "StartScene.h"
 #include "SelectScene.h"
 #include "FirstScene.h"
+#include "EndScene.h"
 
 typedef struct game
 {
@@ -13,7 +14,10 @@ typedef struct game
 	SelectScene selectScene;
 	FirstScene firstScene;
 
+	EndScene endScene;
+
 	bool IsStageChanged;
+	bool IsGameEnd;
 
 }Game;
 

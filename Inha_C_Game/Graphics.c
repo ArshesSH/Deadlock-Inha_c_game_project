@@ -70,7 +70,6 @@ void PutPixel( int x, int y, Color c )
     printf( "бс" );
 }
 
-
 void DrawSpriteNonChroma( int x, int y, Surface* const s )
 {
     DrawSpriteClipNonChroma( x, y, SurfaceGetRect( s ), GetScreenRect(), s );
@@ -214,6 +213,50 @@ void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, Surf
             {
                 PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, subColor );
             }
+        }
+    }
+    s->wasDrew = true;
+}
+
+void DrawSpriteTitle( int x, int y, Surface* const s )
+{
+    Rect srcRect = SurfaceGetRect( s );
+    const Rect clip = GetScreenRect();
+
+    assert( srcRect.left >= 0 );
+    assert( srcRect.right <= s->width );
+    assert( srcRect.top >= 0 );
+    assert( srcRect.bottom <= s->height );
+
+
+    if (x < clip.left)
+    {
+        srcRect.left += clip.left - x;
+        x = clip.left;
+    }
+    if (y < clip.top)
+    {
+        srcRect.top += clip.top - y;
+        y = clip.top;
+    }
+    if (x + RectGetWidth( srcRect ) > clip.right)
+    {
+        srcRect.right -= x + RectGetWidth( srcRect ) - clip.right;
+    }
+    if (y + RectGetHeight( srcRect ) > clip.bottom)
+    {
+        srcRect.bottom -= y + RectGetHeight( srcRect ) - clip.bottom;
+    }
+
+    for (int sy = srcRect.top; sy < srcRect.bottom; sy++)
+    {
+        for (int sx = srcRect.left; sx < srcRect.right; sx++)
+        {
+            if ((x + sx) % 2 == 0 && (y + sy) % 2 == 0)
+            {
+                PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, SurfaceGetPixel( s, sx, sy ) );
+            }
+
         }
     }
     s->wasDrew = true;

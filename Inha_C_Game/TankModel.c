@@ -117,7 +117,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->tankMaxHealth = 80;
 		pTank->bulletDamage = 50;
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
-		pTank->gunPosYOffset = 0;
+		pTank->gunPosYOffset = -10;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
 		break;
 	}

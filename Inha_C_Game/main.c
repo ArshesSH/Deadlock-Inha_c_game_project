@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     *************************/
     Game game;
     game.IsStageChanged = false;
+    game.IsGameEnd = false;
     game.stage = StageStart;
     MakeStage( &game );
 
@@ -26,7 +27,7 @@ int main(int argc, char* argv[]) {
     *       Init Draw        *
     *************************/
 
-    while ( 1 )
+    while ( !game.IsGameEnd )
     {
         /****************************
         *       Update Model        *

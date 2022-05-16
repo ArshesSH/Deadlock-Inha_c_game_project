@@ -8,6 +8,7 @@ typedef struct selectScene
 {
 	Font title;
 	Font discription;
+	Font keyGuide;
 	Surface light;
 	Surface medium;
 	Surface heavy;

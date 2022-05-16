@@ -58,6 +58,8 @@ void CreateParabolaAI(ProjectileAI* pProjAI, Vec2 playerPos, int difficultOffset
 {
 	ProjectileModel* pProjModel = &(pProjAI->model);
 	// Set for ParabolaAI
+
+	// Get parabola vel.y
 	pProjAI->maxTime = (float)(rand() % 2 + 3.0f);
 	pProjAI->impactPos = MakeVec2(playerPos.x + rand() % (difficultOffset * 2) - difficultOffset + RectGetWidth(pProjModel->rect), playerPos.y);
 	pProjAI->yDiffer = (int)(playerPos.y - pProjModel->startPos.y);
@@ -65,6 +67,7 @@ void CreateParabolaAI(ProjectileAI* pProjAI, Vec2 playerPos, int difficultOffset
 	pProjAI->fakeGravity = (float)(pProjAI->prabolaMaxHeight * 2) / powf(pProjAI->maxTime, 2);
 	pProjModel->vel.y = sqrtf(2 * pProjAI->fakeGravity * pProjAI->prabolaMaxHeight);
 
+	// Get parabola vel.x
 	const float a = pProjAI->fakeGravity;
 	const float b = -2 * pProjModel->vel.y;
 	const float c = (float)2 * pProjAI->yDiffer;

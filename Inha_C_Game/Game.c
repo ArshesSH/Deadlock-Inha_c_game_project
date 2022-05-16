@@ -8,94 +8,124 @@
 
 void MakeStage( Game* game )
 {
-	if (game->stage == StageStart)
+	switch (game->stage)
 	{
+	case StageStart:
 		PlaySound( TEXT( "src/sounds/BackgroundMusic.wav" ), NULL, SND_ASYNC );
 		InitStartScene( &(game->startScene) );
-	}
-	else if (game->stage == StageSelectTank)
-	{
+		break;
+
+	case StageSelectTank:
 		InitSelectScene( &(game->selectScene) );
-	}
-	else if (game->stage == Stage1)
-	{
+		break;
+
+	case Stage1:
 		PlaySound( NULL, NULL, SND_ASYNC );
 		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
-	}
-	else if (game->stage == Stage2)
-	{
+		break;
+
+	case Stage2:
 		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
-	}
-	else if (game->stage == Stage3)
-	{
+		break;
 
-	}
-	else if (game->stage == StageEnd)
-	{
+	case Stage3:
+		break;
 
-	}
+	case StageEnd:
+		
+		break;
 
+	case GameEnd:
+		break;
+	}
 }
 
 void UpdateModel( Game* game )
 {
 	const SceneType lastState = game->stage;
 
-	if (game->stage == StageStart)
+	switch (game->stage)
 	{
+	case StageStart:
 		game->stage = UpdateStartScene( &(game->startScene) );
-	}
-	else if (game->stage == StageSelectTank)
-	{
+		break;
+
+	case StageSelectTank:
 		game->stage = UpdateSelectScene( &(game->selectScene) );
-	}
-	else if (game->stage == Stage1)
-	{
+		break;
+
+	case Stage1:
 		game->stage = UpdateFirstScene( &(game->firstScene) );
-	}
-	else if (game->stage == Stage2)
-	{
+		break;
 
-	}
-	else if (game->stage == Stage3)
-	{
+	case Stage2:
+		break;
 
-	}
-	else if (game->stage == StageEnd)
-	{
+	case Stage3:
+		break;
 
-	}
+	case StageEnd:
+		break;
 
+	case GameEnd:
+		game->IsGameEnd = true;
+		return;
+		break;
+	}
+	// Check Game Stage change
 	game->IsStageChanged = CheckStageChange(lastState, game->stage);
 }
 
 void DrawFrame( Game* game )
 {
-	if (game->stage == StageStart)
+
+	switch (game->stage)
 	{
+	case StageStart:
 		DrawStartScene( &(game->startScene) );
-	}
-	else if (game->stage == StageSelectTank)
-	{
+		break;
+	case StageSelectTank:
 		DrawSelectScene( &(game->selectScene) );
-	}
-	else if (game->stage == Stage1)
-	{
+		break;
+	case Stage1:
 		DrawFirstScene( &(game->firstScene) );
-	}
-	else if (game->stage == Stage2)
-	{
-
-	}
-	else if (game->stage == Stage3)
-	{
-
-	}
-	else if (game->stage == StageEnd)
-	{
-
+		break;
+	case Stage2:
+		break;
+	case Stage3:
+		break;
+	case StageEnd:
+		break;
+	case GameEnd:
+		break;
 	}
 }
+
+void DestroyGame(Game* game)
+{
+	switch (game->stage)
+	{
+	case StageStart:
+		DestroyStartScene( &(game->startScene) );
+		break;
+	case StageSelectTank:
+		DestroySelectScene( &(game->selectScene) );
+		break;
+	case Stage1:
+		DestroyFirstScene( &(game->firstScene) );
+		break;
+	case Stage2:
+		break;
+	case Stage3:
+		break;
+	case StageEnd:
+		DestroyEndScene( &(game->endScene) )
+		break;
+	case GameEnd:
+		break;
+	}
+}
+
 
 bool CheckStageChange( SceneType last, SceneType current )
 {

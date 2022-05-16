@@ -39,6 +39,8 @@ void DrawSpriteRectSubstitute( int x, int y, const Rect* const srcRect, Surface*
 
 void DrawSpriteClipSubstitute( int x, int y, Rect srcRect, const Rect clip, Surface* const s, Color chroma, Color subColor );
 
+void DrawSpriteTitle( int x, int y, Surface* const s );
+
 void DrawRect( int x0, int y0, int x1, int y1, Color c );
 
 void DeletePixel( int x, int y );

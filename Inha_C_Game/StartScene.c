@@ -6,17 +6,31 @@
 
 void InitStartScene(StartScene* scene)
 {
+	MakeSurface( "src/images/BackgroundSrc.bmp", &(scene->startImage) );
+	DrawSpriteTitle( 0,0, &(scene->startImage) );
+
 	// Make Title and Draw
 	MakeFont( &(scene->title), FontLarge );
-	const Vec2 titlePos = { 350, 100 };
+	// 8 chars are 256width, middle is screenwidth / 2 + 128
+	const float yAlign = (float)(screenHeight / 5.4);
+	const Vec2 titlePos = { (float)(screenHalfWidth - 128), yAlign };
 	DrawFontText( "Deadlock", titlePos, WHITE, &(scene->title) );
 	scene->difficulty = MenuEasy;
 
-	MakeSurface( "src/images/Background.bmp", &(scene->startImage) );
-	MakeSurface( "src/images/easymode.bmp", &(scene->easyMode) );
-	MakeSurface( "src/images/hardmode.bmp", &(scene->hardMode) );
-	DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
-	DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
+	MakeFont( &(scene->loading), FontLarge );
+	scene->loadingPos = MakeVec2( (float)(screenHalfWidth - 128), titlePos.y + 65 );
+
+
+	// Create Bacground and select menu
+	//MakeSurface( "src/images/Background.bmp", &(scene->startImage) );
+	MakeSurface( "src/images/easy.bmp", &(scene->easyMode) );
+	MakeSurface( "src/images/hard.bmp", &(scene->hardMode) );
+	//DrawSpriteNonChroma( (screenHalfWidth - (scene->startImage.width / 2) ), titlePos.y + yAlign, &(scene->startImage) );
+	DrawSpriteChroma( 420, titlePos.y + (yAlign) * 2, &(scene->easyMode), BLACK );
+
+	MakeFont( (&scene->keyGuide), FontSmall );
+	const Vec2 guidePos = { (float)(screenHalfWidth - 108),titlePos.y + (yAlign) * 3 };
+	DrawFontText( "Press Enter to Select\n\nPress L or R to change mode", guidePos, LIGHTGRAY, &(scene->keyGuide) );
 }
 
 SceneType UpdateStartScene( StartScene* scene )
@@ -43,25 +57,6 @@ SceneType UpdateStartScene( StartScene* scene )
 		break;
 	}
 	return choosedScene;
-
-	/*
-	* Old If Statement
-	* 
-	if (scene->difficulty == SelectEasy)
-	{
-		scene->difficultOffset = 150;
-		DestroyStartScene( scene );
-		return StageSelectTank;
-	}
-	else if (scene->difficulty == SelectHard)
-	{
-		scene->difficultOffset = 100;
-		DestroyStartScene( scene );
-		return StageSelectTank;
-	}
-	
-	return StageStart;
-	*/
 }
 
 void DrawStartScene( StartScene* scene )
@@ -87,28 +82,6 @@ void DrawStartScene( StartScene* scene )
 	default:
 		break;
 	}
-
-	/*
-	* Old ifstatement
-	* 
-	if (scene->difficulty == MenuEasy)
-	{
-		if (WasSurfaceDrew( &(scene->hardMode) ))
-		{
-			DeleteSurfaceScreen( &(scene->hardMode), 420, 300 );
-			DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
-		}
-
-	}
-	else if (scene->difficulty == MenuHard)
-	{
-		if (WasSurfaceDrew( &(scene->easyMode) ))
-		{
-			DeleteSurfaceScreen( &(scene->easyMode), 420, 300 );
-			DrawSpriteChroma( 420, 300, &(scene->hardMode), MAGENTA );
-		}
-	}
-	*/
 }
 
 void ChooseDifficulty( Difficulty* current )
@@ -139,7 +112,10 @@ void ChooseDifficulty( Difficulty* current )
 
 void DestroyStartScene(StartScene* scene)
 {
+	DrawFontText( "Loading...", scene->loadingPos, GREEN, &(scene->loading) );
 	DestroyFont( &(scene->title) );
+	DestroyFont( &(scene->keyGuide) );
+	DestroyFont( &(scene->loading) );
 	DestroySurface( &(scene->startImage) );
 	DestroySurface( &(scene->easyMode) );
 	DestroySurface( &(scene->hardMode) );

@@ -19,6 +19,9 @@ typedef enum difficulty
 typedef struct startScene
 {
 	Font title;
+	Font keyGuide;
+	Font loading;
+	Vec2 loadingPos;
 	Surface startImage;
 	Surface easyMode;
 	Surface hardMode;

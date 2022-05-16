@@ -7,5 +7,6 @@ typedef enum sceneType
 	Stage1,
 	Stage2,
 	Stage3,
-	StageEnd
+	StageEnd,
+	GameEnd
 }SceneType;
