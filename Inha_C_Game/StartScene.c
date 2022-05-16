@@ -21,7 +21,6 @@ void InitStartScene(StartScene* scene)
 
 
 	// Create Bacground and select menu
-	//MakeSurface( "src/images/Background.bmp", &(scene->startImage) );
 	MakeSurface( "src/images/easy.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hard.bmp", &(scene->hardMode) );
 	//DrawSpriteNonChroma( (screenHalfWidth - (scene->startImage.width / 2) ), titlePos.y + yAlign, &(scene->startImage) );
@@ -76,9 +75,6 @@ void DrawStartScene( StartScene* scene )
 			DeleteSurfaceScreen( &(scene->easyMode), 420, 300 );
 			DrawSpriteChroma( 420, 300, &(scene->hardMode), MAGENTA );
 		}
-		break;
-
-	default:
 		break;
 	}
 }
