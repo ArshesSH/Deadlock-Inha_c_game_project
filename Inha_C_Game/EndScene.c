@@ -27,6 +27,7 @@ SceneType UpdateEndScene( EndScene* scene )
 	{
 		return GameEnd;
 	}
+	return StageEnd;
 }
 
 void DestroyEndScene( EndScene* scene )

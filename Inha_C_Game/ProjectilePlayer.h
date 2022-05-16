@@ -11,11 +11,12 @@ typedef struct projectilePlayer
 	int power;
 }ProjectilePlayer;
 
-void MakeProjectilePlayer( ProjectilePlayer* pProjPlayer, Surface* sprite, Color chroma, float damage );
+void MakeProjectilePlayer( ProjectilePlayer* pProjPlayer, Surface* sprite, Color chroma, float damage, int sleepSpeed );
 
 void SetProjectilePlayerVars( ProjectilePlayer* pProjPlayer, int angle, int power );
 
-void UpdateProjectilePlayer( ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int angle, int power, Rect targetTankRect, Rect groundRect );
+void UpdateProjectilePlayer( ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int angle, int power,
+	Rect targetTankRect,Rect groundRect, Rect groundAIRect );
 
 void UpdateParabolaPlayer( ProjectilePlayer* pProjPlayer );
 

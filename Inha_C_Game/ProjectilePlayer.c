@@ -5,11 +5,9 @@
 #include "MathSH.h"
 #include <math.h>
 
-
-
-void MakeProjectilePlayer(ProjectilePlayer* pProjPlayer, Surface* sprite, Color chroma, float damage )
+void MakeProjectilePlayer(ProjectilePlayer* pProjPlayer, Surface* sprite, Color chroma, float damage, int sleepSpeed )
 {
-	MakeProjectile(&(pProjPlayer->model), sprite, chroma, damage);
+	MakeProjectile(&(pProjPlayer->model), sprite, chroma, damage, sleepSpeed );
 }
 
 void SetProjectilePlayerVars(ProjectilePlayer* pProjPlayer, int angle, int power)
@@ -21,7 +19,8 @@ void SetProjectilePlayerVars(ProjectilePlayer* pProjPlayer, int angle, int power
 	pProjPlayer->model.vel = MakeVec2(power * cosf(pProjPlayer->radian), -power * sinf(pProjPlayer->radian));
 }
 
-void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int angle, int power, Rect targetTankRect, Rect groundRect)
+void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int angle, int power,
+	Rect targetTankRect, Rect groundRect, Rect groundAIRect )
 {
 	ProjectileModel* pProjModel = &(pProjPlayer->model);
 
@@ -49,7 +48,7 @@ void UpdateProjectilePlayer(ProjectilePlayer* pProjPlayer, Vec2 curProjPos, int 
 				SetProjectileHit( pProjModel );
 			}
 			// Hit Ground
-			if (IsOverlapWithTarget( pProjModel, groundRect ))
+			if (IsOverlapWithTarget( pProjModel, groundRect ) || IsOverlapWithTarget( pProjModel, groundAIRect ))
 			{
 				SetProjectileWait( pProjModel );
 			}
@@ -77,7 +76,6 @@ void UpdateParabolaPlayer(ProjectilePlayer* pProjPlayer)
 		pProjModel->lastPos = pProjModel->pos;
 		pProjModel->pos = pProjModel->nextPos;
 		pProjModel->rect = pProjModel->nextRect;
-
 	}
 }
 
@@ -87,7 +85,7 @@ void DrawProjectilePlayer( ProjectilePlayer* pProjPlayer )
 	if (pProjModel->state == ProjFire)
 	{
 		DrawProjectileChroma( pProjModel );
-		Sleep( 20 );
+		Sleep( pProjModel->sleepSpeed );
 		DeleteRect( pProjModel->rect );
 	}
 }

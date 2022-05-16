@@ -21,21 +21,27 @@ void MakeStage( Game* game )
 
 	case Stage1:
 		PlaySound( NULL, NULL, SND_ASYNC );
-		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
+		InitStageScene( &(game->firstScene), game->selectScene.playerSelection, MediumTankAI, game->startScene.difficultOffset, 400, 400, Stage1, Stage2 );
 		break;
 
 	case Stage2:
-		InitFirstScene( &(game->firstScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset );
+		PlaySound( NULL, NULL, SND_ASYNC );
+		InitStageScene( &(game->secondScene), game->selectScene.playerSelection, MRLAI, game->startScene.difficultOffset, 400, 353, Stage2, Stage3 );
 		break;
 
 	case Stage3:
+		PlaySound( NULL, NULL, SND_ASYNC );
+		InitStageScene( &(game->thirdScene), game->selectScene.playerSelection, HeavyTankAI, game->startScene.difficultOffset, 353, 400, Stage3, StageEnd );
 		break;
 
 	case StageEnd:
-		
+		PlaySound( TEXT( "src/sounds/gameend.wav" ), NULL, SND_ASYNC );
+		InitEndScene( &(game->endScene) );
 		break;
 
 	case GameEnd:
+		game->IsGameEnd = true;
+		return;
 		break;
 	}
 }
@@ -55,16 +61,19 @@ void UpdateModel( Game* game )
 		break;
 
 	case Stage1:
-		game->stage = UpdateFirstScene( &(game->firstScene) );
+		game->stage = UpdateStageScene( &(game->firstScene) );
 		break;
 
 	case Stage2:
+		game->stage = UpdateStageScene( &(game->secondScene) );
 		break;
 
 	case Stage3:
+		game->stage = UpdateStageScene( &(game->thirdScene) );
 		break;
 
 	case StageEnd:
+		game->stage = UpdateEndScene( &(game->endScene) );
 		break;
 
 	case GameEnd:
@@ -88,15 +97,13 @@ void DrawFrame( Game* game )
 		DrawSelectScene( &(game->selectScene) );
 		break;
 	case Stage1:
-		DrawFirstScene( &(game->firstScene) );
+		DrawStageScene( &(game->firstScene) );
 		break;
 	case Stage2:
+		DrawStageScene( &(game->secondScene) );
 		break;
 	case Stage3:
-		break;
-	case StageEnd:
-		break;
-	case GameEnd:
+		DrawStageScene( &(game->thirdScene) );
 		break;
 	}
 }
@@ -112,16 +119,16 @@ void DestroyGame(Game* game)
 		DestroySelectScene( &(game->selectScene) );
 		break;
 	case Stage1:
-		DestroyFirstScene( &(game->firstScene) );
+		DestroyStageScene( &(game->firstScene) );
 		break;
 	case Stage2:
+		DestroyStageScene( &(game->secondScene) );
 		break;
 	case Stage3:
+		DestroyStageScene( &(game->thirdScene) );
 		break;
 	case StageEnd:
 		DestroyEndScene( &(game->endScene) );
-		break;
-	case GameEnd:
 		break;
 	}
 }

@@ -16,9 +16,10 @@ typedef struct projectileAI
 	int targetRange;
 }ProjectileAI;
 
-void MakeProjectileAI( ProjectileAI* pProjAI, Surface* sprite, Color chroma, float damage );
+void MakeProjectileAI( ProjectileAI* pProjAI, Surface* sprite, Color chroma, float damage, int sleepSpeed );
 
-void UpdateProjectileAI( ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, int aiOffset, Rect targetRect, Rect groundRect );
+void UpdateProjectileAI( ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, int aiOffset,
+	Rect targetRect, Rect groundRect, Rect groundAIRect );
 
 void CreateParabolaAI( ProjectileAI* pProjAI, Vec2 playerPos, int difficultOffset );
 

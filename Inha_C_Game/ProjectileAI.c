@@ -4,15 +4,16 @@
 #include "Graphics.h"
 #include <math.h>
 
-void MakeProjectileAI(ProjectileAI* pProjAI, Surface* sprite, Color chroma, float damage )
+void MakeProjectileAI(ProjectileAI* pProjAI, Surface* sprite, Color chroma, float damage, int sleepSpeed )
 {
-	MakeProjectile(&(pProjAI->model), sprite, chroma, damage);
+	MakeProjectile(&(pProjAI->model), sprite, chroma, damage, sleepSpeed );
 
 	pProjAI->parpbolaMinHeight = 50;
 	pProjAI->targetRange = 100;
 }
 
-void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, int aiOffset, Rect targetRect, Rect groundRect)
+void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, int aiOffset,
+	Rect targetRect, Rect groundRect, Rect groundAIRect)
 {
 	ProjectileModel* pProjModel = &(pProjAI->model);
 
@@ -39,7 +40,7 @@ void UpdateProjectileAI(ProjectileAI* pProjAI, Vec2 curProjPos, Vec2 targetPos, 
 				SetProjectileHit( pProjModel );
 			}
 			// Hit Ground
-			if (IsOverlapWithTarget( pProjModel, groundRect ))
+			if (IsOverlapWithTarget( pProjModel, groundRect ) || IsOverlapWithTarget( pProjModel, groundAIRect ))
 			{
 				SetProjectileWait( pProjModel );
 			}
@@ -95,7 +96,7 @@ void DrawProjectileAI( ProjectileAI* pProjAI )
 	if (pProjModel->state == ProjFire)
 	{
 		DrawProjectileChroma( pProjModel );
-		Sleep( 10 );
+		Sleep( pProjModel->sleepSpeed );
 		DeleteRect( pProjModel->rect );
 	}
 }

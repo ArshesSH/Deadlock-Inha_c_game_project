@@ -3,7 +3,7 @@
 #include "SceneType.h"
 #include "StartScene.h"
 #include "SelectScene.h"
-#include "FirstScene.h"
+#include "StageScene.h"
 #include "EndScene.h"
 
 typedef struct game
@@ -12,8 +12,10 @@ typedef struct game
 
 	StartScene startScene;
 	SelectScene selectScene;
-	FirstScene firstScene;
-
+	StageScene firstScene;
+	StageScene secondScene;
+	StageScene thirdScene;
+	
 	EndScene endScene;
 
 	bool IsStageChanged;
@@ -26,6 +28,8 @@ void MakeStage( Game* stage );
 void UpdateModel( Game* stage );
 
 void DrawFrame( Game* game );
+
+void DestroyGame( Game* game );
 
 bool CheckStageChange( SceneType last, SceneType current );
 

@@ -8,7 +8,8 @@ typedef enum projectileState
 {
 	ProjWait,
 	ProjFire,
-	ProjHit
+	ProjHit,
+	ProjHitCaterpillar
 }ProjectileState;
 
 typedef struct projectileModel
@@ -32,10 +33,11 @@ typedef struct projectileModel
 	Vec2 nextPos;
 	float time;
 	float damage;
+	int sleepSpeed;
 
 }ProjectileModel;
 
-void MakeProjectile( ProjectileModel* pProj, Surface* sprite, Color chroma, float damage );
+void MakeProjectile( ProjectileModel* pProj, Surface* sprite, Color chroma, float damage, int sleepSpeed );
 
 void InitProjectileForParabola( ProjectileModel* pProj, Vec2 curStartPos );
 

@@ -142,7 +142,7 @@
     <ClCompile Include="Colors.c" />
     <ClCompile Include="Effect.c" />
     <ClCompile Include="EndScene.c" />
-    <ClCompile Include="FirstScene.c" />
+    <ClCompile Include="StageScene.c" />
     <ClCompile Include="Font.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="Ground.c" />
@@ -152,7 +152,6 @@
     <ClCompile Include="PlayerController.c" />
     <ClCompile Include="ProjectileAI.c" />
     <ClCompile Include="ProjectilePlayer.c" />
-    <ClCompile Include="SecondScene.c" />
     <ClCompile Include="Status.c" />
     <ClCompile Include="ProjectileModel.c" />
     <ClCompile Include="Rect.c" />
@@ -170,7 +169,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EndScene.h" />
-    <ClInclude Include="FirstScene.h" />
+    <ClInclude Include="StageScene.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
@@ -179,7 +178,6 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="ProjectileAI.h" />
     <ClInclude Include="ProjectilePlayer.h" />
-    <ClInclude Include="SecondScene.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="ProjectileModel.h" />
     <ClInclude Include="Rect.h" />

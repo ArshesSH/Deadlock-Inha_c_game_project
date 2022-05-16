@@ -1,4 +1,4 @@
-#include "FirstScene.h"
+#include "StageScene.h"
 
 #include "Graphics.h"
 #include <stdlib.h>
@@ -6,19 +6,29 @@
 /************************
 *		Init Scene		*
 *************************/
-void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITankType, int difficultOffset )
+void InitStageScene( StageScene* scene, TankType playerTankType, TankType AITankType,
+	int difficultOffset, float playerGroundY, float aiGroundY, SceneType cur, SceneType next )
 {
+	// Make Stage text
+	MakeFont( &(scene->stageMessage), FontLarge );
+	char stageStr[20];
+	sprintf_s( stageStr, 20, "Stage %d", cur - 1 );
+	DrawFontText( stageStr, MakeVec2( (float)(screenHalfWidth - 112), screenYOffset * 2 ), GREEN, &(scene->stageMessage) );
+	scene->currentScene = cur;
+	scene->nextScene = next;
 	const Vec2 guidePos = { (float)(screenHalfWidth - 140), screenHalfHeight + screenYOffset * 2 };
 
 	// Generate Ground
-	const float groundYStart = 400.0f;
-	const int groundCounts = 20;
+	const int groundCounts = 10;
 
-	scene->groundStartPos = MakeVec2( 0.0f, groundYStart );
+	MakeSurface( "src/images/GroundTile.bmp", &(scene->tile) );
+	scene->groundStartPos = MakeVec2( 0.0f, playerGroundY );
+	scene->groundAIStartPos = MakeVec2( (float)(scene->tile.width) * groundCounts, aiGroundY );
 	scene->tileCount = groundCounts;
 	scene->tileChroma = MAGENTA;
-	MakeSurface( "src/images/GroundTile.bmp", &(scene->tile) );
+
 	MakeFlatGround( &(scene->ground), &(scene->tile), scene->groundStartPos, scene->tileCount, scene->tileChroma );
+	MakeFlatGround( &(scene->groundAI), &(scene->tile), scene->groundAIStartPos, scene->tileCount, scene->tileChroma );
 
 	// Generate LimitZone
 	scene->limitZone = MakeRect( screenHalfWidth - (int)screenXOffset, screenHalfWidth + (int)screenXOffset, 0, (int)scene->groundStartPos.y );
@@ -28,22 +38,25 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITank
 	const int playerX = rand() % 100 + 20;
 	const int aiX = screenWidth - 50 - rand() % 100;
 	MakeTankPlayer( &(scene->playerTank), playerTankType, playerX, scene->groundStartPos, scene->limitZone );
-	MakeTankAI( &(scene->aiTank), AITankType, aiX, scene->groundStartPos, scene->limitZone, difficultOffset );
+	MakeTankAI( &(scene->aiTank), AITankType, aiX, scene->groundAIStartPos, scene->limitZone, difficultOffset );
 
 	// Generate UI
-	const Vec2 playerUIPos = MakeVec2( screenXOffset / 2, scene->groundStartPos.y + (screenYOffset / 2) + 10 );
-	const Vec2 aiUIPos = MakeVec2( screenWidth - screenXOffset * 2, scene->groundStartPos.y + (screenYOffset / 2) + 10 );
+	const Vec2 playerUIPos = MakeVec2( screenXOffset / 2, (screenYOffset * 4) + (screenYOffset / 2) + 10 );
+	const Vec2 aiUIPos = MakeVec2( screenWidth - screenXOffset * 2, (screenYOffset * 4) + (screenYOffset / 2) + 10 );
 	MakeUI( &(scene->playerUI), &(scene->playerTank.status), playerUIPos );
 	MakeUI( &(scene->aiUI), &(scene->aiTank.status), aiUIPos );
 
 	// Draw First State
 	DrawGround( &(scene->ground) );
+	DrawGround( &(scene->groundAI) );
 	DrawTank( &(scene->playerTank.model) );
 	DrawTank( &(scene->aiTank.model) );
 	DrawPlayerUI( &(scene->playerUI) );
 	DrawHealth( &(scene->aiUI) );
 	DrawFontText( "Press L or R to Move\nPress Up or Down to change Angle\nPress Shift or Ctrl to change Power\nPress Spacebar to Fire",
 		guidePos, LIGHTGRAY, &(scene->guide) );
+
+	DeleteRect( scene->stageMessage.textRect );
 
 	scene->playerDir = MakeVec2( 0.0f, 0.0f );
 	scene->turn = PlayerMove;
@@ -53,7 +66,7 @@ void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITank
 /****************************
 *		Update Scene		*
 *****************************/
-SceneType UpdateFirstScene( FirstScene* scene )
+SceneType UpdateStageScene( StageScene* scene )
 {
 	switch (scene->turn)
 	{
@@ -66,12 +79,12 @@ SceneType UpdateFirstScene( FirstScene* scene )
 		PlayerMoveInput( scene );
 
 		// Update Player Tank (Move unitl Fire)
-		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect );
+		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
 		break;
 
 	case PlayerShoot:
 		// Update Player Tank ( and Update projectile )
-		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect );
+		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
 
 		// Update Hit Effect and Status by Projectile Status
 		UpdateTanksByProjectile( &(scene->playerTank.model), &(scene->playerTank.bullet.model), &(scene->aiTank.model),
@@ -80,7 +93,7 @@ SceneType UpdateFirstScene( FirstScene* scene )
 
 	case AIMove:
 		// Update AI Tank (Move)
-		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect );
+		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect, scene->groundAI.rect);
 		if (scene->aiTank.model.state == TankFire)
 		{
 			scene->turn = AIShoot;
@@ -89,7 +102,7 @@ SceneType UpdateFirstScene( FirstScene* scene )
 
 	case AIShoot:
 		// Update AI Tank (projectile)
-		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect );
+		UpdateTankAI( &(scene->aiTank), scene->playerTank.model.pos, scene->playerTank.model.rect, scene->ground.rect, scene->groundAI.rect );
 
 		// Update Hit Effect and Status by Projectile Status
 		UpdateTanksByProjectile( &(scene->aiTank.model), &(scene->aiTank.bullet.model), &(scene->playerTank.model),
@@ -100,7 +113,7 @@ SceneType UpdateFirstScene( FirstScene* scene )
 	// If player dead, Change to Start Scene
 	if ( scene->playerTank.status.statusChange == ActorDead )
 	{
-		DestroyFirstScene( scene );
+		DestroyStageScene( scene );
 		system( "cls" );
 		scene->turn = NotInGame;
 		return StageStart;
@@ -108,10 +121,10 @@ SceneType UpdateFirstScene( FirstScene* scene )
 	// If AI Dead Change to Next Scene
 	else if (scene->aiTank.status.statusChange == ActorDead )
 	{
-		DestroyFirstScene( scene );
+		DestroyStageScene( scene );
 		system( "cls" );
 		scene->turn = NotInGame;
-		return Stage2;
+		return scene->nextScene;
 	}
 
 	// Update Effect and UI
@@ -120,14 +133,14 @@ SceneType UpdateFirstScene( FirstScene* scene )
 	UpdateUI( &(scene->playerUI) );
 	UpdateUI( &(scene->aiUI) );
 
-	return Stage1;
+	return scene->currentScene;
 }
 
 
 /************************
 *		Draw Scene		*
 *************************/
-void DrawFirstScene( FirstScene* scene )
+void DrawStageScene( StageScene* scene )
 {
 	if (scene->turn >= PlayerMove && scene->turn<= AIShoot)
 	{
@@ -144,20 +157,21 @@ void DrawFirstScene( FirstScene* scene )
 /****************************
 *		Destroy Scene		*
 ****************************/
-void DestroyFirstScene( FirstScene* scene )
+void DestroyStageScene( StageScene* scene )
 {
 	DestroyFont( &(scene->guide) );
 	DestroySurface( &(scene->tile) );
 	DestroyTankPlayer( &(scene->playerTank) );
 	DestroyTankAI( &(scene->aiTank) );
 	DestroyGround( &(scene->ground) );
+	DestroyGround( &(scene->groundAI) );
 	DestroyUI( &(scene->playerUI) );
 	DestroyUI( &(scene->aiUI) );
 }
 
 
 // Player Input Function
-void PlayerMoveInput(FirstScene* scene)
+void PlayerMoveInput(StageScene* scene)
 {
 	// Input Shoot
 	if ( IsPlayerInput( VK_SPACE ) )
@@ -168,15 +182,15 @@ void PlayerMoveInput(FirstScene* scene)
 	}
 
 	// Input Move
-	if ( IsPlayerInput( VK_RIGHT ) )
+	if (IsPlayerInput( VK_RIGHT ))
 	{
-		if ( IsTankInMoveZone( scene->playerTank.model.rect, scene->limitZone ) )
+		if (IsTankInMoveZone( scene->playerTank.model.rect, scene->limitZone ))
 		{
 			scene->playerDir.x += 1;
 			SetTankStateMove( &(scene->playerTank.model) );
 		}
 	}
-	else if ( IsPlayerInput( VK_LEFT ) )
+	else if (IsPlayerInput( VK_LEFT ))
 	{
 		if (IsTankInMoveZone( scene->playerTank.model.rect, scene->limitZone ))
 		{
@@ -188,6 +202,8 @@ void PlayerMoveInput(FirstScene* scene)
 	{
 		scene->playerTank.model.state = TankDrawAndWait;
 	}
+
+
 
 	// Input angle
 	if ( IsPlayerInput( VK_UP ) )

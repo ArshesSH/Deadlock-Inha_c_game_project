@@ -18,7 +18,7 @@ typedef struct tankAI
 
 void MakeTankAI( TankAI* pTankAI, TankType type, int pos_x, Vec2 groundPos, Rect limitZone, int aiDifficult );
 
-void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect groundRect );
+void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect groundRect, Rect groundAIRect );
 
 void SetTankAIMoveCount( TankAI* pTankAI );
 

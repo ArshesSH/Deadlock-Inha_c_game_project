@@ -10,10 +10,10 @@ void MakeTankAI( TankAI* pTankAI, TankType type, int pos_x, Vec2 groundPos, Rect
 	pTankAI->aiOffset = aiDifficult;
 	MakeTankModel( pModel, type, pos_x, groundPos, limitZone );
 	MakeStatus( &(pTankAI->status), pModel->tankMaxHealth, 0, 0, pModel->tankSpeed );
-	MakeProjectileAI( &(pTankAI->bullet), &(pModel->bulletSprite), MAGENTA, pModel->bulletDamage );
+	MakeProjectileAI( &(pTankAI->bullet), &(pModel->bulletSprite), MAGENTA, pModel->bulletDamage, pModel->bulletSpeed );
 }
 
-void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect groundRect )
+void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect groundRect, Rect groundAIRect )
 {
 	TankModel* pModel = &(pTankAI->model);
 
@@ -44,7 +44,7 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 		{
 			StartEffect( &(pModel->fireEffect) );
 		}
-		UpdateProjectileAI( &(pTankAI->bullet), pModel->gunPos, targetPos, pTankAI->aiOffset, targetRect, groundRect );
+		UpdateProjectileAI( &(pTankAI->bullet), pModel->gunPos, targetPos, pTankAI->aiOffset, targetRect, groundRect, groundAIRect);
 		UpdateEffect( &(pModel->fireEffect) );
 		break;
 	}

@@ -42,8 +42,8 @@ void SetConsoleWindowSize( int consoleWidth, int consoleHeight )
     screenHeight = halfHeight;
     screenHalfWidth = screenWidth / 2;
     screenHalfHeight = screenHeight / 2;
-    screenXOffset = screenWidth / 9.6;
-    screenYOffset = screenHeight / 5.4;
+    screenXOffset = screenWidth / 9.6f;
+    screenYOffset = screenHeight / 5.4f;
 
     DWORD dwWidth = GetSystemMetrics( SM_CXSCREEN );
     DWORD dwHeight = GetSystemMetrics( SM_CYSCREEN );

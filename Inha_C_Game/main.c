@@ -33,13 +33,16 @@ int main(int argc, char* argv[]) {
         *       Update Model        *
         *****************************/
         {
+            if (IsPlayerInput( VK_ESCAPE ))
+            {
+                break;
+            }
             if (game.IsStageChanged)
             {
                 MakeStage( &game );
             }
             UpdateModel( &game );
         }
-
 
         /****************************
         *       Compose Frame       *
@@ -52,6 +55,7 @@ int main(int argc, char* argv[]) {
     /************************
     *       End Game        *
     *************************/
+    DestroyGame( &game );
 
     return 0;
 }

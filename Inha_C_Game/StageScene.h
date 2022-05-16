@@ -8,8 +8,10 @@
 #include "PlayerController.h"
 #include "SceneType.h"
 
-typedef struct firstScene
+typedef struct stageScene
 {
+	SceneType currentScene;
+	SceneType nextScene;
 	// Turn state
 	Turn turn;
 
@@ -20,7 +22,11 @@ typedef struct firstScene
 	// Ground Contents
 	Surface tile;
 	Ground ground;
+	Ground groundAI;
+
 	Vec2 groundStartPos;
+	Vec2 groundAIStartPos;
+
 	Color tileChroma;
 	int tileCount;
 	Rect limitZone;
@@ -33,18 +39,20 @@ typedef struct firstScene
 	UI playerUI;
 	UI aiUI;
 
-	// Key Guide
+	// Text
 	Font guide;
-}FirstScene;
+	Font stageMessage;
+}StageScene;
 
-void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITankType, int difficultOffset );
+void InitStageScene( StageScene* scene, TankType playerTankType, TankType AITankType,
+	int difficultOffset, float playerGroundY, float aiGroundY, SceneType cur, SceneType next );
 
-SceneType UpdateFirstScene( FirstScene* scene);
+SceneType UpdateStageScene( StageScene* scene);
 
-void DrawFirstScene( FirstScene* scene );
+void DrawStageScene( StageScene* scene );
 
-void DestroyFirstScene( FirstScene* scene );
+void DestroyStageScene( StageScene* scene );
 
-void PlayerMoveInput( FirstScene* scene );
+void PlayerMoveInput( StageScene* scene );
 
 void UpdateTanksByProjectile( TankModel* pFireTankModel, ProjectileModel* pProjModel, TankModel* pTargetTankModel, Status* pTargetStatus, Turn* turn, Turn desireTurn );

@@ -23,6 +23,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPosYOffset = 5;
 		pTank->gunPos.x = (float)pTank->sprite.width;
 		pTank->firePosXOffset = 0;
+		pTank->bulletSpeed = 20;
 		break;
 
 	case LightTankAI:
@@ -35,6 +36,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = 5;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
+		pTank->bulletSpeed = 10;
 		break;
 
 	case MediumTank:
@@ -51,6 +53,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPosYOffset = 5;
 		pTank->gunPos.x = (float)pTank->sprite.width;
 		pTank->firePosXOffset = 0;
+		pTank->bulletSpeed = 20;
 		break;
 
 	case MediumTankAI:
@@ -63,6 +66,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = 5;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
+		pTank->bulletSpeed = 10;
 		break;
 
 	case HeavyTank:
@@ -79,6 +83,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPosYOffset = -2;
 		pTank->gunPos.x = (float)pTank->sprite.width;
 		pTank->firePosXOffset = 0;
+		pTank->bulletSpeed = 20;
 		break;
 
 	case HeavyTankAI:
@@ -91,6 +96,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = -2;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
+		pTank->bulletSpeed = 10;
 		break;
 
 	case MRL:
@@ -107,6 +113,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPosYOffset = -10;
 		pTank->gunPos.x = (float)pTank->sprite.width;
 		pTank->firePosXOffset = 0;
+		pTank->bulletSpeed = 4;
 		break;
 
 	case MRLAI:
@@ -119,6 +126,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = -10;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
+		pTank->bulletSpeed = 2;
 		break;
 	}
 
@@ -130,6 +138,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 	pTank->gunPos.x += pTank->pos.x;
 	pTank->gunPos.y = pTank->pos.y + pTank->gunPosYOffset;
 	pTank->fireEffectCenterY = (pTank->fireEffect.sprite.height / 2) + pTank->pos.y + pTank->gunPosYOffset;
+
 	// Tank Damage Effect
 	MakeEffect( &(pTank->hitEffect), "src/images/fire3.bmp", MAGENTA,  0.5f );
 	
@@ -222,28 +231,3 @@ void DestroyTank( TankModel* pTank )
 	DestroyEffect( &(pTank->fireEffect) );
 	DestroyEffect( &(pTank->hitEffect) );
 }
-
-
-
-/*
-* 
-* 
-	if ( pTank->state == TankWait )
-	{
-		DeleteRect( pTank->lastRect );
-		DrawTankOnce( pTank );
-		pTank->state = TankDrawAndWait;
-	}
-	else if ( pTank->state == TankMove )
-	{
-		DeleteRect( pTank->lastRect );
-		DrawSpriteNonChroma( (int)pTank->pos.x, (int)pTank->pos.y, &(pTank->sprite) );
-	}
-	else if ( pTank->state == TankFire )
-	{
-		const Vec2 fireEffectPos = { pTank->gunPos.x + pTank->firePosXOffset, pTank->fireEffectCenterY };
-		DrawEffect( &(pTank->fireEffect), fireEffectPos );
-	}
-	DrawEffect( &(pTank->hitEffect), pTank->hitPos);
-* 
-*/

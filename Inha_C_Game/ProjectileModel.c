@@ -10,7 +10,7 @@
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
-void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float damage)
+void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float damage, int sleepSpeed)
 {
 	// Set Image of projectile
 	pProj->sprite = sprite;
@@ -23,9 +23,9 @@ void MakeProjectile(ProjectileModel* pProj, Surface* sprite, Color chroma, float
 	// Set Time
 	pProj->time = 0.0f;
 	pProj->damage = damage;
+	pProj->sleepSpeed = sleepSpeed;
 
 	pProj->state = ProjWait;
-
 }
 
 void InitProjectileForParabola(ProjectileModel* pProj, Vec2 curStartPos )
@@ -68,6 +68,7 @@ void SetProjectileHit(ProjectileModel* pProj)
 {
 	pProj->state = ProjHit;
 }
+
 
 void DrawProjectile(ProjectileModel* pProj)
 {

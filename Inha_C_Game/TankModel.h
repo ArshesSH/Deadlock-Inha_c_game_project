@@ -59,7 +59,6 @@ typedef struct tankModel
 	float fireEffectCenterY;
 	float bulletDamage;
 	float tankMaxHealth;
-
 	int tankSpeed;
 	int tankMinAngle;
 	int tankMaxAngle;
@@ -67,7 +66,7 @@ typedef struct tankModel
 	int tankMaxPower;
 	int gunPosYOffset;
 	int firePosXOffset;
-
+	int bulletSpeed;
 }TankModel;
 
 void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, Rect limitZone );
@@ -89,3 +88,5 @@ void DrawTankSprite( TankModel* pTank );
 bool IsTankInMoveZone( Rect nextRect, Rect limitZone );
 
 void DestroyTank( TankModel* pTank );
+
+void SetCaterpillars( TankModel* pTank );
