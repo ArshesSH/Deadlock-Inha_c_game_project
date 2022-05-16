@@ -119,7 +119,7 @@ void DestroyGame(Game* game)
 	case Stage3:
 		break;
 	case StageEnd:
-		DestroyEndScene( &(game->endScene) )
+		DestroyEndScene( &(game->endScene) );
 		break;
 	case GameEnd:
 		break;
