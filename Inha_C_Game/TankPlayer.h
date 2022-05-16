@@ -15,6 +15,4 @@ void MakeTankPlayer( TankPlayer* pTankPlayer, TankType type, int pos_x, Vec2 gro
 
 void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect );
 
-ProjectileState GetPlayerBulletState( TankPlayer* pTankPlayer );
-
 void DestroyTankPlayer( TankPlayer* pTankPlayer );

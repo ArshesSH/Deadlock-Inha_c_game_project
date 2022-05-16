@@ -44,6 +44,7 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 		UpdateProjectileAI( &(pTankAI->bullet), pModel->gunPos, targetPos, pTankAI->aiOffset, targetRect, groundRect );
 		UpdateEffect( &(pModel->fireEffect) );
 	}
+	/*
 	else if (pModel->state == TankDamaged)
 	{
 		PlaySound( TEXT( "src/sounds/explosion.wav" ), NULL, SND_ASYNC );
@@ -52,6 +53,7 @@ void UpdateTankAI( TankAI* pTankAI, Vec2 targetPos, Rect targetRect, Rect ground
 		StartEffect( &(pModel->hitEffect) );
 		pModel->state = TankWait;
 	}
+	*/
 
 }
 
@@ -62,11 +64,6 @@ void SetTankAIMoveCount( TankAI* pTankAI )
 
 	// Create -1 or 1
 	pTankAI->aiDir = ((rand() % 2) * -2) + 1;
-}
-
-ProjectileState GetAIBulletState( TankAI* pTankAI )
-{
-	return pTankAI->bullet.model.state;
 }
 
 void DestroyTankAI( TankAI* pTankAI )

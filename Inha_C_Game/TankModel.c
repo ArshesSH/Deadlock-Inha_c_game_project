@@ -174,17 +174,6 @@ void SetTankStateFire( TankModel* pTank )
 	pTank->state = TankFire;
 }
 
-void SetTankStateDamaged( TankModel* pTank )
-{
-	pTank->state = TankDamaged;
-}
-
-void SetTankStateDestroyed( TankModel* pTank )
-{
-	pTank->state = TankDestroyed;
-}
-
-
 bool IsTankOverlapWith(TankModel* pTank, Rect target)
 {
 	return RectIsOverlappingWith( pTank->rect, target );

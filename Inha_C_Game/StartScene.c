@@ -4,8 +4,6 @@
 #include <Windows.h>
 #include "PlayerController.h"
 
-
-
 void InitStartScene(StartScene* scene)
 {
 	// Make Title and Draw
@@ -18,7 +16,6 @@ void InitStartScene(StartScene* scene)
 	MakeSurface( "src/images/easymode.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hardmode.bmp", &(scene->hardMode) );
 	DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
-	//DrawSpriteNonChroma( 415, 200, &(scene->startImage) );
 	DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
 }
 
@@ -26,6 +23,30 @@ SceneType UpdateStartScene( StartScene* scene )
 {
 	ChooseDifficulty( &(scene->difficulty) );
 
+	SceneType choosedScene = StageStart;
+	switch (scene->difficulty)
+	{
+	case SelectEasy:
+		scene->difficultOffset = 150;
+		DestroyStartScene( scene );
+		choosedScene = StageSelectTank;
+		break;
+		
+	case SelectHard:
+		scene->difficultOffset = 100;
+		DestroyStartScene( scene );
+		choosedScene = StageSelectTank;
+		break;
+
+	default:
+		choosedScene = StageStart;
+		break;
+	}
+	return choosedScene;
+
+	/*
+	* Old If Statement
+	* 
 	if (scene->difficulty == SelectEasy)
 	{
 		scene->difficultOffset = 150;
@@ -40,10 +61,36 @@ SceneType UpdateStartScene( StartScene* scene )
 	}
 	
 	return StageStart;
+	*/
 }
 
 void DrawStartScene( StartScene* scene )
 {
+	switch (scene->difficulty)
+	{
+	case MenuEasy:
+		if (WasSurfaceDrew( &(scene->hardMode) ))
+		{
+			DeleteSurfaceScreen( &(scene->hardMode), 420, 300 );
+			DrawSpriteChroma( 420, 300, &(scene->easyMode), MAGENTA );
+		}
+		break;
+
+	case MenuHard:
+		if (WasSurfaceDrew( &(scene->easyMode) ))
+		{
+			DeleteSurfaceScreen( &(scene->easyMode), 420, 300 );
+			DrawSpriteChroma( 420, 300, &(scene->hardMode), MAGENTA );
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	/*
+	* Old ifstatement
+	* 
 	if (scene->difficulty == MenuEasy)
 	{
 		if (WasSurfaceDrew( &(scene->hardMode) ))
@@ -61,6 +108,7 @@ void DrawStartScene( StartScene* scene )
 			DrawSpriteChroma( 420, 300, &(scene->hardMode), MAGENTA );
 		}
 	}
+	*/
 }
 
 void ChooseDifficulty( Difficulty* current )

@@ -43,3 +43,5 @@ void DrawFirstScene( FirstScene* scene );
 void DestroyFirstScene( FirstScene* scene );
 
 void PlayerMoveInput( FirstScene* scene );
+
+void UpdateTanksByProjectile( TankModel* pFireTankModel, ProjectileModel* pProjModel, TankModel* pTargetTankModel, Status* pTargetStatus, Turn* turn, Turn desireTurn );

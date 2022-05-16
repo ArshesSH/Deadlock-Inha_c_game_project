@@ -32,9 +32,7 @@ typedef enum tankState
 	TankWait,
 	TankDrawAndWait,
 	TankMove,
-	TankFire,
-	TankDamaged,
-	TankDestroyed
+	TankFire
 }TankState;
 
 typedef struct tankModel
@@ -81,10 +79,6 @@ void SetTankStateWait( TankModel* pTank );
 void SetTankStateMove( TankModel* pTank );
 
 void SetTankStateFire( TankModel* pTank );
-
-void SetTankStateDamaged( TankModel* pTank );
-
-void SetTankStateDestroyed( TankModel* pTank );
 
 bool IsTankOverlapWith( TankModel* pTank, Rect target );
 

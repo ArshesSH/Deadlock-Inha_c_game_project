@@ -35,11 +35,6 @@ void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect 
 
 }
 
-ProjectileState GetPlayerBulletState( TankPlayer* pTankPlayer )
-{
-	return pTankPlayer->bullet.model.state;
-}
-
 void DestroyTankPlayer( TankPlayer* pTankPlayer )
 {
 	DestroyTank( &(pTankPlayer->model) );
