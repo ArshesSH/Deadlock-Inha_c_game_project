@@ -12,13 +12,12 @@ void InitStartScene(StartScene* scene)
 	// Make Title and Draw
 	MakeFont( &(scene->title), FontLarge );
 	// 8 chars are 256width, middle is screenwidth / 2 + 128
-	const float yAlign = (float)(screenHeight / 5.4);
-	const Vec2 titlePos = { (float)(screenHalfWidth - 128), yAlign };
+	const Vec2 titlePos = { (float)(screenHalfWidth - 128), screenYOffset };
 	DrawFontText( "Deadlock", titlePos, WHITE, &(scene->title) );
 	scene->difficulty = MenuEasy;
 
 	MakeFont( &(scene->loading), FontLarge );
-	scene->loadingPos = MakeVec2( (float)(screenHalfWidth - 128), titlePos.y + 65 );
+	scene->loadingPos = MakeVec2( (float)(screenHalfWidth - 128), titlePos.y + (screenYOffset / 2) + 10 );
 
 
 	// Create Bacground and select menu
@@ -26,10 +25,10 @@ void InitStartScene(StartScene* scene)
 	MakeSurface( "src/images/easy.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hard.bmp", &(scene->hardMode) );
 	//DrawSpriteNonChroma( (screenHalfWidth - (scene->startImage.width / 2) ), titlePos.y + yAlign, &(scene->startImage) );
-	DrawSpriteChroma( 420, titlePos.y + (yAlign) * 2, &(scene->easyMode), BLACK );
+	DrawSpriteChroma( 420, titlePos.y + (screenYOffset) * 2, &(scene->easyMode), BLACK );
 
 	MakeFont( (&scene->keyGuide), FontSmall );
-	const Vec2 guidePos = { (float)(screenHalfWidth - 108),titlePos.y + (yAlign) * 3 };
+	const Vec2 guidePos = { (float)(screenHalfWidth - 108),titlePos.y + (screenYOffset) * 3 };
 	DrawFontText( "Press Enter to Select\n\nPress L or R to change mode", guidePos, LIGHTGRAY, &(scene->keyGuide) );
 }
 

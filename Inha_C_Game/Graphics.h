@@ -8,6 +8,8 @@ int screenWidth;
 int screenHeight;
 int screenHalfWidth;
 int screenHalfHeight;
+float screenXOffset;
+float screenYOffset;
 
 void HideCursor();
 

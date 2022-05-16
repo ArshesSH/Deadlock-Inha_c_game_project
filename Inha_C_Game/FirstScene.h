@@ -32,6 +32,9 @@ typedef struct firstScene
 	// UI
 	UI playerUI;
 	UI aiUI;
+
+	// Key Guide
+	Font guide;
 }FirstScene;
 
 void InitFirstScene( FirstScene* scene, TankType playerTankType, TankType AITankType, int difficultOffset );

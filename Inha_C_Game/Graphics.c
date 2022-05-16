@@ -42,6 +42,8 @@ void SetConsoleWindowSize( int consoleWidth, int consoleHeight )
     screenHeight = halfHeight;
     screenHalfWidth = screenWidth / 2;
     screenHalfHeight = screenHeight / 2;
+    screenXOffset = screenWidth / 9.6;
+    screenYOffset = screenHeight / 5.4;
 
     DWORD dwWidth = GetSystemMetrics( SM_CXSCREEN );
     DWORD dwHeight = GetSystemMetrics( SM_CYSCREEN );
@@ -252,7 +254,7 @@ void DrawSpriteTitle( int x, int y, Surface* const s )
     {
         for (int sx = srcRect.left; sx < srcRect.right; sx++)
         {
-            if ((x + sx) % 2 == 0 && (y + sy) % 2 == 0)
+            if ((x + sx) % 2 == 0 && (y + sy) % 3 == 0)
             {
                 PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, SurfaceGetPixel( s, sx, sy ) );
             }

@@ -9,7 +9,9 @@ void InitSelectScene( SelectScene* scene )
 	// Create Font
 	MakeFont( &(scene->title), FontMedium );
 	MakeFont( &(scene->discription), FontSmall );
-	const Vec2 titlePos = { (float)screenHalfWidth - 136, 50 };
+	MakeFont( &(scene->keyGuide), FontSmall );
+	const Vec2 titlePos = { (float)screenHalfWidth - 136, screenYOffset / 2 };
+	const Vec2 guidePos = { (float)screenHalfWidth - 104, screenHeight - screenYOffset };
 	DrawFontText( "Select Your Tank!", titlePos, GREEN, &(scene->title) );
 	scene->tankType = LightTank;
 	MakeSurface( "src/images/tank/player/LightTankGray50.bmp", &(scene->light) );
@@ -30,6 +32,7 @@ void InitSelectScene( SelectScene* scene )
 	scene->posDisc = MakeVec2( 250.0f, (float)screenHalfHeight );
 	DrawSpriteNonChroma( (int)scene->posLight.x, (int)scene->posLight.y, &(scene->light) );
 	DrawFontText( textLight, scene->posDisc, WHITE, &(scene->discription) );
+	DrawFontText( "Press L or R to Select\nPress Enter to select Tank", guidePos, LIGHTGRAY, &(scene->keyGuide) );
 }
 
 // Update Select Scene
@@ -152,6 +155,7 @@ void DestroySelectScene( SelectScene* scene )
 {
 	DestroyFont( &(scene->title) );
 	DestroyFont( &(scene->discription) );
+	DestroyFont( &(scene->keyGuide) );
 	DestroySurface( &(scene->light) );
 	DestroySurface( &(scene->medium) );
 	DestroySurface( &(scene->heavy) );

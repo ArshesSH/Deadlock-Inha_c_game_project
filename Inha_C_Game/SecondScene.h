@@ -32,14 +32,7 @@ typedef struct secondScene
 	// UI
 	UI playerUI;
 	UI aiUI;
+
+	// Key Guide
+	Font guide;
 }SecondScene;
-
-void InitSecondScene( SecondScene* scene, TankType playerTankType, int difficultOffset );
-
-SceneType UpdateSecondScene( SecondScene* scene );
-
-void DrawSecondScene( SecondScene* scene );
-
-void DestroySecondScene( SecondScene* scene );
-
-void PlayerMoveInput( SecondScene* scene );
