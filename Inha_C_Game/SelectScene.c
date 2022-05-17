@@ -29,7 +29,7 @@ void InitSelectScene( SelectScene* scene )
 		(float)(screenHalfHeight - (scene->heavy.height / 2) + offset ));
 	scene->posMRL = MakeVec2( (float)(screenHalfWidth - (scene->mrl.width / 2)),
 		(float)(screenHalfHeight - (scene->mrl.height / 2) + offset ));
-	scene->posDisc = MakeVec2( 250.0f, (float)screenHalfHeight );
+	scene->posDisc = MakeVec2( (float)(screenHalfWidth - 272 ), (float)screenHalfHeight );
 	DrawSpriteNonChroma( (int)scene->posLight.x, (int)scene->posLight.y, &(scene->light) );
 	DrawFontText( textLight, scene->posDisc, WHITE, &(scene->discription) );
 	DrawFontText( "Press L or R to Select\nPress Enter to select Tank", guidePos, LIGHTGRAY, &(scene->keyGuide) );

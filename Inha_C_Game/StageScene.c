@@ -79,12 +79,12 @@ SceneType UpdateStageScene( StageScene* scene )
 		PlayerMoveInput( scene );
 
 		// Update Player Tank (Move unitl Fire)
-		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
+		UpdateTankPlayer( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
 		break;
 
 	case PlayerShoot:
 		// Update Player Tank ( and Update projectile )
-		UpdatePlayerTank( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
+		UpdateTankPlayer( &(scene->playerTank), scene->playerDir, scene->aiTank.model.rect, scene->ground.rect, scene->groundAI.rect);
 
 		// Update Hit Effect and Status by Projectile Status
 		UpdateTanksByProjectile( &(scene->playerTank.model), &(scene->playerTank.bullet.model), &(scene->aiTank.model),

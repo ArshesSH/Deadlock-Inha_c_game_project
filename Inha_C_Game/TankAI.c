@@ -63,34 +63,3 @@ void DestroyTankAI( TankAI* pTankAI )
 {
 	DestroyTank( &(pTankAI->model) );
 }
-
-/*
-
-	if (pModel->state == TankDrawAndWait)
-	{
-		SetTankAIMoveCount( pTankAI );
-		SetTankStateMove( pModel );
-	}
-	else if (pModel->state == TankMove)
-	{
-		if (pTankAI->aiCount <= pTankAI->aiMaxCount)
-		{
-			MoveTank( pModel, MakeVec2( (float)pTankAI->aiDir, 0.0f ), pModel->limitZone );
-			pTankAI->aiCount++;
-		}
-		else
-		{
-			SetTankStateFire( pModel );
-		}
-	}
-	else if (pModel->state == TankFire)
-	{
-		if (GetProjectileState( &(pTankAI->bullet.model) ) == ProjWait)
-		{
-			StartEffect( &(pModel->fireEffect) );
-		}
-		UpdateProjectileAI( &(pTankAI->bullet), pModel->gunPos, targetPos, pTankAI->aiOffset, targetRect, groundRect );
-		UpdateEffect( &(pModel->fireEffect) );
-	}
-
-*/

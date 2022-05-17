@@ -13,6 +13,6 @@ typedef struct tankPlayer
 
 void MakeTankPlayer( TankPlayer* pTankPlayer, TankType type, int pos_x, Vec2 groundPos, Rect limitZone );
 
-void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect, Rect groundAIRect);
+void UpdateTankPlayer( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect, Rect groundAIRect);
 
 void DestroyTankPlayer( TankPlayer* pTankPlayer );

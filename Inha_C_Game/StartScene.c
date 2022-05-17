@@ -23,9 +23,8 @@ void InitStartScene(StartScene* scene)
 	// Create Bacground and select menu
 	MakeSurface( "src/images/easy.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hard.bmp", &(scene->hardMode) );
-	//DrawSpriteNonChroma( (screenHalfWidth - (scene->startImage.width / 2) ), titlePos.y + yAlign, &(scene->startImage) );
-	DrawSpriteChroma( 420, (int)(titlePos.y + (screenYOffset) * 2), &(scene->easyMode), BLACK );
-
+	DrawSpriteChroma( (float)(screenHalfWidth - 60), (int)(titlePos.y + (screenYOffset) * 2), &(scene->easyMode), BLACK );
+	
 	MakeFont( (&scene->keyGuide), FontSmall );
 	const Vec2 guidePos = { (float)(screenHalfWidth - 108),titlePos.y + (screenYOffset) * 3 };
 	DrawFontText( "Press Enter to Select\n\nPress L or R to change mode\n\nAlways Press ESC to Exit", guidePos, LIGHTGRAY, &(scene->keyGuide) );

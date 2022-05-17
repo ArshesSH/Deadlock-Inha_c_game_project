@@ -8,8 +8,22 @@
 
 int main(int argc, char* argv[]) {
     SetConsoleFontSize( 1 );
+
     // 960 540
-    SetConsoleWindowSize( 1920, 1080 );
+    int width = 1920;
+    int height = 1080;
+
+    /*
+    * Can not Use this Now
+    // If User Input screen Size, Change Screen Size
+    if ( argc == 3 )
+    {
+        width = atoi(argv[1]);
+        height = atoi(argv[2]);
+    }
+    */
+
+    SetConsoleWindowSize( width, height );
     HideCursor();
 
     srand( (unsigned int)time( NULL ) );

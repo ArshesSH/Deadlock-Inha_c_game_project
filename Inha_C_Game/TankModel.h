@@ -88,5 +88,3 @@ void DrawTankSprite( TankModel* pTank );
 bool IsTankInMoveZone( Rect nextRect, Rect limitZone );
 
 void DestroyTank( TankModel* pTank );
-
-void SetCaterpillars( TankModel* pTank );

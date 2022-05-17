@@ -12,7 +12,7 @@ void MakeTankPlayer(TankPlayer* pTankPlayer, TankType type, int pos_x, Vec2 grou
 	MakeProjectilePlayer( &(pTankPlayer->bullet), &(pModel->bulletSprite), MAGENTA, pModel->bulletDamage, pModel->bulletSpeed );
 }
 
-void UpdatePlayerTank( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect, Rect groundAIRect )
+void UpdateTankPlayer( TankPlayer* pTankPlayer, Vec2 dir, Rect targetRect, Rect groundRect, Rect groundAIRect )
 {
 	TankModel* pModel = &(pTankPlayer->model);
 

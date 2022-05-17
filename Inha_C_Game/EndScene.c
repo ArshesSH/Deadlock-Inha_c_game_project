@@ -19,15 +19,16 @@ void InitEndScene( EndScene* scene )
 
 SceneType UpdateEndScene( EndScene* scene )
 {
+	SceneType sceneType = StageEnd;
 	if (IsPlayerInput( VK_RETURN ))
 	{
-		return StageStart;
+		sceneType = StageStart;
 	}
 	else if (IsPlayerInput( VK_ESCAPE ))
 	{
-		return GameEnd;
+		sceneType = GameEnd;
 	}
-	return StageEnd;
+	return sceneType;
 }
 
 void DestroyEndScene( EndScene* scene )
