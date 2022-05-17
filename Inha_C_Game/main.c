@@ -22,8 +22,9 @@ int main(int argc, char* argv[]) {
         height = atoi(argv[2]);
     }
     */
-
+    MoveConsoleWindow( 0, 0, width, height );
     SetConsoleWindowSize( width, height );
+
     HideCursor();
 
     srand( (unsigned int)time( NULL ) );

@@ -33,6 +33,11 @@ void MoveCursor( int x, int y )
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord );
 }
 
+void MoveConsoleWindow(int x, int y, int width, int height)
+{
+    MoveWindow( GetConsoleWindow(), x, y, width, height, FALSE );
+}
+
 void SetConsoleWindowSize( int consoleWidth, int consoleHeight )
 {
     const int halfWidth = consoleWidth / 2;
@@ -254,7 +259,7 @@ void DrawSpriteTitle( int x, int y, Surface* const s )
     {
         for (int sx = srcRect.left; sx < srcRect.right; sx++)
         {
-            if ((x + sx) % 2 == 0 && (y + sy) % 3 == 0)
+            if ((x + sx) % 2 == 0 )
             {
                 PutPixel( x + sx - srcRect.left, y + sy - srcRect.top, SurfaceGetPixel( s, sx, sy ) );
             }

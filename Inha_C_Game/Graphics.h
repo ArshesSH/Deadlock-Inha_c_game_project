@@ -17,6 +17,8 @@ void SetConsoleFontSize( int size );
 
 void MoveCursor( int x, int y );
 
+void MoveConsoleWindow( int x, int y, int width, int height );
+
 void SetConsoleWindowSize( int consoleWidth, int consoleHeight );
 
 Rect GetScreenRect();

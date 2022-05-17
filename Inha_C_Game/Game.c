@@ -21,7 +21,7 @@ void MakeStage( Game* game )
 
 	case Stage1:
 		PlaySound( NULL, NULL, SND_ASYNC );
-		InitStageScene( &(game->firstScene), game->selectScene.playerSelection, MediumTankAI, game->startScene.difficultOffset, 400, 400, Stage1, Stage2 );
+		InitStageScene( &(game->firstScene), game->selectScene.playerSelection, LightTankAI, game->startScene.difficultOffset, 400, 400, Stage1, Stage2 );
 		break;
 
 	case Stage2:
