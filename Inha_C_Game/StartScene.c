@@ -23,7 +23,7 @@ void InitStartScene(StartScene* scene)
 	// Create Bacground and select menu
 	MakeSurface( "src/images/easy.bmp", &(scene->easyMode) );
 	MakeSurface( "src/images/hard.bmp", &(scene->hardMode) );
-	DrawSpriteChroma( (float)(screenHalfWidth - 60), (int)(titlePos.y + (screenYOffset) * 2), &(scene->easyMode), BLACK );
+	DrawSpriteChroma( (int)(screenHalfWidth - 60), (int)(titlePos.y + (screenYOffset) * 2), &(scene->easyMode), BLACK );
 	
 	MakeFont( (&scene->keyGuide), FontSmall );
 	const Vec2 guidePos = { (float)(screenHalfWidth - 108),titlePos.y + (screenYOffset) * 3 };
