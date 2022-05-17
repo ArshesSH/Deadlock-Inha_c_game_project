@@ -128,6 +128,7 @@ void DestroyGame(Game* game)
 		DestroyStageScene( &(game->thirdScene) );
 		break;
 	case StageEnd:
+		system( "cls" );
 		DestroyEndScene( &(game->endScene) );
 		break;
 	}

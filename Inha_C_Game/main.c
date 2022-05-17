@@ -25,6 +25,7 @@ int main(int argc, char* argv[]) {
     MoveConsoleWindow( 0, 0, width, height );
     SetConsoleWindowSize( width, height );
 
+
     HideCursor();
 
     srand( (unsigned int)time( NULL ) );

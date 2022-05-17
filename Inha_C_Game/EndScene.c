@@ -22,6 +22,7 @@ SceneType UpdateEndScene( EndScene* scene )
 	SceneType sceneType = StageEnd;
 	if (IsPlayerInput( VK_RETURN ))
 	{
+		DestroyEndScene( scene );
 		sceneType = StageStart;
 	}
 	else if (IsPlayerInput( VK_ESCAPE ))
@@ -33,8 +34,8 @@ SceneType UpdateEndScene( EndScene* scene )
 
 void DestroyEndScene( EndScene* scene )
 {
+	system( "cls" );
 	DestroyFont( &(scene->title) );
 	DestroyFont( &(scene->script) );
 	DestroyFont( &(scene->guide) );
-	system( "cls" );
 }
