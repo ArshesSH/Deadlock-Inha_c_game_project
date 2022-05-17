@@ -36,7 +36,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = 5;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
-		pTank->bulletSpeed = 10;
+		pTank->bulletSpeed = 15;
 		break;
 
 	case MediumTank:
@@ -66,7 +66,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = 5;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
-		pTank->bulletSpeed = 10;
+		pTank->bulletSpeed = 15;
 		break;
 
 	case HeavyTank:
@@ -96,7 +96,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = -2;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
-		pTank->bulletSpeed = 10;
+		pTank->bulletSpeed = 15;
 		break;
 
 	case MRL:
@@ -113,7 +113,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPosYOffset = -10;
 		pTank->gunPos.x = (float)pTank->sprite.width;
 		pTank->firePosXOffset = 0;
-		pTank->bulletSpeed = 4;
+		pTank->bulletSpeed = 3;
 		break;
 
 	case MRLAI:
@@ -126,7 +126,7 @@ void MakeTankModel( TankModel* pTank, TankType type, int pos_x, Vec2 groundPos, 
 		pTank->gunPos.x = -(float)pTank->bulletSprite.width;
 		pTank->gunPosYOffset = -10;
 		pTank->firePosXOffset = -pTank->fireEffect.sprite.width;
-		pTank->bulletSpeed = 2;
+		pTank->bulletSpeed = 10;
 		break;
 	}
 
