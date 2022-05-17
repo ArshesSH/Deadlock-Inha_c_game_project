@@ -9,6 +9,10 @@ void MakeFlatGround( Ground* ground, Surface* sprite, Vec2 startPos, int count, 
 	ground->tileCount = count;
 	ground->pos = startPos;
 	ground->tiles = (Tile*)malloc( sizeof( Tile ) * count );
+	if ( ground->tiles == NULL )
+	{
+		exit( 0 );
+	}
 
 	Vec2 pos = startPos;
 	for ( int i = 0; i < count; i++ )

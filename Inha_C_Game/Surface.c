@@ -60,6 +60,10 @@ void MakeSurface ( const char* filename, Surface* pSurface )
 	}
 
 	pSurface->pPixels = (Color*)malloc( sizeof( Color ) * pSurface->height * pSurface->width );
+	if ( pSurface->pPixels == NULL )
+	{
+		exit( 0 );
+	}
 
 	//move file pointer to the beginning of bitmap data
 	fseek( pFile, bmFileHeader.bfOffBits, SEEK_SET );
