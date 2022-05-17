@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Scenes">
+      <UniqueIdentifier>{02b7d751-9c17-4bf0-8e86-15aef80bfc28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Scenes">
+      <UniqueIdentifier>{e2a983bc-fd5e-4031-ab34-30fdbf2fc2f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Engines">
+      <UniqueIdentifier>{cc5ff710-45d0-4881-91ca-ec64d2a5905c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObjects">
+      <UniqueIdentifier>{04e9edfb-6056-4bd9-bc94-b97f388cab96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Engines">
+      <UniqueIdentifier>{6a9661a5-4343-4392-843d-2bb8fc85ba3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\GameObjects">
+      <UniqueIdentifier>{6ce05a72-9845-441d-a0d8-0ea88f201225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObjects\Tank">
+      <UniqueIdentifier>{56e4db56-89fb-4d15-ad27-9f382857f991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObjects\Projectile">
+      <UniqueIdentifier>{1cd088d2-b6cd-4351-8c58-339a220e58ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\GameObjects\Tank">
+      <UniqueIdentifier>{03871148-54d0-4555-9c9f-a36b17ee4b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\GameObjects\Projectile">
+      <UniqueIdentifier>{900be42d-a66b-4b05-85f9-1b5565aa7eb1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="StageScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Colors.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MathSH.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Surface.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Status.c">
+      <Filter>소스 파일\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.c">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TankAI.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TankModel.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="TankPlayer.c">
+      <Filter>소스 파일\GameObjects\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePlayer.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileAI.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileModel.c">
+      <Filter>소스 파일\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.c">
+      <Filter>소스 파일\Engines</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="StageScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="cful.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MathSH.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneType.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>헤더 파일\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Turn.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="TankAI.h">
+      <Filter>헤더 파일\GameObjects\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TankModel.h">
+      <Filter>헤더 파일\GameObjects\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="TankPlayer.h">
+      <Filter>헤더 파일\GameObjects\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileAI.h">
+      <Filter>헤더 파일\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileModel.h">
+      <Filter>헤더 파일\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePlayer.h">
+      <Filter>헤더 파일\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>헤더 파일\Engines</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
