@@ -12,6 +12,7 @@ extern
 inline unsigned char rgb_ansi(unsigned char r, unsigned char g, unsigned char b)
 {
 	// 16: black, 231: white, 6: light blue, 36: blue green
+	const double colorNum = 255 * 5;
 	int ansi = 16;
 
 	if ( r == g && g == b ) {
@@ -26,9 +27,9 @@ inline unsigned char rgb_ansi(unsigned char r, unsigned char g, unsigned char b)
 		return (((r - 8) / 247) * 24) + 232;
 	}
 
-	ansi += (int)(36 * (floor(((double)r / 255 * 5) + (double)0.5)));
-	ansi += (int)(6 * (floor((double)g / 255 * 5) + (double)0.5));
-	ansi += (int)(floor(((double)b / 255 * 5) + (double)0.5));
+	ansi += (int)(36 * (floor(((double)r / colorNum) + (double)0.5)));
+	ansi += (int)(6 * (floor((double)g / colorNum) + (double)0.5));
+	ansi += (int)(floor(((double)b / colorNum) + (double)0.5));
 
 	return ansi;
 }
