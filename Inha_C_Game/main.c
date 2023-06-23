@@ -13,15 +13,13 @@ int main(int argc, char* argv[]) {
     int width = 1920;
     int height = 1080;
 
-    /*
-    * Can not Use this Now
     // If User Input screen Size, Change Screen Size
     if ( argc == 3 )
     {
         width = atoi(argv[1]);
         height = atoi(argv[2]);
     }
-    */
+
     MoveConsoleWindow( 0, 0, width, height );
     SetConsoleWindowSize( width, height );
 
