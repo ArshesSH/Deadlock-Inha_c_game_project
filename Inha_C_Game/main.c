@@ -6,22 +6,23 @@
 #include "Graphics.h"
 #include "Game.h"
 
-int main(int argc, char* argv[]) {
-    SetConsoleFontSize( 1 );
+BOOL IsElevated();
 
-    // 960 540
+int main(int argc, char* argv[])
+{
     int width = 1920;
     int height = 1080;
 
-    /*
-    * Can not Use this Now
-    // If User Input screen Size, Change Screen Size
-    if ( argc == 3 )
+    if (IsElevated() == false)
     {
-        width = atoi(argv[1]);
-        height = atoi(argv[2]);
+		printf( "This program requires administrator privileges to run.\n" );
+		printf( "Please run the program as an administrator.\n" );
+		printf( "Press any key to continue..." );
+		getchar();
+		return 0;
     }
-    */
+
+    SetConsoleFontSize( 1 );
     MoveConsoleWindow( 0, 0, width, height );
     SetConsoleWindowSize( width, height );
 
@@ -74,4 +75,21 @@ int main(int argc, char* argv[]) {
     DestroyGame( &game );
 
     return 0;
+}
+
+BOOL IsElevated()
+{
+    BOOL fRet = FALSE;
+    HANDLE hToken = NULL;
+    if (OpenProcessToken( GetCurrentProcess(), TOKEN_QUERY, &hToken )) {
+        TOKEN_ELEVATION Elevation;
+        DWORD cbSize = sizeof( TOKEN_ELEVATION );
+        if (GetTokenInformation( hToken, TokenElevation, &Elevation, sizeof( Elevation ), &cbSize )) {
+            fRet = Elevation.TokenIsElevated;
+        }
+    }
+    if (hToken) {
+        CloseHandle( hToken );
+    }
+    return fRet;
 }
